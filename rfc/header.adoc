@@ -1,0 +1,24 @@
+:version-label!:
+:revdate!:
+:revremark!:
+:docversion: {revnumber}
+:revnumber!:
+:sectnums:
+:xrefstyle: short
+:!section-refsig:
+:example-caption:
+:toc: left
+:toclevels: 4
+:doctype: article
+:backend: html5
+:reproducible:
+:safe: safe
+:docinfo: shared
+:dblstar_: **
+:source-highlighter: coderay
+:coderay-css: style
+:coderay-linenums-mode: table
+:data-uri:
+:icons: font
+:stylesheet: golo.css
+:stylesdir: ../css/stylesheets

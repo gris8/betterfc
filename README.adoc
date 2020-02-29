@@ -1,0 +1,31 @@
+= BetteRFC
+
+== Introduction
+
+BetteRFC is a project whose purpose is to make the RFC easier to read by creating HTML documents from the original plain ASCII format.
+The lack of any kind of tag or structure in the RFC documents makes it impossible to automate the process and it requires  manual intervention.
+Thankfully https://asciidoctor.org[Asciidoctor] now makes this process quite easy and fast.
+
+== What to expect
+
+. The documents take advantage of the CSS which enables them to be displayed clearly on screens of different sizes (tablet, phone, etc.)
+. A table of contents is included which easily identifies parts of the document.
+. RFC and https://en.wikipedia.org/wiki/Erratum[errata] are listed on the same page.
+. The parts of the document that have an errata associated are highlighted with a different background color. E.g: the RFC791 section 3.1 has the https://www.rfc-editor.org/errata/eid716[errata 716] associated :
++
+[.rfc-error, subs=+macros]
+....
++--------+--------+--------+--------+
+|10001000|00000pass:quotes[*010*]|  Stream ID  |
++--------+--------+--------+--------+
+Type=136 Length=4
+....
+
+
+== How to contribute
+
+It isn't necessary to know anything about HTML and CSS. You can install https://asciidoctor.org[Asciidoctor] for Windows with https://chocolatey.org[chocolatey] or for Linux with the packet manager provided by your distribution or eventually from the https://github.com/asciidoctor/asciidoctor[source code].
+
+== The future
+
+I will slowly port other RFC, asymptotically one day ... all icon:smile-o[role="blue"]

@@ -1,0 +1,11 @@
+@import "settings/rubygems";
+@import "components/asciidoc";
+@import "components/awesome-icons";
+@import "components/rfc";
+
+.literalblock,
+.listingblock {
+  & pre {
+    background: $pre-bg;
+  }
+}

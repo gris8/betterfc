@@ -1,0 +1,36 @@
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@5/dist/gumshoe.polyfills.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.js"></script>
+<script>
+   jQuery(function () {
+      var scrollspy = new Gumshoe('#toc li > a', {
+         nested: false
+      });
+      document.addEventListener('gumshoeActivate', function (event) {
+         jQuery('#toc')
+            .stop()
+            .scrollTo(event.detail.link, 500, {
+               offset: {
+                  top:  0 - jQuery('#toc').height() / 2,
+                  left: 0,
+               }
+            });
+      }, false);
+   });
+</script>
+
+<style>
+   #toc li.active > a {
+      font-weight: bold;
+      text-decoration: underline;
+         <!-- font-style: italic; -->
+   }
+
+  #toc li a {
+     display: inline-block;
+  }
+</style>
+
+<div id="header">
+   <div style="text-align:center"> <b> This isn’t the official RFC, please refer to the IETF website for the official RFC. Errors & omissions excepted </b> </div>
+</div>

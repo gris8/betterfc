@@ -1,0 +1,10 @@
+.rfc-error,
+.listingblock {
+  & pre {
+    background: rgba(255, 187, 204, 0.4);
+    border-color: #aaaaaa;
+  }
+}
+
+.rfc-error-text { background-color: rgba(255, 187, 204, 0.4); }
+
