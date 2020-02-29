@@ -2,7 +2,7 @@ ADOC_PATH ?= ~/usr/bin
 ADOC_EXEC  = asciidoctor
 
 PATH_RFC   = rfc
-PATH_HTML  = doc
+PATH_HTML  = docs
 
 CSS_PATH   = css/stylesheets
 CSS_STYLE  = golo.css

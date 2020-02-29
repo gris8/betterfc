@@ -1,0 +1,2615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.11.dev">
+<title>RFC 792</title>
+<style>
+@import url(https://fonts.googleapis.com/css?family=Varela+Round|Open+Sans:400italic,600italic,400,600|Ubuntu+Mono:400);
+/*! normalize.css v2.1.2 | MIT License | git.io/normalize */
+/* ========================================================================== HTML5 display definitions ========================================================================== */
+/** Correct `block` display not defined in IE 8/9. */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary { display: block; }
+
+/** Correct `inline-block` display not defined in IE 8/9. */
+audio, canvas, video { display: inline-block; }
+
+/** Prevent modern browsers from displaying `audio` without controls. Remove excess height in iOS 5 devices. */
+audio:not([controls]) { display: none; height: 0; }
+
+/** Address `[hidden]` styling not present in IE 8/9. Hide the `template` element in IE, Safari, and Firefox < 22. */
+[hidden], template { display: none; }
+
+script { display: none !important; }
+
+/* ========================================================================== Base ========================================================================== */
+/** 1. Set default font family to sans-serif. 2. Prevent iOS text size adjust after orientation change, without disabling user zoom. */
+html { font-family: sans-serif; /* 1 */ -ms-text-size-adjust: 100%; /* 2 */ -webkit-text-size-adjust: 100%; /* 2 */ }
+
+/** Remove default margin. */
+body { margin: 0; }
+
+/* ========================================================================== Links ========================================================================== */
+/** Remove the gray background color from active links in IE 10. */
+a { background: transparent; }
+
+/** Address `outline` inconsistency between Chrome and other browsers. */
+a:focus { outline: thin dotted; }
+
+/** Improve readability when focused and also mouse hovered in all browsers. */
+a:active, a:hover { outline: 0; }
+
+/* ========================================================================== Typography ========================================================================== */
+/** Address variable `h1` font-size and margin within `section` and `article` contexts in Firefox 4+, Safari 5, and Chrome. */
+h1 { font-size: 2em; margin: 0.67em 0; }
+
+/** Address styling not present in IE 8/9, Safari 5, and Chrome. */
+abbr[title] { border-bottom: 1px dotted; }
+
+/** Address style set to `bolder` in Firefox 4+, Safari 5, and Chrome. */
+b, strong { font-weight: bold; }
+
+/** Address styling not present in Safari 5 and Chrome. */
+dfn { font-style: italic; }
+
+/** Address differences between Firefox and other browsers. */
+hr { -moz-box-sizing: content-box; box-sizing: content-box; height: 0; }
+
+/** Address styling not present in IE 8/9. */
+mark { background: #ff0; color: #000; }
+
+/** Correct font family set oddly in Safari 5 and Chrome. */
+code, kbd, pre, samp { font-family: monospace, serif; font-size: 1em; }
+
+/** Improve readability of pre-formatted text in all browsers. */
+pre { white-space: pre-wrap; }
+
+/** Set consistent quote types. */
+q { quotes: "\201C" "\201D" "\2018" "\2019"; }
+
+/** Address inconsistent and variable font size in all browsers. */
+small { font-size: 80%; }
+
+/** Prevent `sub` and `sup` affecting `line-height` in all browsers. */
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+
+sup { top: -0.5em; }
+
+sub { bottom: -0.25em; }
+
+/* ========================================================================== Embedded content ========================================================================== */
+/** Remove border when inside `a` element in IE 8/9. */
+img { border: 0; }
+
+/** Correct overflow displayed oddly in IE 9. */
+svg:not(:root) { overflow: hidden; }
+
+/* ========================================================================== Figures ========================================================================== */
+/** Address margin not present in IE 8/9 and Safari 5. */
+figure { margin: 0; }
+
+/* ========================================================================== Forms ========================================================================== */
+/** Define consistent border, margin, and padding. */
+fieldset { border: 1px solid #c0c0c0; margin: 0 2px; padding: 0.35em 0.625em 0.75em; }
+
+/** 1. Correct `color` not being inherited in IE 8/9. 2. Remove padding so people aren't caught out if they zero out fieldsets. */
+legend { border: 0; /* 1 */ padding: 0; /* 2 */ }
+
+/** 1. Correct font family not being inherited in all browsers. 2. Correct font size not being inherited in all browsers. 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome. */
+button, input, select, textarea { font-family: inherit; /* 1 */ font-size: 100%; /* 2 */ margin: 0; /* 3 */ }
+
+/** Address Firefox 4+ setting `line-height` on `input` using `!important` in the UA stylesheet. */
+button, input { line-height: normal; }
+
+/** Address inconsistent `text-transform` inheritance for `button` and `select`. All other form control elements do not inherit `text-transform` values. Correct `button` style inheritance in Chrome, Safari 5+, and IE 8+. Correct `select` style inheritance in Firefox 4+ and Opera. */
+button, select { text-transform: none; }
+
+/** 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio` and `video` controls. 2. Correct inability to style clickable `input` types in iOS. 3. Improve usability and consistency of cursor style between image-type `input` and others. */
+button, html input[type="button"], input[type="reset"], input[type="submit"] { -webkit-appearance: button; /* 2 */ cursor: pointer; /* 3 */ }
+
+/** Re-set default cursor for disabled elements. */
+button[disabled], html input[disabled] { cursor: default; }
+
+/** 1. Address box sizing set to `content-box` in IE 8/9. 2. Remove excess padding in IE 8/9. */
+input[type="checkbox"], input[type="radio"] { box-sizing: border-box; /* 1 */ padding: 0; /* 2 */ }
+
+/** 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome. 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome (include `-moz` to future-proof). */
+input[type="search"] { -webkit-appearance: textfield; /* 1 */ -moz-box-sizing: content-box; -webkit-box-sizing: content-box; /* 2 */ box-sizing: content-box; }
+
+/** Remove inner padding and search cancel button in Safari 5 and Chrome on OS X. */
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; }
+
+/** Remove inner padding and border in Firefox 4+. */
+button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
+
+/** 1. Remove default vertical scrollbar in IE 8/9. 2. Improve readability and alignment in all browsers. */
+textarea { overflow: auto; /* 1 */ vertical-align: top; /* 2 */ }
+
+/* ========================================================================== Tables ========================================================================== */
+/** Remove most spacing between table cells. */
+table { border-collapse: collapse; border-spacing: 0; }
+
+meta.foundation-mq-small { font-family: "only screen and (min-width: 768px)"; width: 768px; }
+
+meta.foundation-mq-medium { font-family: "only screen and (min-width:1280px)"; width: 1280px; }
+
+meta.foundation-mq-large { font-family: "only screen and (min-width:1440px)"; width: 1440px; }
+
+*, *:before, *:after { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+html, body { font-size: 100%; }
+
+body { background: #fefdfd; color: rgba(0, 0, 0, 0.8); padding: 0; margin: 0; font-family: "Open Sans", sans-serif; font-weight: normal; font-style: normal; line-height: 1; position: relative; cursor: auto; }
+
+a:hover { cursor: pointer; }
+
+img, object, embed { max-width: 100%; height: auto; }
+
+object, embed { height: 100%; }
+
+img { -ms-interpolation-mode: bicubic; }
+
+#map_canvas img, #map_canvas embed, #map_canvas object, .map_canvas img, .map_canvas embed, .map_canvas object { max-width: none !important; }
+
+.left { float: left !important; }
+
+.right { float: right !important; }
+
+.text-left { text-align: left !important; }
+
+.text-right { text-align: right !important; }
+
+.text-center { text-align: center !important; }
+
+.text-justify { text-align: justify !important; }
+
+.hide { display: none; }
+
+.antialiased { -webkit-font-smoothing: antialiased; }
+
+img { display: inline-block; vertical-align: middle; }
+
+textarea { height: auto; min-height: 50px; }
+
+select { width: 100%; }
+
+object, svg { display: inline-block; vertical-align: middle; }
+
+.center { margin-left: auto; margin-right: auto; }
+
+.stretch { width: 100%; }
+
+p.lead { font-size: 1.21875em; line-height: 1.6; }
+
+.subheader, .admonitionblock td.content > .title, .audioblock > .title, .exampleblock > .title, .imageblock > .title, .listingblock > .title, .literalblock > .title, .stemblock > .title, .openblock > .title, .paragraph > .title, .quoteblock > .title, table.tableblock > .title, .verseblock > .title, .videoblock > .title, .dlist > .title, .olist > .title, .ulist > .title, .qlist > .title, .hdlist > .title { line-height: 1.25; color: #002c5e; font-weight: 300; margin-top: 0.2em; margin-bottom: 0.5em; }
+
+/* Typography resets */
+div, dl, dt, dd, ul, ol, li, h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6, pre, form, p, blockquote, th, td { margin: 0; padding: 0; direction: ltr; }
+
+/* Default Link Styles */
+a { color: #005580; text-decoration: underline; line-height: inherit; }
+a:hover, a:focus { color: #078d71; }
+a img { border: none; }
+
+/* Default paragraph styles */
+p { font-family: inherit; font-weight: normal; font-size: 1em; line-height: 1.5; margin-bottom: 1.25em; text-rendering: optimizeLegibility; }
+p aside { font-size: 0.875em; line-height: 1.35; font-style: italic; }
+
+/* Default header styles */
+h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 { font-family: "Varela Round", sans-serif; font-weight: 400; font-style: normal; color: #00326b; text-rendering: optimizeLegibility; margin-top: 0.8em; margin-bottom: 0.5em; line-height: 1.0625em; }
+h1 small, h2 small, h3 small, #toctitle small, .sidebarblock > .content > .title small, h4 small, h5 small, h6 small { font-size: 60%; color: #057aff; line-height: 0; }
+
+h1 { font-size: 2.125em; }
+
+h2 { font-size: 1.6875em; }
+
+h3, #toctitle, .sidebarblock > .content > .title { font-size: 1.375em; }
+
+h4 { font-size: 1.125em; }
+
+h5 { font-size: 1.125em; }
+
+h6 { font-size: 1em; }
+
+hr { border: solid rgba(145, 135, 84, 0.15); border-width: 1px 0 0; clear: both; margin: 1.25em 0 1.1875em; height: 0; }
+
+/* Helpful Typography Defaults */
+em, i { font-style: italic; line-height: inherit; }
+
+strong, b { font-weight: bold; line-height: inherit; }
+
+small { font-size: 60%; line-height: inherit; }
+
+code { font-family: "Ubuntu Mono", "Inconsolata", monospace; font-weight: 400; color: #331d00; }
+
+/* Lists */
+ul, ol, dl { font-size: 1em; line-height: 1.5; margin-bottom: 1.25em; list-style-position: outside; font-family: inherit; }
+
+ul, ol { margin-left: 1.5em; }
+ul.no-bullet, ol.no-bullet { margin-left: 1.5em; }
+
+/* Unordered Lists */
+ul li ul, ul li ol { margin-left: 1.25em; margin-bottom: 0; font-size: 1em; /* Override nested font-size change */ }
+ul.square li ul, ul.circle li ul, ul.disc li ul { list-style: inherit; }
+ul.square { list-style-type: square; }
+ul.circle { list-style-type: circle; }
+ul.disc { list-style-type: disc; }
+ul.no-bullet { list-style: none; }
+
+/* Ordered Lists */
+ol li ul, ol li ol { margin-left: 1.25em; margin-bottom: 0; }
+
+/* Definition Lists */
+dl dt { margin-bottom: 0.3125em; font-weight: bold; }
+dl dd { margin-bottom: 1.25em; }
+
+/* Abbreviations */
+abbr, acronym { text-transform: uppercase; font-size: 90%; color: rgba(0, 0, 0, 0.8); border-bottom: 1px dotted #dddddd; cursor: help; }
+
+abbr { text-transform: none; }
+
+/* Blockquotes */
+blockquote { margin: 0 0 1.25em; padding: 0.5625em 1.25em 0 1.1875em; border-left: 1px solid #dddddd; }
+blockquote cite { display: block; font-size: 0.8125em; color: #666666; }
+blockquote cite:before { content: "\2014 \0020"; }
+blockquote cite a, blockquote cite a:visited { color: #666666; }
+
+blockquote, blockquote p { line-height: 1.5; color: #999999; }
+
+/* Microformats */
+.vcard { display: inline-block; margin: 0 0 1.25em 0; border: 1px solid #dddddd; padding: 0.625em 0.75em; }
+.vcard li { margin: 0; display: block; }
+.vcard .fn { font-weight: bold; font-size: 0.9375em; }
+
+.vevent .summary { font-weight: bold; }
+.vevent abbr { cursor: auto; text-decoration: none; font-weight: bold; border: none; padding: 0 0.0625em; }
+
+@media only screen and (min-width: 768px) { h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 { line-height: 1.25; }
+  h1 { font-size: 2.75em; }
+  h2 { font-size: 2.3125em; }
+  h3, #toctitle, .sidebarblock > .content > .title { font-size: 1.6875em; }
+  h4 { font-size: 1.4375em; } }
+/* Tables */
+table { background: white; margin-bottom: 1.25em; border: solid 1px rgba(145, 135, 84, 0.15); }
+table thead, table tfoot { background: rgba(119, 84, 22, 0.1); font-weight: bold; }
+table thead tr th, table thead tr td, table tfoot tr th, table tfoot tr td { padding: 0.5em 0.625em 0.625em; font-size: inherit; color: rgba(0, 0, 0, 0.8); text-align: left; }
+table tr th, table tr td { padding: 0.5625em 0.625em; font-size: inherit; color: rgba(0, 0, 0, 0.8); }
+table tr.even, table tr.alt, table tr:nth-of-type(even) { background: rgba(119, 84, 22, 0.025); }
+table thead tr th, table tfoot tr th, table tbody tr td, table tr td, table tfoot tr td { display: table-cell; line-height: 1.5; }
+
+body { -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; tab-size: 4; }
+
+h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 { line-height: 1.25; }
+
+.clearfix:before, .clearfix:after, .float-group:before, .float-group:after { content: " "; display: table; }
+.clearfix:after, .float-group:after { clear: both; }
+
+:not(pre):not([class^=L]) > code { font-size: 1.0625em; font-style: normal !important; letter-spacing: 0; padding: 0; line-height: 1.25; word-wrap: break-word; }
+
+:not(pre) > code.nobreak { word-wrap: normal; }
+:not(pre) > code.nowrap { white-space: nowrap; }
+
+pre { color: inherit; font-family: "Liberation Mono", "Consolas", monospace; line-height: 1.4; }
+pre code, pre pre { color: inherit; font-size: inherit; line-height: inherit; }
+pre > code { display: block; }
+
+pre.nowrap, pre.nowrap pre { white-space: pre; word-wrap: normal; }
+
+em em { font-style: normal; }
+
+strong strong { font-weight: normal; }
+
+.keyseq { color: rgba(51, 51, 51, 0.8); }
+
+kbd { font-family: "Ubuntu Mono", "Inconsolata", monospace; display: inline-block; color: rgba(0, 0, 0, 0.8); font-size: 0.65em; line-height: 1.45; background-color: #f7f7f7; border: 1px solid #ccc; -webkit-border-radius: 3px; border-radius: 3px; -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 0.1em white inset; box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 0.1em white inset; margin: 0 0.15em; padding: 0.2em 0.5em; vertical-align: middle; position: relative; top: -0.1em; white-space: nowrap; }
+
+.keyseq kbd:first-child { margin-left: 0; }
+
+.keyseq kbd:last-child { margin-right: 0; }
+
+.menuseq, .menuref { color: #000; }
+
+.menuseq b:not(.caret), .menuref { font-weight: inherit; }
+
+.menuseq { word-spacing: -0.02em; }
+.menuseq b.caret { font-size: 1.25em; line-height: 0.8; }
+.menuseq i.caret { font-weight: bold; text-align: center; width: 0.45em; }
+
+b.button:before, b.button:after { position: relative; top: -1px; font-weight: normal; }
+
+b.button:before { content: "["; padding: 0 3px 0 2px; }
+
+b.button:after { content: "]"; padding: 0 2px 0 3px; }
+
+p a > code:hover { color: #1a0f00; }
+
+#header, #content, #footnotes, #footer { width: 100%; margin-left: auto; margin-right: auto; margin-top: 0; margin-bottom: 0; max-width: 62.5em; *zoom: 1; position: relative; padding-left: 0.9375em; padding-right: 0.9375em; }
+#header:before, #header:after, #content:before, #content:after, #footnotes:before, #footnotes:after, #footer:before, #footer:after { content: " "; display: table; }
+#header:after, #content:after, #footnotes:after, #footer:after { clear: both; }
+
+#content { margin-top: 1.25em; }
+
+#content:before { content: none; }
+
+#header > h1:first-child { color: #703f1c; margin-top: 2.25rem; margin-bottom: 0; }
+#header > h1:first-child + #toc { margin-top: 8px; border-top: 1px solid rgba(145, 135, 84, 0.15); }
+#header > h1:only-child, body.toc2 #header > h1:nth-last-child(2) { border-bottom: 1px solid rgba(145, 135, 84, 0.15); padding-bottom: 8px; }
+#header .details { border-bottom: 1px solid rgba(145, 135, 84, 0.15); line-height: 1.45; padding-top: 0.25em; padding-bottom: 0.25em; padding-left: 0.25em; color: #666666; display: -ms-flexbox; display: -webkit-flex; display: flex; -ms-flex-flow: row wrap; -webkit-flex-flow: row wrap; flex-flow: row wrap; }
+#header .details span:first-child { margin-left: -0.125em; }
+#header .details span.email a { color: #999999; }
+#header .details br { display: none; }
+#header .details br + span:before { content: "\00a0\2013\00a0"; }
+#header .details br + span.author:before { content: "\00a0\22c5\00a0"; color: #999999; }
+#header .details br + span#revremark:before { content: "\00a0|\00a0"; }
+#header #revnumber { text-transform: capitalize; }
+#header #revnumber:after { content: "\00a0"; }
+
+#content > h1:first-child:not([class]) { color: #703f1c; border-bottom: 1px solid rgba(145, 135, 84, 0.15); padding-bottom: 8px; margin-top: 0; padding-top: 1rem; margin-bottom: 1.25rem; }
+
+#toc { border-bottom: 0px solid #dddddd; padding-bottom: 0.5em; }
+#toc > ul { margin-left: 0.125em; }
+#toc ul.sectlevel0 > li > a { font-style: italic; }
+#toc ul.sectlevel0 ul.sectlevel1 { margin: 0.5em 0; }
+#toc ul { font-family: "Varela Round", sans-serif; list-style-type: none; }
+#toc li { line-height: 1.3334; margin-top: 0.3334em; }
+#toc a { text-decoration: none; }
+#toc a:active { text-decoration: underline; }
+
+#toctitle { color: #002c5e; font-size: 1.2em; }
+
+@media only screen and (min-width: 768px) { #toctitle { font-size: 1.375em; }
+  body.toc2 { padding-left: 15em; padding-right: 0; }
+  #toc.toc2 { margin-top: 0 !important; background: #f2f2f4; position: fixed; width: 15em; left: 0; top: 0; border-right: 1px solid #dddddd; border-top-width: 0 !important; border-bottom-width: 0 !important; z-index: 1000; padding: 1.25em 1em; height: 100%; overflow: auto; }
+  #toc.toc2 #toctitle { margin-top: 0; margin-bottom: 0.8rem; font-size: 1.2em; }
+  #toc.toc2 > ul { font-size: 0.9em; margin-bottom: 0; }
+  #toc.toc2 ul ul { margin-left: 0; padding-left: 1em; }
+  #toc.toc2 ul.sectlevel0 ul.sectlevel1 { padding-left: 0; margin-top: 0.5em; margin-bottom: 0.5em; }
+  body.toc2.toc-right { padding-left: 0; padding-right: 15em; }
+  body.toc2.toc-right #toc.toc2 { border-right-width: 0; border-left: 1px solid #dddddd; left: auto; right: 0; } }
+@media only screen and (min-width: 1280px) { body.toc2 { padding-left: 20em; padding-right: 0; }
+  #toc.toc2 { width: 20em; }
+  #toc.toc2 #toctitle { font-size: 1.375em; }
+  #toc.toc2 > ul { font-size: 0.95em; }
+  #toc.toc2 ul ul { padding-left: 1.25em; }
+  body.toc2.toc-right { padding-left: 0; padding-right: 20em; } }
+#content #toc { border-style: solid; border-width: 1px; border-color: #d6d6dd; margin-bottom: 1.25em; padding: 1.25em; background: #f2f2f4; -webkit-border-radius: 6px; border-radius: 6px; }
+#content #toc > :first-child { margin-top: 0; }
+#content #toc > :last-child { margin-bottom: 0; }
+
+#footer { max-width: 100%; background: #0b445a; padding: 1.25em; }
+
+#footer-text { color: #fefdfd; line-height: 1.35; }
+
+#content { margin-bottom: 0.625em; }
+
+.sect1 { padding-bottom: 0.625em; }
+
+@media only screen and (min-width: 768px) { #content { margin-bottom: 1.25em; }
+  .sect1 { padding-bottom: 1.25em; } }
+.sect1:last-child { padding-bottom: 0; }
+
+.sect1 + .sect1 { border-top: 0px solid #dddddd; }
+
+#content h1 > a.anchor, h2 > a.anchor, h3 > a.anchor, #toctitle > a.anchor, .sidebarblock > .content > .title > a.anchor, h4 > a.anchor, h5 > a.anchor, h6 > a.anchor { position: absolute; z-index: 1001; width: 1.5ex; margin-left: -1.5ex; display: block; text-decoration: none !important; visibility: hidden; text-align: center; font-weight: normal; }
+#content h1 > a.anchor:before, h2 > a.anchor:before, h3 > a.anchor:before, #toctitle > a.anchor:before, .sidebarblock > .content > .title > a.anchor:before, h4 > a.anchor:before, h5 > a.anchor:before, h6 > a.anchor:before { content: "\00A7"; font-size: 0.85em; display: block; padding-top: 0.1em; }
+#content h1:hover > a.anchor, #content h1 > a.anchor:hover, h2:hover > a.anchor, h2 > a.anchor:hover, h3:hover > a.anchor, #toctitle:hover > a.anchor, .sidebarblock > .content > .title:hover > a.anchor, h3 > a.anchor:hover, #toctitle > a.anchor:hover, .sidebarblock > .content > .title > a.anchor:hover, h4:hover > a.anchor, h4 > a.anchor:hover, h5:hover > a.anchor, h5 > a.anchor:hover, h6:hover > a.anchor, h6 > a.anchor:hover { visibility: visible; }
+#content h1 > a.link, h2 > a.link, h3 > a.link, #toctitle > a.link, .sidebarblock > .content > .title > a.link, h4 > a.link, h5 > a.link, h6 > a.link { color: #00326b; text-decoration: none; }
+#content h1 > a.link:hover, h2 > a.link:hover, h3 > a.link:hover, #toctitle > a.link:hover, .sidebarblock > .content > .title > a.link:hover, h4 > a.link:hover, h5 > a.link:hover, h6 > a.link:hover { color: #002652; }
+
+details, .audioblock, .imageblock, .literalblock, .listingblock, .stemblock, .videoblock { margin-bottom: 1.25em; }
+
+details > summary:first-of-type { cursor: pointer; display: list-item; outline: none; margin-bottom: 0.75em; }
+
+.admonitionblock td.content > .title, .audioblock > .title, .exampleblock > .title, .imageblock > .title, .listingblock > .title, .literalblock > .title, .stemblock > .title, .openblock > .title, .paragraph > .title, .quoteblock > .title, table.tableblock > .title, .verseblock > .title, .videoblock > .title, .dlist > .title, .olist > .title, .ulist > .title, .qlist > .title, .hdlist > .title { text-rendering: optimizeLegibility; text-align: left; }
+
+table.tableblock.fit-content > caption.title { white-space: nowrap; width: 0; }
+
+.paragraph.lead > p, #preamble > .sectionbody > [class="paragraph"]:first-of-type p { font-size: 1.21875em; line-height: 1.6; color: #703f1c; }
+
+table.tableblock #preamble > .sectionbody > [class="paragraph"]:first-of-type p { font-size: inherit; }
+
+.admonitionblock > table { border-collapse: separate; border: 0; background: none; width: 100%; }
+.admonitionblock > table td.icon { text-align: center; width: 80px; }
+.admonitionblock > table td.icon img { max-width: none; }
+.admonitionblock > table td.icon .title { font-weight: bold; font-family: "Varela Round", sans-serif; text-transform: uppercase; }
+.admonitionblock > table td.content { padding-left: 1.125em; padding-right: 1.25em; border-left: 1px solid rgba(145, 135, 84, 0.15); color: #666666; }
+.admonitionblock > table td.content > :last-child > :last-child { margin-bottom: 0; }
+
+.exampleblock > .content { border-style: solid; border-width: 1px; border-color: #eddbdb; margin-bottom: 1.25em; padding: 1.25em; background: #fefdfd; -webkit-border-radius: 6px; border-radius: 6px; }
+.exampleblock > .content > :first-child { margin-top: 0; }
+.exampleblock > .content > :last-child { margin-bottom: 0; }
+
+.sidebarblock { border-style: solid; border-width: 1px; border-color: #d1d1d8; margin-bottom: 1.25em; padding: 1.25em; background: #ececef; -webkit-border-radius: 6px; border-radius: 6px; }
+.sidebarblock > :first-child { margin-top: 0; }
+.sidebarblock > :last-child { margin-bottom: 0; }
+.sidebarblock > .content > .title { color: #002c5e; margin-top: 0; }
+
+.exampleblock > .content > :last-child > :last-child, .exampleblock > .content .olist > ol > li:last-child > :last-child, .exampleblock > .content .ulist > ul > li:last-child > :last-child, .exampleblock > .content .qlist > ol > li:last-child > :last-child, .sidebarblock > .content > :last-child > :last-child, .sidebarblock > .content .olist > ol > li:last-child > :last-child, .sidebarblock > .content .ulist > ul > li:last-child > :last-child, .sidebarblock > .content .qlist > ol > li:last-child > :last-child { margin-bottom: 0; }
+
+.literalblock pre, .listingblock > .content > pre { border: 1px solid rgba(16, 195, 196, 0.125); -webkit-border-radius: 6px; border-radius: 6px; word-wrap: break-word; overflow-x: auto; padding: 1em; font-size: 0.8125em; }
+@media only screen and (min-width: 768px) { .literalblock pre, .listingblock > .content > pre { font-size: 0.90625em; } }
+@media only screen and (min-width: 1280px) { .literalblock pre, .listingblock > .content > pre { font-size: 1em; } }
+
+.literalblock pre, .listingblock > .content > pre:not(.highlight), .listingblock > .content > pre[class="highlight"], .listingblock > .content > pre[class^="highlight "] { background: rgba(16, 195, 196, 0.05); }
+
+.literalblock.output pre { color: rgba(16, 195, 196, 0.05); background-color: inherit; }
+
+.listingblock > .content { position: relative; }
+
+.listingblock code[data-lang]:before { display: none; content: attr(data-lang); position: absolute; font-size: 0.75em; top: 0.425rem; right: 0.5rem; line-height: 1; text-transform: uppercase; color: inherit; opacity: 0.5; }
+
+.listingblock:hover code[data-lang]:before { display: block; }
+
+.listingblock.terminal pre .command:before { content: attr(data-prompt); padding-right: 0.5em; color: inherit; opacity: 0.5; }
+
+.listingblock.terminal pre .command:not([data-prompt]):before { content: "$"; }
+
+.listingblock pre.highlightjs { padding: 0; }
+.listingblock pre.highlightjs > code { padding: 1em; -webkit-border-radius: 6px; border-radius: 6px; }
+
+.prettyprint { background: rgba(16, 195, 196, 0.05); }
+
+pre.prettyprint .linenums { line-height: 1.4; margin-left: 2em; }
+
+pre.prettyprint li { background: none; list-style-type: inherit; padding-left: 0; }
+
+pre.prettyprint li code[data-lang]:before { opacity: 1; }
+
+pre.prettyprint li:not(:first-child) code[data-lang]:before { display: none; }
+
+table.linenotable { border-collapse: separate; border: 0; margin-bottom: 0; background: none; }
+table.linenotable td[class] { color: inherit; vertical-align: top; padding: 0; line-height: inherit; white-space: normal; }
+table.linenotable td.code { padding-left: 0.75em; }
+table.linenotable td.linenos { border-right: 1px solid currentColor; opacity: 0.35; padding-right: 0.5em; }
+
+pre.pygments .lineno { border-right: 1px solid currentColor; opacity: 0.35; display: inline-block; margin-right: 0.75em; }
+pre.pygments .lineno:before { content: ""; margin-right: -0.125em; }
+
+.quoteblock { margin: 0 1em 1.25em 1.5em; display: table; }
+.quoteblock:not(.excerpt) > .title { margin-left: -1.5em; margin-bottom: 0.75em; }
+.quoteblock blockquote, .quoteblock p { color: #999999; font-size: 1.15rem; line-height: 1.75; word-spacing: 0.1em; letter-spacing: 0; font-style: italic; text-align: justify; }
+.quoteblock blockquote { margin: 0; padding: 0; border: 0; }
+.quoteblock blockquote:before { content: "\201c"; float: left; font-size: 2.75em; font-weight: bold; line-height: 0.6em; margin-left: -0.6em; color: #002c5e; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); }
+.quoteblock blockquote > .paragraph:last-child p { margin-bottom: 0; }
+.quoteblock .attribution { margin-top: 0.75em; margin-right: 0.5ex; text-align: right; }
+
+.verseblock { margin: 0 1em 1.25em 1em; }
+.verseblock pre { font-family: "Open Sans", "DejaVu Sans", sans; font-size: 1.15rem; color: #999999; font-weight: 300; text-rendering: optimizeLegibility; }
+.verseblock pre strong { font-weight: 400; }
+.verseblock .attribution { margin-top: 1.25rem; margin-left: 0.5ex; }
+
+.quoteblock .attribution, .verseblock .attribution { font-size: 0.8125em; line-height: 1.45; font-style: italic; }
+.quoteblock .attribution br, .verseblock .attribution br { display: none; }
+.quoteblock .attribution cite, .verseblock .attribution cite { display: block; letter-spacing: -0.025em; color: #666666; }
+
+.quoteblock.abstract blockquote:before, .quoteblock.excerpt blockquote:before, .quoteblock .quoteblock blockquote:before { display: none; }
+.quoteblock.abstract blockquote, .quoteblock.abstract p, .quoteblock.excerpt blockquote, .quoteblock.excerpt p, .quoteblock .quoteblock blockquote, .quoteblock .quoteblock p { line-height: 1.6; word-spacing: 0; }
+.quoteblock.abstract { margin: 0 1em 1.25em 1em; display: block; }
+.quoteblock.abstract > .title { margin: 0 0 0.375em 0; font-size: 1.15em; text-align: center; }
+.quoteblock.excerpt > blockquote, .quoteblock .quoteblock { padding: 0 0 0.25em 1em; border-left: 0.25em solid rgba(145, 135, 84, 0.15); }
+.quoteblock.excerpt, .quoteblock .quoteblock { margin-left: 0; }
+.quoteblock.excerpt blockquote, .quoteblock.excerpt p, .quoteblock .quoteblock blockquote, .quoteblock .quoteblock p { color: inherit; font-size: 1.0625rem; }
+.quoteblock.excerpt .attribution, .quoteblock .quoteblock .attribution { color: inherit; text-align: left; margin-right: 0; }
+
+table.tableblock { max-width: 100%; border-collapse: separate; }
+
+p.tableblock:last-child { margin-bottom: 0; }
+
+td.tableblock > .content > :last-child { margin-bottom: -1.25em; }
+td.tableblock > .content > :last-child.sidebarblock { margin-bottom: 0; }
+
+table.tableblock, th.tableblock, td.tableblock { border: 0 solid rgba(145, 135, 84, 0.15); }
+
+table.grid-all > thead > tr > .tableblock, table.grid-all > tbody > tr > .tableblock { border-width: 0 1px 1px 0; }
+
+table.grid-all > tfoot > tr > .tableblock { border-width: 1px 1px 0 0; }
+
+table.grid-cols > * > tr > .tableblock { border-width: 0 1px 0 0; }
+
+table.grid-rows > thead > tr > .tableblock, table.grid-rows > tbody > tr > .tableblock { border-width: 0 0 1px 0; }
+
+table.grid-rows > tfoot > tr > .tableblock { border-width: 1px 0 0 0; }
+
+table.grid-all > * > tr > .tableblock:last-child, table.grid-cols > * > tr > .tableblock:last-child { border-right-width: 0; }
+
+table.grid-all > tbody > tr:last-child > .tableblock, table.grid-all > thead:last-child > tr > .tableblock, table.grid-rows > tbody > tr:last-child > .tableblock, table.grid-rows > thead:last-child > tr > .tableblock { border-bottom-width: 0; }
+
+table.frame-all { border-width: 1px; }
+
+table.frame-sides { border-width: 0 1px; }
+
+table.frame-topbot, table.frame-ends { border-width: 1px 0; }
+
+table.stripes-all tr, table.stripes-odd tr:nth-of-type(odd), table.stripes-even tr:nth-of-type(even), table.stripes-hover tr:hover { background: rgba(119, 84, 22, 0.025); }
+
+th.halign-left, td.halign-left { text-align: left; }
+
+th.halign-right, td.halign-right { text-align: right; }
+
+th.halign-center, td.halign-center { text-align: center; }
+
+th.valign-top, td.valign-top { vertical-align: top; }
+
+th.valign-bottom, td.valign-bottom { vertical-align: bottom; }
+
+th.valign-middle, td.valign-middle { vertical-align: middle; }
+
+table thead th, table tfoot th { font-weight: bold; }
+
+tbody tr th { display: table-cell; line-height: 1.5; background: rgba(119, 84, 22, 0.1); }
+
+tbody tr th, tbody tr th p, tfoot tr th, tfoot tr th p { color: rgba(0, 0, 0, 0.8); font-weight: bold; }
+
+p.tableblock > code:only-child { background: none; padding: 0; }
+
+p.tableblock { font-size: 1em; }
+
+ol { margin-left: 1.75em; }
+
+ul li ol { margin-left: 1.5em; }
+
+dl dd { margin-left: 1.125em; }
+
+dl dd:last-child, dl dd:last-child > :last-child { margin-bottom: 0; }
+
+ol > li p, ul > li p, ul dd, ol dd, .olist .olist, .ulist .ulist, .ulist .olist, .olist .ulist { margin-bottom: 0.625em; }
+
+ul.checklist, ul.none, ol.none, ul.no-bullet, ol.no-bullet, ol.unnumbered, ul.unstyled, ol.unstyled { list-style-type: none; }
+
+ul.no-bullet, ol.no-bullet, ol.unnumbered { margin-left: 0.625em; }
+
+ul.unstyled, ol.unstyled { margin-left: 0; }
+
+ul.checklist { margin-left: 0.625em; }
+
+ul.checklist li > p:first-child > .fa-square-o:first-child, ul.checklist li > p:first-child > .fa-check-square-o:first-child { width: 1.25em; font-size: 0.8em; position: relative; bottom: 0.125em; }
+
+ul.checklist li > p:first-child > input[type="checkbox"]:first-child { margin-right: 0.25em; }
+
+ul.inline { display: -ms-flexbox; display: -webkit-box; display: flex; -ms-flex-flow: row wrap; -webkit-flex-flow: row wrap; flex-flow: row wrap; list-style: none; margin: 0 0 0.625em -1.25em; }
+
+ul.inline > li { margin-left: 1.25em; }
+
+.unstyled dl dt { font-weight: normal; font-style: normal; }
+
+ol.arabic { list-style-type: decimal; }
+
+ol.decimal { list-style-type: decimal-leading-zero; }
+
+ol.loweralpha { list-style-type: lower-alpha; }
+
+ol.upperalpha { list-style-type: upper-alpha; }
+
+ol.lowerroman { list-style-type: lower-roman; }
+
+ol.upperroman { list-style-type: upper-roman; }
+
+ol.lowergreek { list-style-type: lower-greek; }
+
+.hdlist > table, .colist > table { border: 0; background: none; }
+.hdlist > table > tbody > tr, .colist > table > tbody > tr { background: none; }
+
+td.hdlist1, td.hdlist2 { vertical-align: top; padding: 0 0.625em; }
+
+td.hdlist1 { font-weight: bold; padding-bottom: 1.25em; }
+
+.literalblock + .colist, .listingblock + .colist { margin-top: -0.5em; }
+
+.colist td:not([class]):first-child { padding: 0.4em 0.75em 0 0.75em; line-height: 1; vertical-align: top; }
+.colist td:not([class]):first-child img { max-width: none; }
+.colist td:not([class]):last-child { padding: 0.25em 0; }
+
+.thumb, .th { line-height: 0; display: inline-block; border: solid 4px white; -webkit-box-shadow: 0 0 0 1px #dddddd; box-shadow: 0 0 0 1px #dddddd; }
+
+.imageblock.left { margin: 0.25em 0.625em 1.25em 0; }
+.imageblock.right { margin: 0.25em 0 1.25em 0.625em; }
+.imageblock > .title { margin-bottom: 0; }
+.imageblock.thumb, .imageblock.th { border-width: 6px; }
+.imageblock.thumb > .title, .imageblock.th > .title { padding: 0 0.125em; }
+
+.image.left, .image.right { margin-top: 0.25em; margin-bottom: 0.25em; display: inline-block; line-height: 0; }
+.image.left { margin-right: 0.625em; }
+.image.right { margin-left: 0.625em; }
+
+a.image { text-decoration: none; display: inline-block; }
+a.image object { pointer-events: none; }
+
+sup.footnote, sup.footnoteref { font-size: 0.875em; position: static; vertical-align: super; }
+sup.footnote a, sup.footnoteref a { text-decoration: none; }
+sup.footnote a:active, sup.footnoteref a:active { text-decoration: underline; }
+
+#footnotes { padding-top: 0.75em; padding-bottom: 0.75em; margin-bottom: 0.625em; }
+#footnotes hr { width: 20%; min-width: 6.25em; margin: -0.25em 0 0.75em 0; border-width: 1px 0 0 0; }
+#footnotes .footnote { padding: 0 0.375em 0 0.225em; line-height: 1.3334; font-size: 0.875em; margin-left: 1.2em; margin-bottom: 0.2em; }
+#footnotes .footnote a:first-of-type { font-weight: bold; text-decoration: none; margin-left: -1.05em; }
+#footnotes .footnote:last-of-type { margin-bottom: 0; }
+#content #footnotes { margin-top: -0.625em; margin-bottom: 0; padding: 0.75em 0; }
+
+.gist .file-data > table { border: 0; background: #fff; width: 100%; margin-bottom: 0; }
+.gist .file-data > table td.line-data { width: 99%; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+.big { font-size: larger; }
+
+.small { font-size: smaller; }
+
+.underline { text-decoration: underline; }
+
+.overline { text-decoration: overline; }
+
+.line-through { text-decoration: line-through; }
+
+.aqua { color: #00bfbf; }
+
+.aqua-background { background-color: #00fafa; }
+
+.black { color: black; }
+
+.black-background { background-color: black; }
+
+.blue { color: #0000bf; }
+
+.blue-background { background-color: #0000fa; }
+
+.fuchsia { color: #bf00bf; }
+
+.fuchsia-background { background-color: #fa00fa; }
+
+.gray { color: #606060; }
+
+.gray-background { background-color: #7d7d7d; }
+
+.green { color: #006000; }
+
+.green-background { background-color: #007d00; }
+
+.lime { color: #00bf00; }
+
+.lime-background { background-color: #00fa00; }
+
+.maroon { color: #600000; }
+
+.maroon-background { background-color: #7d0000; }
+
+.navy { color: #000060; }
+
+.navy-background { background-color: #00007d; }
+
+.olive { color: #606000; }
+
+.olive-background { background-color: #7d7d00; }
+
+.purple { color: #600060; }
+
+.purple-background { background-color: #7d007d; }
+
+.red { color: #bf0000; }
+
+.red-background { background-color: #fa0000; }
+
+.silver { color: #909090; }
+
+.silver-background { background-color: #bcbcbc; }
+
+.teal { color: #006060; }
+
+.teal-background { background-color: #007d7d; }
+
+.white { color: #bfbfbf; }
+
+.white-background { background-color: #fafafa; }
+
+.yellow { color: #bfbf00; }
+
+.yellow-background { background-color: #fafa00; }
+
+span.icon > .fa { cursor: default; }
+a span.icon > .fa { cursor: inherit; }
+
+.admonitionblock td.icon [class^="fa icon-"] { font-size: 2.5em; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); cursor: default; }
+.admonitionblock td.icon .icon-note:before { content: "\f05a"; color: #004060; }
+.admonitionblock td.icon .icon-tip:before { content: "\f0eb"; text-shadow: 1px 1px 2px rgba(155, 155, 0, 0.8); color: #111; }
+.admonitionblock td.icon .icon-warning:before { content: "\f071"; color: #bf6900; }
+.admonitionblock td.icon .icon-caution:before { content: "\f06d"; color: #bf3400; }
+.admonitionblock td.icon .icon-important:before { content: "\f06a"; color: #bf0000; }
+
+.conum[data-value] { display: inline-block; color: #fff !important; background-color: rgba(0, 0, 0, 0.8); -webkit-border-radius: 100px; border-radius: 100px; text-align: center; font-size: 0.75em; width: 1.67em; height: 1.67em; line-height: 1.67em; font-family: "Open Sans", "DejaVu Sans", sans-serif; font-style: normal; font-weight: bold; }
+.conum[data-value] * { color: #fff !important; }
+.conum[data-value] + b { display: none; }
+.conum[data-value]:after { content: attr(data-value); }
+pre .conum[data-value] { position: relative; top: -0.125em; }
+
+b.conum * { color: inherit !important; }
+
+.conum:not([data-value]):empty { display: none; }
+
+.rfc-error pre, .listingblock pre { background: rgba(255, 187, 204, 0.4); border-color: #aaaaaa; }
+
+.rfc-error-text { background-color: rgba(255, 187, 204, 0.4); }
+
+#toc.toc2 ul ul { list-style-type: circle; padding-left: 2em; }
+
+.sect1 { padding-bottom: 0 !important; margin-bottom: 2.5em; }
+
+#header h1 { font-weight: bold; position: relative; left: -0.0625em; }
+
+#content h2, #content h3, #content #toctitle, #content .sidebarblock > .content > .title, #content h4, #content h5, #content #toctitle { position: relative; left: -0.0625em; }
+#content h2 { font-weight: bold; }
+
+.paragraph.lead > p, #preamble > .sectionbody > .paragraph:first-of-type p { color: black; }
+
+pre.pygments.highlight { background-color: rgba(16, 195, 196, 0.05); }
+
+.pygments .tok-err { border: none !important; color: #800000 !important; }
+
+.pygments .tok-c { color: #999 !important; }
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158925429-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-158925429-1');
+</script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@5/dist/gumshoe.polyfills.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.js"></script>
+<script>
+   jQuery(function () {
+      var scrollspy = new Gumshoe('#toc li > a', {
+         nested: false
+      });
+      document.addEventListener('gumshoeActivate', function (event) {
+         jQuery('#toc')
+            .stop()
+            .scrollTo(event.detail.link, 500, {
+               offset: {
+                  top:  0 - jQuery('#toc').height() / 2,
+                  left: 0,
+               }
+            });
+      }, false);
+   });
+</script>
+
+<style>
+   #toc li.active > a {
+      font-weight: bold;
+      text-decoration: underline;
+         <!-- font-style: italic; -->
+   }
+
+  #toc li a {
+     display: inline-block;
+  }
+</style>
+
+<div id="header">
+   <div style="text-align:center"> <b> This isn’t the official RFC, please refer to the IETF website for the official RFC. Errors & omissions excepted </b> </div>
+</div>
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1>RFC 792</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_introduction">1. Introduction</a></li>
+<li><a href="#_message_formats">2. Message Formats</a></li>
+<li><a href="#_destination_unreachable_message">3. Destination Unreachable Message</a></li>
+<li><a href="#_time_exceeded_message">4. Time Exceeded Message</a></li>
+<li><a href="#_parameter_problem_message">5. Parameter Problem Message</a></li>
+<li><a href="#_source_quench_message">6. Source Quench Message</a></li>
+<li><a href="#_redirect_message">7. Redirect Message</a></li>
+<li><a href="#_echo_or_echo_reply_message">8. Echo or Echo Reply Message</a></li>
+<li><a href="#_timestamp_or_timestamp_reply_message">9. Timestamp or Timestamp Reply Message</a></li>
+<li><a href="#_information_request_or_information_reply_message">10. Information Request or Information Reply Message</a></li>
+<li><a href="#_summary_of_message_types">11. Summary of Message Types</a></li>
+<li><a href="#_references">References</a></li>
+<li><a href="#_errata">Errata</a>
+<ul class="sectlevel2">
+<li><a href="#_verified">Verified</a>
+<ul class="sectlevel3">
+<li><a href="#_577">577</a></li>
+<li><a href="#_576">576</a></li>
+</ul>
+</li>
+<li><a href="#_held_for_document_update">Held for Document Update</a>
+<ul class="sectlevel3">
+<li><a href="#_1231">1231</a></li>
+<li><a href="#_1703">1703</a></li>
+<li><a href="#_2935">2935</a></li>
+<li><a href="#_2936">2936</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<table class="tableblock frame-none grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Network Working Group<br>
+Request for Comments:  792</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">INTERNET STANDARD<br>
+Errata Exist<br>
+ J. Postel<br>
+ISI<br>
+September 1981</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Updates:  RFCs 777, 760<br>
+Updates:  IENs 109, 128</p></td>
+<td class="tableblock halign-right valign-top"></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-none grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">INTERNET CONTROL MESSAGE PROTOCOL<br>
+<br>
+                         DARPA INTERNET PROGRAM<br>
+                         PROTOCOL SPECIFICATION<br></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_introduction">1. Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Internet Protocol (IP) <a href="#ref1">[1]</a> is used for host-to-host datagram
+service in a system of interconnected networks called the
+Catenet <a href="#ref2">[2]</a>.  The network connecting devices are called Gateways.
+These gateways communicate between themselves for control purposes
+via a Gateway to Gateway Protocol (GGP) <a href="#ref3">[3]</a> <a href="#ref4">[4]</a>.  Occasionally a
+gateway or destination host will communicate with a source host, for
+example, to report an error in datagram processing.  For such
+purposes this protocol, the Internet Control Message Protocol (ICMP),
+is used.  ICMP, uses the basic support of IP as if it were a higher
+level protocol, however, ICMP is actually an integral part of IP, and
+must be implemented by every IP module.</p>
+</div>
+<div class="paragraph">
+<p>ICMP messages are sent in several situations:  for example, when a
+datagram cannot reach its destination, when the gateway does not have
+the buffering capacity to forward a datagram, and when the gateway
+can direct the host to send traffic on a shorter route.</p>
+</div>
+<div class="paragraph">
+<p>The Internet Protocol is not designed to be absolutely reliable.  The
+purpose of these control messages is to provide feedback about
+problems in the communication environment, not to make IP reliable.
+There are still no guarantees that a datagram will be delivered or a
+control message will be returned.  Some datagrams may still be
+undelivered without any report of their loss.  The higher level
+protocols that use IP must implement their own reliability procedures
+if reliable communication is required.</p>
+</div>
+<div class="paragraph">
+<p>The ICMP messages typically report errors in the processing of
+datagrams.  To avoid the infinite regress of messages about messages
+etc., <a id="errata_1231"></a> no ICMP messages are sent about <span class="rfc-error-text">ICMP messages</span>.  <a id="errata_576"></a> Also ICMP
+messages are only sent about errors in handling fragment zero of
+<span class="rfc-error-text">fragemented</span> datagrams.  (Fragment zero has the fragment <span class="rfc-error-text">offeset</span> equal
+zero) .</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_message_formats">2. Message Formats</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>ICMP messages are sent using the basic IP header.  The first octet of
+the data portion of the datagram is a ICMP type field; the value of
+this field determines the format of the remaining data.  Any field
+labeled "unused" is reserved for later extensions and must be zero
+when sent, but receivers should not use these fields (except to
+include them in the checksum).  Unless otherwise noted under the
+individual format descriptions, the values of the internet header
+fields are as follows:</p>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Version 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>4</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+IHL 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>Internet header length in 32-bit words.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Type of Service 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>0</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Total Length 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>Length of internet header and data in octets.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Identification, Flags, Fragment Offset 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>Used in fragmentation, see <a href="#ref1">[1]</a>.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Time to Live 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>Time to live in seconds; as this field is decremented at each
+machine in which the datagram is processed, the value in this
+field should be at least as great as the number of gateways which
+this datagram will traverse.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Protocol 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>ICMP = 1</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Header Checksum 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The 16 bit one&#8217;s complement of the one&#8217;s complement sum of all 16
+bit words in the header.  For computing the checksum, the checksum
+field should be zero.  This checksum may be replaced in the
+future.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Source Address 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The address of the gateway or host that composes the ICMP message.
+Unless otherwise noted, this can be any of a gateway&#8217;s addresses.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Destination Address 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The address of the gateway or host to which the message should be
+sent.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_destination_unreachable_message">3. Destination Unreachable Message</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |     Type      |     Code      |          Checksum             |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |                             unused                            |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |      Internet Header + 64 bits of Original Data Datagram      |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">IP Fields: </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Destination Address 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The source network and address from the original datagram&#8217;s data.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">ICMP Fields: </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Type 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p><strong>3</strong></p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Code 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>0 = net unreachable;</p>
+</div>
+<div class="paragraph">
+<p>1 = host unreachable;</p>
+</div>
+<div class="paragraph">
+<p>2 = protocol unreachable;</p>
+</div>
+<div class="paragraph">
+<p>3 = port unreachable;</p>
+</div>
+<div class="paragraph">
+<p>4 = fragmentation needed and DF set;</p>
+</div>
+<div class="paragraph">
+<p>5 = source route failed.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Checksum 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The checksum is the 16-bit ones&#8217;s complement of the one&#8217;s
+complement sum of the ICMP message starting with the ICMP Type.
+For computing the checksum , the checksum field should be zero.
+This checksum may be replaced in the future.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Internet Header + 64 bits of Data Datagram 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The internet header plus the first 64 bits of the original
+datagram&#8217;s data.  This data is used by the host to match the
+message to the appropriate process.  If a higher level protocol
+uses port numbers, they are assumed to be in the first 64 data
+bits of the original datagram&#8217;s data.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Description 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>If, according to the information in the gateway&#8217;s routing tables,
+the network specified in the internet destination field of a
+datagram is unreachable, e.g., the distance to the network is
+infinity, the gateway may send a destination unreachable message
+to the internet source host of the datagram.  In addition, in some
+networks, the gateway may be able to determine if the internet
+destination host is unreachable.  Gateways in these networks may
+send destination unreachable messages to the source host when the
+destination host is unreachable.</p>
+</div>
+<div class="paragraph">
+<p>If, in the destination host, the IP module cannot deliver the
+datagram  because the indicated protocol module or process port is
+not active, the destination host may send a destination
+unreachable message to the source host.</p>
+</div>
+<div class="paragraph">
+<p>Another case is when a datagram must be fragmented to be forwarded
+by a gateway yet the Don&#8217;t Fragment flag is on.  In this case the
+gateway must discard the datagram and may return a destination
+unreachable message.</p>
+</div>
+<div class="paragraph">
+<p>Codes 0, 1, 4, and 5 may be received from a gateway.  Codes 2 and
+3 may be received from a host.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_time_exceeded_message">4. Time Exceeded Message</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |     Type      |     Code      |          Checksum             |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |                             unused                            |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |      Internet Header + 64 bits of Original Data Datagram      |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">IP Fields: </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Destination Address 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The source network and address from the original datagram&#8217;s data.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">ICMP Fields: </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Type 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p><strong>11</strong></p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Code 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>0 = time to live exceeded in transit;</p>
+</div>
+<div class="paragraph">
+<p>1 = fragment reassembly time exceeded.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Checksum 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The checksum is the 16-bit ones&#8217;s complement of the one&#8217;s
+complement sum of the ICMP message starting with the ICMP Type.
+For computing the checksum , the checksum field should be zero.
+This checksum may be replaced in the future.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Internet Header + 64 bits of Data Datagram 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The internet header plus the first 64 bits of the original
+datagram&#8217;s data.  This data is used by the host to match the
+message to the appropriate process.  If a higher level protocol
+uses port numbers, they are assumed to be in the first 64 data
+bits of the original datagram&#8217;s data.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Description 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>If the gateway processing a datagram finds the time to live field
+is zero it must discard the datagram.  The gateway may also notify
+the source host via the time exceeded message.</p>
+</div>
+<div class="paragraph">
+<p>If a host reassembling a fragmented datagram cannot complete the
+reassembly due to missing fragments within its time limit it
+discards the datagram, and it may send a time exceeded message.</p>
+</div>
+<div class="paragraph">
+<p>If fragment zero is not available then no time exceeded need be
+sent at all.</p>
+</div>
+<div class="paragraph">
+<p>Code 0 may be received from a gateway.  Code 1 may be received
+from a host.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_parameter_problem_message">5. Parameter Problem Message</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |     Type      |     Code      |          Checksum             |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |    Pointer    |                   unused                      |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |      Internet Header + 64 bits of Original Data Datagram      |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">IP Fields: </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Destination Address 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The source network and address from the original datagram&#8217;s data.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">ICMP Fields: </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Type 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p><strong>12</strong></p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Code 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>0 = pointer indicates the error.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Checksum 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The checksum is the 16-bit ones&#8217;s complement of the one&#8217;s
+complement sum of the ICMP message starting with the ICMP Type.
+For computing the checksum , the checksum field should be zero.
+This checksum may be replaced in the future.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Pointer 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>If code = 0, identifies the octet where an error was detected.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Internet Header + 64 bits of Data Datagram 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The internet header plus the first 64 bits of the original
+datagram&#8217;s data.  This data is used by the host to match the
+message to the appropriate process.  If a higher level protocol
+uses port numbers, they are assumed to be in the first 64 data
+bits of the original datagram&#8217;s data.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Description 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>If the gateway or host processing a datagram finds a problem with
+the header parameters such that it cannot complete processing the
+datagram it must discard the datagram.  One potential source of
+such a problem is with incorrect arguments in an option.  The
+gateway or host may also notify the source host via the parameter
+problem message.  This message is only sent if the error caused
+the datagram to be discarded.</p>
+</div>
+<div class="paragraph">
+<p>The pointer identifies the octet of the original datagram&#8217;s header
+where the error was detected (it may be in the middle of an
+option).  For example, 1 indicates something is wrong with the
+Type of Service, and (if there are options present) 20 indicates
+something is wrong with the type code of the first option.</p>
+</div>
+<div class="paragraph">
+<p>Code 0 may be received from a gateway or a host.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_source_quench_message">6. Source Quench Message</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |     Type      |     Code      |          Checksum             |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |                             unused                            |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |      Internet Header + 64 bits of Original Data Datagram      |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">IP Fields: </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Destination Address 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The source network and address of the original datagram&#8217;s data.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">ICMP Fields: </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Type 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p><strong>4</strong></p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Code 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>0</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Checksum 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The checksum is the 16-bit ones&#8217;s complement of the one&#8217;s
+complement sum of the ICMP message starting with the ICMP Type.
+For computing the checksum , the checksum field should be zero.
+This checksum may be replaced in the future.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Internet Header + 64 bits of Data Datagram 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The internet header plus the first 64 bits of the original
+datagram&#8217;s data.  This data is used by the host to match the
+message to the appropriate process.  If a higher level protocol
+uses port numbers, they are assumed to be in the first 64 data
+bits of the original datagram&#8217;s data.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Description 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>A gateway may discard internet datagrams if it does not have the
+buffer space needed to queue the datagrams for output to the next
+network on the route to the destination network.  If a gateway
+discards a datagram, it may send a source quench message to the
+internet source host of the datagram.  A destination host may also
+send a source quench message if datagrams arrive too fast to be
+processed.  The source quench message is a request to the host to
+cut back the rate at which it is sending traffic to the internet
+destination.  The gateway may send a source quench message for
+every message that it discards.  On receipt of a source quench
+message, the source host should cut back the rate at which it is
+sending traffic to the specified destination until it no longer
+receives source quench messages from the gateway.  The source host
+can then gradually increase the rate at which it sends traffic to
+the destination until it again receives source quench messages.</p>
+</div>
+<div class="paragraph">
+<p>The gateway or host may send the source quench message when it
+approaches its capacity limit rather than waiting until the
+capacity is exceeded.  This means that the data datagram which
+triggered the source quench message may be delivered.</p>
+</div>
+<div class="paragraph">
+<p>Code 0 may be received from a gateway or a host.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_redirect_message">7. Redirect Message</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |     Type      |     Code      |          Checksum             |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |                 Gateway Internet Address                      |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |      Internet Header + 64 bits of Original Data Datagram      |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">IP Fields: </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Destination Address 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The source network and address of the original datagram&#8217;s data.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">ICMP Fields: </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Type 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p><strong>5</strong></p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Code 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>0 = Redirect datagrams for the Network.</p>
+</div>
+<div class="paragraph">
+<p>1 = Redirect datagrams for the Host.</p>
+</div>
+<div class="paragraph">
+<p>2 = Redirect datagrams for the Type of Service and Network.</p>
+</div>
+<div class="paragraph">
+<p>3 = Redirect datagrams for the Type of Service and Host.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Checksum 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The checksum is the 16-bit ones&#8217;s complement of the one&#8217;s
+complement sum of the ICMP message starting with the ICMP Type.
+For computing the checksum , the checksum field should be zero.
+This checksum may be replaced in the future.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Gateway Internet Address 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>Address of the gateway to which traffic for the network specified
+in the internet destination network field of the original
+datagram&#8217;s data should be sent.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Internet Header + 64 bits of Data Datagram 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The internet header plus the first 64 bits of the original
+datagram&#8217;s data.  This data is used by the host to match the
+message to the appropriate process.  If a higher level protocol
+uses port numbers, they are assumed to be in the first 64 data
+bits of the original datagram&#8217;s data.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Description 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The gateway sends a redirect message to a host in the following
+situation.  A gateway, G1, receives an internet datagram from a
+host on a network to which the gateway is attached.  The gateway,
+G1, checks its routing table and obtains the address of the next
+gateway, G2, on the route to the datagram&#8217;s internet destination
+network, X.  If G2 and the host identified by the internet source
+address of the datagram are on the same network, a redirect
+message is sent to the host.  The redirect message advises the
+host to send its traffic for network X directly to gateway G2 as
+this is a shorter path to the destination.  The gateway forwards
+the original datagram&#8217;s data to its internet destination.</p>
+</div>
+<div class="paragraph">
+<p>For datagrams with the IP source route options and the gateway
+address in the destination address field, a redirect message is
+not sent even if there is a better route to the ultimate
+destination than the next address in the source route.</p>
+</div>
+<div class="paragraph">
+<p>Codes 0, 1, 2, and 3 may be received from a gateway.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_echo_or_echo_reply_message">8. Echo or Echo Reply Message</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |     Type      |     Code      |          Checksum             |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |           Identifier          |        Sequence Number        |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |     Data ...
+   +-+-+-+-+-</pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">IP Fields: </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Addresses 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The address of the source in an echo message will be the
+destination of the echo reply message.  To form an echo reply
+message, the source and destination addresses are simply reversed,
+the type code changed to 0, and the checksum recomputed.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+<div id="errata_1703" class="dlist">
+<dl>
+<dt class="hdlist1"><span class="rfc-error-text">IP Fields</span>: </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Type 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>8 for echo message;</p>
+</div>
+<div class="paragraph">
+<p>0 for echo reply message.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Code 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>0</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Checksum 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The checksum is the 16-bit ones&#8217;s complement of the one&#8217;s
+complement sum of the ICMP message starting with the ICMP Type.
+For computing the checksum , the checksum field should be zero.
+If the total length is odd, the received data is padded with one
+octet of zeros for computing the checksum.  This checksum may be
+replaced in the future.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Identifier 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>If code = 0, an identifier to aid in matching echos and replies,
+may be zero.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Sequence Number 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>If code = 0, a sequence number to aid in matching echos and
+replies, may be zero.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Description 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The data received in the echo message must be returned in the echo
+reply message.</p>
+</div>
+<div class="paragraph">
+<p>The identifier and sequence number may be used by the <a id="errata_2935"></a> <span class="rfc-error-text">echo sender</span>
+to aid in matching the replies with the echo requests.  For
+example, the identifier might be used like a port in TCP or UDP to
+identify a session, and the sequence number might be incremented
+on each echo request sent.  The echoer returns these same values
+in the echo reply.</p>
+</div>
+<div class="paragraph">
+<p>Code 0 may be received from a gateway or a host.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_timestamp_or_timestamp_reply_message">9. Timestamp or Timestamp Reply Message</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |     Type      |      Code     |          Checksum             |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |           Identifier          |        Sequence Number        |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |     Originate Timestamp                                       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |     Receive Timestamp                                         |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |     Transmit Timestamp                                        |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">IP Fields: </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Addresses </dt>
+<dd>
+<div class="paragraph">
+<p>The address of the source in a timestamp message will be the
+destination of the timestamp reply message.  To form a timestamp
+reply message, the source and destination addresses are simply
+reversed, the type code changed to 14, and the checksum
+recomputed.</p>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+<div id="errata_577_1" class="dlist">
+<dl>
+<dt class="hdlist1"><span class="rfc-error-text">IP Fields</span>: </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Type 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>13 for timestamp message;</p>
+</div>
+<div class="paragraph">
+<p>14 for timestamp reply message.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Code 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>0</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Checksum 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The checksum is the 16-bit ones&#8217;s complement of the one&#8217;s
+complement sum of the ICMP message starting with the ICMP Type.
+For computing the checksum , the checksum field should be zero.
+This checksum may be replaced in the future.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Identifier 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>If code = 0, an identifier to aid in matching timestamp and
+replies, may be zero.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Sequence Number 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>If code = 0, a sequence number to aid in matching timestamp and
+replies, may be zero.</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Description 
+</td>
+<td class="hdlist2">
+<div class="paragraph">
+<p>The data received (a timestamp) in the message is returned in the
+reply together with an additional timestamp.  The timestamp is 32
+bits of milliseconds since midnight UT.  One use of these
+timestamps is described by Mills <a href="#ref5">[5]</a>.</p>
+</div>
+<div class="paragraph">
+<p>The Originate Timestamp is the time the sender last touched the
+message before sending it, the Receive Timestamp is the time the
+echoer first touched it on receipt, and the Transmit Timestamp is
+the time the echoer last touched the message on sending it.</p>
+</div>
+<div class="paragraph">
+<p>If the time is not available in miliseconds or cannot be provided
+with respect to midnight UT then any time can be inserted in a
+timestamp provided the high order bit of the timestamp is also set
+to indicate this non-standard value.</p>
+</div>
+<div class="paragraph">
+<p>The identifier and sequence number may be used by the <a id="errata_2936"></a> echo <span class="rfc-error-text">sender</span>
+to aid in matching the replies with the requests.  For example,
+the identifier might be used like a port in TCP or UDP to identify
+a session, and the sequence number might be incremented on each
+request sent.  The destination returns these same values in the
+reply.</p>
+</div>
+<div class="paragraph">
+<p>Code 0 may be received from a gateway or a host.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_information_request_or_information_reply_message">10. Information Request or Information Reply Message</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |     Type      |      Code     |          Checksum             |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |           Identifier          |        Sequence Number        |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">IP Fields: </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Addresses </dt>
+<dd>
+<div class="paragraph">
+<p>The address of the source in a information request message will be
+the destination of the information reply message.  To form a
+information reply message, the source and destination addresses
+are simply reversed, the type code changed to 16, and the checksum
+recomputed.</p>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+<div id="errata_577_2" class="dlist">
+<dl>
+<dt class="hdlist1"><span class="rfc-error-text">IP Fields</span>: </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Type </dt>
+<dd>
+<div class="paragraph">
+<p>15 for information request message;</p>
+</div>
+<div class="paragraph">
+<p>16 for information reply message.</p>
+</div>
+</dd>
+<dt class="hdlist1">Code </dt>
+<dd>
+<div class="paragraph">
+<p>0</p>
+</div>
+</dd>
+<dt class="hdlist1">Checksum </dt>
+<dd>
+<div class="paragraph">
+<p>The checksum is the 16-bit ones&#8217;s complement of the one&#8217;s
+complement sum of the ICMP message starting with the ICMP Type.
+For computing the checksum , the checksum field should be zero.
+This checksum may be replaced in the future.</p>
+</div>
+</dd>
+<dt class="hdlist1">Identifier </dt>
+<dd>
+<div class="paragraph">
+<p>If code = 0, an identifier to aid in matching request and replies,
+may be zero.</p>
+</div>
+</dd>
+<dt class="hdlist1">Sequence Number </dt>
+<dd>
+<div class="paragraph">
+<p>If code = 0, a sequence number to aid in matching request and
+replies, may be zero.</p>
+</div>
+</dd>
+<dt class="hdlist1">Description </dt>
+<dd>
+<div class="literalblock">
+<div class="content">
+<pre>This message may be sent with the source network in the IP header
+source and destination address fields zero (which means "this"
+network).  The replying IP module should send the reply with the
+addresses fully specified.  This message is a way for a host to
+find out the number of the network it is on.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>The identifier and sequence number may be used by the echo sender
+to aid in matching the replies with the requests.  For example,
+the identifier might be used like a port in TCP or UDP to identify
+a session, and the sequence number might be incremented on each
+request sent.  The destination returns these same values in the
+reply.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Code 0 may be received from a gateway or a host.</pre>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary_of_message_types">11. Summary of Message Types</h2>
+<div class="sectionbody">
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+0  
+</td>
+<td class="hdlist2">
+<p><a href="#_echo_or_echo_reply_message">Echo Reply</a></p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+3  
+</td>
+<td class="hdlist2">
+<p><a href="#_destination_unreachable_message">Destination Unreachable</a></p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+4  
+</td>
+<td class="hdlist2">
+<p><a href="#_source_quench_message">Source Quench</a></p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+5  
+</td>
+<td class="hdlist2">
+<p><a href="#_redirect_message">Redirect</a></p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+8  
+</td>
+<td class="hdlist2">
+<p><a href="#_echo_or_echo_reply_message">Echo</a></p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+11  
+</td>
+<td class="hdlist2">
+<p><a href="#_time_exceeded_message">Time Exceeded</a></p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+12  
+</td>
+<td class="hdlist2">
+<p><a href="#_parameter_problem_message">Parameter Problem</a></p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+13  
+</td>
+<td class="hdlist2">
+<p><a href="#_timestamp_or_timestamp_reply_message">Timestamp</a></p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+14  
+</td>
+<td class="hdlist2">
+<p><a href="#_timestamp_or_timestamp_reply_message">Timestamp Reply</a></p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+15  
+</td>
+<td class="hdlist2">
+<p><a href="#_information_request_or_information_reply_message">Information Request</a></p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+16  
+</td>
+<td class="hdlist2">
+<p><a href="#_information_request_or_information_reply_message">Information Reply</a></p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_references">References</h2>
+<div class="sectionbody">
+<div class="ulist bibliography">
+<ul class="bibliography">
+<li>
+<p><a id="ref1"></a>[1]   Postel, J. (ed.), "Internet Protocol - DARPA Internet Program
+Protocol Specification," RFC 791, USC/Information Sciences
+Institute, September 1981.</p>
+</li>
+<li>
+<p><a id="ref2"></a>[2]   Cerf, V., "The Catenet Model for Internetworking," IEN 48,
+Information Processing Techniques Office, Defense Advanced
+Research Projects Agency, July 1978.</p>
+</li>
+<li>
+<p><a id="ref3"></a>[3]   Strazisar, V., "Gateway Routing:  An Implementation
+Specification", IEN 30, Bolt Beranek and Newman, April 1979.</p>
+</li>
+<li>
+<p><a id="ref4"></a>[4]   Strazisar, V., "How to Build a Gateway", IEN 109, Bolt Beranek
+and Newman, August 1979.</p>
+</li>
+<li>
+<p><a id="ref5"></a>[5]   Mills, D., "DCNET Internet Clock Service," RFC 778, COMSAT
+Laboratories, April 1981.</p>
+</li>
+</ul>
+</div>
+<hr>
+<hr>
+<table class="tableblock frame-none grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">END OF THE RFC</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_errata">Errata</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_verified">Verified</h3>
+<div class="sect3">
+<h4 id="_577">577</h4>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Errata ID: <a href="https://www.rfc-editor.org/errata/eid577">577</a><br>
+Status: Verified<br>
+Type: Technical</p>
+</div>
+<div class="paragraph">
+<p>Reported By: Beren Sanders<br>
+Date Reported: 2002-09-09</p>
+</div>
+<div class="paragraph">
+<p>On p. <a href="#errata_577_1">16</a> and <a href="#errata_577_2">18</a>, it says:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre><strong>IP</strong> Fields:
+
+Type</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It should say:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre><strong>ICMP</strong> Fields:
+
+Type</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>On page 16, the section 'Timestamp and Timestamp Reply Messages' has
+the header 'IP Fields:' - first mentioned after the graph and then
+again after 'Addresses'. The second one should actually be 'ICMP
+Fields:'. This error also occurs in the discussion of the
+'Information Request and Information Reply Message' on page 18.</p>
+</div>
+<div class="paragraph">
+<p>The second 'IP Fields:' section of these two sets of message
+descriptions are really talking about fields in the ICMP header not
+the IP header.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_576">576</h4>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Errata ID: <a href="https://www.rfc-editor.org/errata/eid576">576</a><br>
+Status: Verified<br>
+Type: Editorial</p>
+</div>
+<div class="paragraph">
+<p>Reported By: Arun Darlie Koshy<br>
+Date Reported: 2004-03-26</p>
+</div>
+<div class="paragraph">
+<p>In the Introduction, fourth paragraph, it says:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Also ICMP messages are only sent about errors in handling fragment zero of
+<strong>fragemented</strong> datagrams.  (Fragment zero has the fragment <strong>offeset</strong> equal
+zero).</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="#errata_576">It should say</a>:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Also ICMP messages are only sent about errors in handling fragment zero of
+<strong>fragmented</strong> datagrams.  (Fragment zero has the fragment <strong>offset</strong> equal
+zero).</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_held_for_document_update">Held for Document Update</h3>
+<div class="sect3">
+<h4 id="_1231">1231</h4>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Errata ID: <a href="https://www.rfc-editor.org/errata/eid1231">1231</a><br>
+Status: Held for Document Update<br>
+Type: Editorial</p>
+</div>
+<div class="paragraph">
+<p>Reported By: Stéphane Bortzmeyer<br>
+Date Reported: 2008-01-04<br>
+Held for Document Update by: ron bonica</p>
+</div>
+<div class="paragraph">
+<p>In the Introduction, it says:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>no ICMP messages are sent about <strong>ICMP</strong> messages</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="#errata_1231">It should say</a>:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>no ICMP messages are sent about <strong>ICMP error</strong> messages</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For instance, echo replies are sent about echo messages. The context of the original sentence indicates that the author only referred to error messages but the sentence itself is not clear and I&#8217;ve seen the editorial error reproduced in some places.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_1703">1703</h4>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Errata ID: <a href="https://www.rfc-editor.org/errata/eid1703">1703</a><br>
+Status: Held for Document Update<br>
+Type: Editorial</p>
+</div>
+<div class="paragraph">
+<p>Reported By: Nikolai Malykh<br>
+Date Reported: 2009-03-02<br>
+Held for Document Update by: ron bonica</p>
+</div>
+<div class="paragraph">
+<p>On page 14, it says:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>   <strong>IP Fields</strong>:
+
+   Type
+
+      8 for echo message;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="#errata_1703">It should say</a>:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>   <strong>ICMP Fields</strong>:
+
+   Type
+
+      8 for echo message;</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_2935">2935</h4>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Errata ID: <a href="https://www.rfc-editor.org/errata/eid2935">2935</a><br>
+Status: Held for Document Update<br>
+Type: Editorial</p>
+</div>
+<div class="paragraph">
+<p>Reported By: Jeffrey Connell<br>
+Date Reported: 2011-08-13<br>
+Held for Document Update by: ron bonica</p>
+</div>
+<div class="paragraph">
+<p>On page 17, it says:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>The identifier and sequence number may be used by the <strong>echo</strong> sender
+to aid in matching the replies with the requests.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="#errata_2935">It should say</a>:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>The identifier and sequence number may be used by the <strong>timestamp</strong> sender
+to aid in matching the replies with the requests.</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In the "Description" of the "Timestamp or Timestamp Reply" message. Appears to be a copy-paste error from the "Echo or Echo Reply" message&#8217;s description.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_2936">2936</h4>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Errata ID: <a href="https://www.rfc-editor.org/errata/eid2936">2936</a><br>
+Status: Held for Document Update<br>
+Type: Editorial</p>
+</div>
+<div class="paragraph">
+<p>Reported By: Jeffrey Connell<br>
+Date Reported: 2011-08-13<br>
+Held for Document Update by: ron bonica</p>
+</div>
+<div class="paragraph">
+<p>On page 19, it says:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>The identifier and sequence number may be used by the <strong>echo</strong> sender
+to aid in matching the replies with the requests.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="#errata_2936">It should say</a>:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>The identifier and sequence number may be used by the <strong>information request</strong>
+sender to aid in matching the replies with the requests.</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In the "Description" of the "Information Request or Information Reply" message. Appears to be a copy-paste error from the "Echo or Echo Reply" message&#8217;s description.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+</div>
+</div>
+<div id="footer">
+    <div id="footer-text">
+       <a href="https://gris8.github.io/betterfc" style="color:yellow">BetteRFC</a>
+       document v1.0 created with
+       <a href="https://www.asciidoctor.org" style="color:yellow">Asciidoctor</a>
+       v2.0.11.dev
+    </div>
+</div>
+</body>
+</html>
