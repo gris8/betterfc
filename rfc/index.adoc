@@ -4,7 +4,7 @@
 :doctype: article
 :reproducible:
 :docinfo: private
-:RFC_PATH: link:betterfc/
+:RFC_PATH: link:docs
 
 = BetteRFC
 
