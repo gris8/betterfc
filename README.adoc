@@ -28,4 +28,4 @@ It isn't necessary to know anything about HTML and CSS. You can install https://
 
 == The future
 
-I will slowly port other RFC, asymptotically one day ... all icon:smile-o[role="blue"]
+I will slowly port other RFC, asymptotically one day ... all :smile:
