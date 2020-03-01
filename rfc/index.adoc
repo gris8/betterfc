@@ -4,7 +4,7 @@
 :doctype: article
 :reproducible:
 :docinfo: private
-:RFC_PATH: link:docs
+:RFC_PATH: link:
 
 = BetteRFC
 
@@ -45,6 +45,7 @@ I will slowly port other RFC, asymptotically one day ... all icon:smile-o[role="
 [options="header", cols="<,~"]
 |===
 |            RFC              | Description
+| {RFC_PATH}/rfc791.html[791] | INTERNET PROTOCOL
 | {RFC_PATH}/rfc792.html[792] | INTERNET CONTROL MESSAGE PROTOCOL
 |===
 
