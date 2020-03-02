@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.11.dev">
-<title>BetteRFC</title>
+<title>RFC 1350</title>
 <style>
 @import url(https://fonts.googleapis.com/css?family=Varela+Round|Open+Sans:400italic,600italic,400,600|Ubuntu+Mono:400);
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
@@ -757,100 +757,929 @@ pre.pygments.highlight { background-color: rgba(16, 195, 196, 0.05); }
 
   gtag('config', 'UA-158925429-1');
 </script>
-</head>
-<body class="article">
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@5/dist/gumshoe.polyfills.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.js"></script>
+<script>
+   jQuery(function () {
+      var scrollspy = new Gumshoe('#toc li > a', {
+         nested: false
+      });
+      document.addEventListener('gumshoeActivate', function (event) {
+         jQuery('#toc')
+            .stop()
+            .scrollTo(event.detail.link, 500, {
+               offset: {
+                  top:  0 - jQuery('#toc').height() / 2,
+                  left: 0,
+               }
+            });
+      }, false);
+   });
+</script>
+
+<style>
+   #toc li.active > a {
+      font-weight: bold;
+      text-decoration: underline;
+         <!-- font-style: italic; -->
+   }
+
+  #toc li a {
+     display: inline-block;
+  }
+</style>
+
 <div id="header">
-<h1>BetteRFC</h1>
+   <div style="text-align:center"> <b> This isn’t the official RFC, please refer to the IETF website for the official RFC. Errors & omissions excepted </b> </div>
+</div>
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1>RFC 1350</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_status_of_this_memo">Status of this Memo</a></li>
+<li><a href="#_summary">Summary</a></li>
+<li><a href="#errata_1712"><span class="rfc-error-text">Acknowlegements</span></a></li>
+<li><a href="#_purpose">1. Purpose</a></li>
+<li><a href="#_overview_of_the_protocol">2. Overview of the Protocol</a></li>
+<li><a href="#_relation_to_other_protocols">3. Relation to other Protocols</a></li>
+<li><a href="#_initial_connection_protocol">4. Initial Connection Protocol</a></li>
+<li><a href="#_tftp_packets">5. TFTP Packets</a></li>
+<li><a href="#errata_4971">6. Normal Termination</a></li>
+<li><a href="#_premature_termination">7. Premature Termination</a></li>
+<li><a href="#_order_of_headers">Appendix A: Order of Headers</a></li>
+<li><a href="#_tftp_formats">8. TFTP Formats</a></li>
+<li><a href="#_initial_connection_protocol_for_reading_a_file">9. Initial Connection Protocol for reading a file</a></li>
+<li><a href="#_error_codes">10. Error Codes</a>
+<ul class="sectlevel2">
+<li><a href="#_values_of_fields">10.1. Values of Fields</a></li>
+</ul>
+</li>
+<li><a href="#_references">References</a></li>
+<li><a href="#_security_considerations">Security Considerations</a></li>
+<li><a href="#_authors_address">Author&#8217;s Address</a></li>
+<li><a href="#_errata">Errata</a>
+<ul class="sectlevel2">
+<li><a href="#_verified">Verified</a>
+<ul class="sectlevel3">
+<li><a href="#_4971">4971</a></li>
+</ul>
+</li>
+<li><a href="#_held_for_document_update">Held for Document Update</a>
+<ul class="sectlevel3">
+<li><a href="#_1712">1712</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 <div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<table class="tableblock frame-none grid-all stripes-none" style="width: 99%;">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Network Working Group</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">K. Sollins</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Request For Comments: 1350</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">MIT</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STD: 33</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">July 1992</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Obsoletes: RFC 783</p></td>
+<td class="tableblock halign-right valign-top"></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-none grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">THE TFTP PROTOCOL (REVISION 2)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <div class="sect1">
-<h2 id="_introduction">Introduction</h2>
+<h2 id="_status_of_this_memo">Status of this Memo</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>BetteRFC is a project whose purpose is to make the RFC easier to read by creating HTML documents from the original plain ASCII format.
-The lack of any kind of tag or structure in the RFC documents makes it impossible to automate the process and it requires  manual intervention.
-Thankfully <a href="https://asciidoctor.org">Asciidoctor</a> now makes this process quite easy and fast.</p>
+<p>This RFC specifies an IAB standards track protocol for the Internet
+community, and requests discussion and suggestions for improvements.
+Please refer to the current edition of the "IAB Official Protocol
+Standards" for the standardization state and status of this protocol.
+Distribution of this memo is unlimited.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_what_to_expect">What to expect</h2>
+<h2 id="_summary">Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>TFTP is a very simple protocol used to transfer files.  It is from
+this that its name comes, Trivial File Transfer Protocol or TFTP.
+Each nonterminal packet is acknowledged separately.  This document
+describes the protocol and its types of packets.  The document also
+explains the reasons behind some of the design decisions.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="errata_1712"><span class="rfc-error-text">Acknowlegements</span></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The protocol was originally designed by Noel Chiappa, and was
+redesigned by him, Bob Baldwin and Dave Clark, with comments from
+Steve Szymanski.  The current revision of the document includes
+modifications stemming from discussions with and suggestions from
+Larry Allen, Noel Chiappa, Dave Clark, Geoff Cooper, Mike Greenwald,
+Liza Martin, David Reed, Craig Milo Rogers (of USC-ISI), Kathy
+Yellick, and the author.  The acknowledgement and retransmission
+scheme was inspired by TCP, and the error mechanism was suggested by
+PARC&#8217;s EFTP abort message.</p>
+</div>
+<div class="paragraph">
+<p>The May, 1992 revision to fix the "Sorcerer&#8217;s Apprentice" protocol
+bug [<a href="#ref4">4</a>] and other minor document problems was done by Noel Chiappa.</p>
+</div>
+<div class="paragraph">
+<p>This research was supported by the Advanced Research Projects Agency
+of the Department of Defense and was monitored by the Office of Naval
+Research under contract number N00014-75-C-0661.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_purpose">1. Purpose</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>TFTP is a simple protocol to transfer files, and therefore was named
+the Trivial File Transfer Protocol or TFTP.  It has been implemented
+on top of the Internet User Datagram protocol (UDP or Datagram) [<a href="#ref2">2</a>]
+so it may be used to move files between machines on different
+networks implementing UDP.  (This should not exclude the possibility
+of implementing TFTP on top of other datagram protocols.)  It is
+designed to be small and easy to implement.  Therefore, it lacks most
+of the features of a regular FTP.  The only thing it can do is read
+and write files (or mail) from/to a remote server.  It cannot list
+directories, and currently has no provisions for user authentication.
+In common with other Internet protocols, it passes 8 bit bytes of
+data.</p>
+</div>
+<div class="paragraph">
+<p>Three modes of transfer are currently supported: netascii (This is
+ascii as defined in "USA Standard Code for Information Interchange"
+[<a href="#ref1">1</a>] with the modifications specified in "Telnet Protocol
+Specification" [<a href="#ref3">3</a>].)  Note that it is 8 bit ascii.  The term
+"netascii" will be used throughout this document to mean this
+particular version of ascii.); octet (This replaces the "binary" mode
+of previous versions of this document.) raw 8 bit bytes; mail,
+netascii characters sent to a user rather than a file.  (The mail
+mode is obsolete and should not be implemented or used.)  Additional
+modes can be defined by pairs of cooperating hosts.</p>
+</div>
+<div class="paragraph">
+<p>Reference [<a href="#ref4">4</a>] (section 4.2) should be consulted for further valuable
+directives and suggestions on TFTP.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview_of_the_protocol">2. Overview of the Protocol</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Any transfer begins with a request to read or write a file, which
+also serves to request a connection.  If the server grants the
+request, the connection is opened and the file is sent in fixed
+length blocks of 512 bytes.  Each data packet contains one block of
+data, and must be acknowledged by an acknowledgment packet before the
+next packet can be sent.  A data packet of less than 512 bytes
+signals termination of a transfer.  If a packet gets lost in the
+network, the intended recipient will timeout and may retransmit his
+last packet (which may be data or an acknowledgment), thus causing
+the sender of the lost packet to retransmit that lost packet.  The
+sender has to keep just one packet on hand for retransmission, since
+the lock step acknowledgment guarantees that all older packets have
+been received.  Notice that both machines involved in a transfer are
+considered senders and receivers.  One sends data and receives
+acknowledgments, the other sends acknowledgments and receives data.</p>
+</div>
+<div class="paragraph">
+<p>Most errors cause termination of the connection.  An error is
+signalled by sending an error packet.  This packet is not
+acknowledged, and not retransmitted (i.e., a TFTP server or user may
+terminate after sending an error message), so the other end of the
+connection may not get it.  Therefore timeouts are used to detect
+such a termination when the error packet has been lost.  Errors are
+caused by three types of events: not being able to satisfy the
+request (e.g., file not found, access violation, or no such user),
+receiving a packet which cannot be explained by a delay or
+duplication in the network (e.g., an incorrectly formed packet), and
+losing access to a necessary resource (e.g., disk full or access
+denied during a transfer).</p>
+</div>
+<div class="paragraph">
+<p>TFTP recognizes only one error condition that does not cause
+termination, the source port of a received packet being incorrect.
+In this case, an error packet is sent to the originating host.</p>
+</div>
+<div class="paragraph">
+<p>This protocol is very restrictive, in order to simplify
+implementation.  For example, the fixed length blocks make allocation
+straight forward, and the lock step acknowledgement provides flow
+control and eliminates the need to reorder incoming data packets.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_relation_to_other_protocols">3. Relation to other Protocols</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As mentioned TFTP is designed to be implemented on top of the
+Datagram protocol (UDP).  Since Datagram is implemented on the
+Internet protocol, packets will have an Internet header, a Datagram
+header, and a TFTP header.  Additionally, the packets may have a
+header (LNI, ARPA header, etc.)  to allow them through the local
+transport medium.  As shown in Figure 3-1, the order of the contents
+of a packet will be: local medium header, if used, Internet header,
+Datagram header, TFTP header, followed by the remainder of the TFTP
+packet.  (This may or may not be data depending on the type of packet
+as specified in the TFTP header.)  TFTP does not specify any of the
+values in the Internet header.  On the other hand, the source and
+destination port fields of the Datagram header (its format is given
+in the appendix) are used by TFTP and the length field reflects the
+size of the TFTP packet.  The transfer identifiers (TID&#8217;s) used by
+TFTP are passed to the Datagram layer to be used as ports; therefore
+they must be between 0 and 65,535.  The initialization of TID&#8217;s is
+discussed in the section on initial connection protocol.</p>
+</div>
+<div class="paragraph">
+<p>The  TFTP header consists of a 2 byte opcode field which indicates
+the packet&#8217;s type (e.g., DATA, ERROR, etc.)  These opcodes and  the
+formats of  the various types of packets are discussed further in the
+section on TFTP packets.</p>
+</div>
+<div class="literalblock">
+<div class="title">Figure 3-1</div>
+<div class="content">
+<pre> ---------------------------------------------------
+|  Local Medium  |  Internet  |  Datagram  |  TFTP  |
+ ---------------------------------------------------
+
+             Figure 3-1: Order of Headers</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_initial_connection_protocol">4. Initial Connection Protocol</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A transfer is established by sending a request (WRQ to write onto a
+foreign file system, or RRQ to read from it), and receiving a
+positive reply, an acknowledgment packet for write, or the first data
+packet for read.  In general an acknowledgment packet will contain
+the block number of the data packet being acknowledged.  Each data
+packet has associated with it a block number; block numbers are
+consecutive and begin with one.  Since the positive response to a
+write request is an acknowledgment packet, in this special case the
+block number will be zero.  (Normally, since an acknowledgment packet
+is acknowledging a data packet, the acknowledgment packet will
+contain the block number of the data packet being acknowledged.)  If
+the reply is an error packet, then the request has been denied.</p>
+</div>
+<div class="paragraph">
+<p>In order to create a connection, each end of the connection chooses a
+TID for itself, to be used for the duration of that connection.  The
+TID&#8217;s chosen for a connection should be randomly chosen, so that the
+probability that the same number is chosen twice in immediate
+succession is very low.  Every packet has associated with it the two
+TID&#8217;s of the ends of the connection, the source TID and the
+destination TID.  These TID&#8217;s are handed to the supporting UDP (or
+other datagram protocol) as the source and destination ports.  A
+requesting host chooses its source TID as described above, and sends
+its initial request to the known TID 69 decimal (105 octal) on the
+serving host.  The response to the request, under normal operation,
+uses a TID chosen by the server as its source TID and the TID chosen
+for the previous message by the requestor as its destination TID.
+The two chosen TID&#8217;s are then used for the remainder of the transfer.</p>
+</div>
+<div class="paragraph">
+<p>As an example, the following shows the steps used to establish a
+connection to write a file.  Note that WRQ, ACK, and DATA are the
+names of the write request, acknowledgment, and data types of packets
+respectively.  The appendix contains a similar example for reading a
+file.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Host A sends  a  "WRQ"  to  host  B  with  source=  A&#8217;s  TID,
+destination= 69.</p>
+</li>
+<li>
+<p>Host  B  sends  a "ACK" (with block number= 0) to host A with
+source= B&#8217;s TID, destination= A&#8217;s TID.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>At this point the connection has been established and the first data
+packet can be sent by Host A with a sequence number of 1.  In the
+next step, and in all succeeding steps, the hosts should make sure
+that the source TID matches the value that was agreed on in steps 1
+and 2.  If a source TID does not match, the packet should be
+discarded as erroneously sent from somewhere else.  An error packet
+should be sent to the source of the incorrect packet, while not
+disturbing the transfer.  This can be done only if the TFTP in fact
+receives a packet with an incorrect TID.  If the supporting protocols
+do not allow it, this particular error condition will not arise.</p>
+</div>
+<div class="paragraph">
+<p>The following example demonstrates a correct operation of the
+protocol in which the above situation can occur.  Host A sends a
+request to host B. Somewhere in the network, the request packet is
+duplicated, and as a result two acknowledgments are returned to host
+A, with different TID&#8217;s chosen on host B in response to the two
+requests.  When the first response arrives, host A continues the
+connection.  When the second response to the request arrives, it
+should be rejected, but there is no reason to terminate the first
+connection.  Therefore, if different TID&#8217;s are chosen for the two
+connections on host B and host A checks the source TID&#8217;s of the
+messages it receives, the first connection can be maintained while
+the second is rejected by returning an error packet.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tftp_packets">5. TFTP Packets</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>TFTP supports five types of packets, all of which have been mentioned
+above:</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top">opcode</th>
+<th class="tableblock halign-left valign-top">operation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read request (RRQ)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Write request (WRQ)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data (DATA)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Acknowledgment (ACK)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Error (ERROR)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The TFTP header of a packet contains the  opcode  associated  with
+that packet.</p>
+</div>
+<div class="literalblock">
+<div class="title">Figure 5-1</div>
+<div class="content">
+<pre> 2 bytes     string    1 byte     string   1 byte
+ ------------------------------------------------
+| Opcode |  Filename  |   0  |    Mode    |   0  |
+ ------------------------------------------------
+
+            Figure 5-1: RRQ/WRQ packet</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>RRQ and WRQ packets (opcodes 1 and 2 respectively) have the format
+shown in Figure 5-1.  The file name is a sequence of bytes in
+netascii terminated by a zero byte.  The mode field contains the
+string "netascii", "octet", or "mail" (or any combination of upper
+and lower case, such as "NETASCII", NetAscii", etc.) in netascii
+indicating the three modes defined in the protocol.  A host which
+receives netascii mode data must translate the data to its own
+format.  Octet mode is used to transfer a file that is in the 8-bit
+format of the machine from which the file is being transferred.  It
+is assumed that each type of machine has a single 8-bit format that
+is more common, and that that format is chosen.  For example, on a
+DEC-20, a 36 bit machine, this is four 8-bit bytes to a word with
+four bits of breakage.  If a host receives a octet file and then
+returns it, the returned file must be identical to the original.
+Mail mode uses the name of a mail recipient in place of a file and
+must begin with a WRQ.  Otherwise it is identical to netascii mode.
+The mail recipient string should be of the form "username" or
+"username@hostname".  If the second form is used, it allows the
+option of mail forwarding by a relay computer.</p>
+</div>
+<div class="paragraph">
+<p>The discussion above assumes that both the sender and recipient are
+operating in the same mode, but there is no reason that this has to
+be the case.  For example, one might build a storage server.  There
+is no reason that such a machine needs to translate netascii into its
+own form of text.  Rather, the sender might send files in netascii,
+but the storage server might simply store them without translation in
+8-bit format.  Another such situation is a problem that currently
+exists on DEC-20 systems.  Neither netascii nor octet accesses all
+the bits in a word.  One might create a special mode for such a
+machine which read all the bits in a word, but in which the receiver
+stored the information in 8-bit format.  When such a file is
+retrieved from the storage site, it must be restored to its original
+form to be useful, so the reverse mode must also be implemented.  The
+user site will have to remember some information to achieve this.  In
+both of these examples, the request packets would specify octet mode
+to the foreign host, but the local host would be in some other mode.
+No such machine or application specific modes have been specified in
+TFTP, but one would be compatible with this specification.</p>
+</div>
+<div class="paragraph">
+<p>It is also possible to define other modes for cooperating pairs of</p>
+</div>
+<div class="paragraph">
+<p>hosts, although this must be done with care.  There is no requirement
+that any other hosts implement these.  There is no central authority
+that will define these modes or assign them names.</p>
+</div>
+<div class="literalblock">
+<div class="title">Figure 5-2</div>
+<div class="content">
+<pre> 2 bytes     2 bytes      n bytes
+ ----------------------------------
+| Opcode |   Block #  |   Data     |
+ ----------------------------------
+
+      Figure 5-2: DATA packet</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Data is actually transferred in DATA packets depicted in Figure 5-2.
+DATA packets (opcode = 3) have a block number and data field.  The
+block numbers on data packets begin with one and increase by one for
+each new block of data.  This restriction allows the program to use a
+single number to discriminate between new packets and duplicates.
+The data field is from zero to 512 bytes long.  If it is 512 bytes
+long, the block is not the last block of data; if it is from zero to
+511 bytes long, it signals the end of the transfer.  (See the section
+on Normal Termination for details.)</p>
+</div>
+<div class="paragraph">
+<p>All  packets other than duplicate ACK&#8217;s and those used for
+termination are acknowledged unless a timeout occurs [<a href="#ref4">4</a>].  Sending a
+DATA packet is an acknowledgment for the first ACK packet of the
+previous DATA packet. The WRQ and DATA packets are acknowledged by
+ACK or ERROR packets, while RRQ</p>
+</div>
+<div class="literalblock">
+<div class="title">Figure 5-3</div>
+<div class="content">
+<pre> 2 bytes     2 bytes
+ ---------------------
+| Opcode |   Block #  |
+ ---------------------
+
+ Figure 5-3: ACK packet</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and ACK packets are acknowledged by  DATA  or ERROR packets.  Figure
+5-3 depicts an ACK packet; the opcode is 4.  The  block  number  in
+an  ACK echoes the block number of the DATA packet being
+acknowledged.  A WRQ is acknowledged with an ACK packet having a
+block number of zero.</p>
+</div>
+<div class="literalblock">
+<div class="title">Figure 5-4</div>
+<div class="content">
+<pre> 2 bytes     2 bytes      string    1 byte
+ -----------------------------------------
+| Opcode |  ErrorCode |   ErrMsg   |   0  |
+ -----------------------------------------
+
+          Figure 5-4: ERROR packet</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An ERROR packet (opcode 5) takes the form depicted in Figure 5-4.  An
+ERROR packet can be the acknowledgment of any other type of packet.
+The error code is an integer indicating the nature of the error.  A
+table of values and meanings is given in the appendix.  (Note that
+several error codes have been added to this version of this
+document.) The error message is intended for human consumption, and
+should be in netascii.  Like all other strings, it is terminated with
+a zero byte.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="errata_4971">6. Normal Termination</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The end of a transfer is marked by a DATA packet that contains
+between 0 and 511 bytes of data <span class="rfc-error-text">(i.e., Datagram length &lt; 516)</span>.  This
+packet is acknowledged by an ACK packet like all other DATA packets.
+The host acknowledging the final DATA packet may terminate its side
+of the connection on sending the final ACK.  On the other hand,
+dallying is encouraged.  This means that the host sending the final
+ACK will wait for a while before terminating in order to retransmit
+the final ACK if it has been lost.  The acknowledger will know that
+the ACK has been lost if it receives the final DATA packet again.
+The host sending the last DATA must retransmit it until the packet is
+acknowledged or the sending host times out.  If the response is an
+ACK, the transmission was completed successfully.  If the sender of
+the data times out and is not prepared to retransmit any more, the
+transfer may still have been completed successfully, after which the
+acknowledger or network may have experienced a problem.  It is also
+possible in this case that the transfer was unsuccessful.  In any
+case, the connection has been closed.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_premature_termination">7. Premature Termination</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If a request can not be granted, or some error occurs during the
+transfer, then an ERROR packet (opcode 5) is sent.  This is only a
+courtesy since it will not be retransmitted or acknowledged, so it
+may never be received.  Timeouts must also be used to detect errors.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_order_of_headers">Appendix A: Order of Headers</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>                                               2 bytes
+ ----------------------------------------------------------
+|  Local Medium  |  Internet  |  Datagram  |  TFTP Opcode  |
+ ----------------------------------------------------------</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tftp_formats">8. TFTP Formats</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>Type   Op #     Format without header
+
+       2 bytes    string   1 byte     string   1 byte
+       -----------------------------------------------
+RRQ/  | 01/02 |  Filename  |   0  |    Mode    |   0  |
+WRQ    -----------------------------------------------
+       2 bytes    2 bytes       n bytes
+       ---------------------------------
+DATA  | 03    |   Block #  |    Data    |
+       ---------------------------------
+       2 bytes    2 bytes
+       -------------------
+ACK   | 04    |   Block #  |
+       --------------------
+       2 bytes  2 bytes        string    1 byte
+       ----------------------------------------
+ERROR | 05    |  ErrorCode |   ErrMsg   |   0  |
+       ----------------------------------------</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_initial_connection_protocol_for_reading_a_file">9. Initial Connection Protocol for reading a file</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The documents take advantage of the CSS which enables them to be displayed clearly on screens of different sizes (tablet, phone, etc.)</p>
+<p>Host  A  sends  a  "RRQ"  to  host  B  with  source= A&#8217;s TID,
+destination= 69.</p>
 </li>
 <li>
-<p>A table of contents is included which easily identifies parts of the document.</p>
-</li>
-<li>
-<p>RFC and <a href="https://en.wikipedia.org/wiki/Erratum">errata</a> are listed on the same page.</p>
-</li>
-<li>
-<p>The parts of the document that have an errata associated are highlighted with a different background color. E.g: the RFC791 section 3.1 has the <a href="https://www.rfc-editor.org/errata/eid716">errata 716</a> associated :</p>
-<div class="literalblock rfc-error">
-<div class="content">
-<pre>--------------------------------+
-|10001000|00000<strong>010</strong>|  Stream ID  |
---------------------------------+
-Type=136 Length=4</pre>
-</div>
-</div>
+<p>Host B sends a "DATA" (with block number= 1) to host  A  with
+source= B&#8217;s TID, destination= A&#8217;s TID.</p>
 </li>
 </ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_how_to_contribute">How to contribute</h2>
+<h2 id="_error_codes">10. Error Codes</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>It isn&#8217;t necessary to know anything about HTML and CSS. You can install <a href="https://asciidoctor.org">Asciidoctor</a> for Windows with <a href="https://chocolatey.org">chocolatey</a> or for Linux with the packet manager provided by your distribution or eventually from the <a href="https://github.com/asciidoctor/asciidoctor">source code</a>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_the_future">The future</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>I will slowly port other RFC, asymptotically one day &#8230;&#8203; all <span class="icon blue"><i class="fa fa-smile-o"></i></span></p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_list_of_the_rfc">List of the RFC</h2>
-<div class="sectionbody">
-<table class="tableblock frame-all grid-all stretch">
+<table class="tableblock frame-all grid-all fit-content">
 <colgroup>
-<col style="width: 1%;">
+<col>
 <col>
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">RFC</th>
-<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc791.html">791</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">INTERNET PROTOCOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Not defined, see error message (if any).</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc792.html">792</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">INTERNET CONTROL MESSAGE PROTOCOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">File not found.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc814.html">814</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">NAME, ADDRESSES, PORTS, AND ROUTES</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Access violation.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc1350.html">1350</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">THE TFTP PROTOCOL (REVISION 2)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Disk full or allocation exceeded.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Illegal TFTP operation.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unknown transfer ID.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">File already exists.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No such user.</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>Internet User Datagram Header [<a href="#ref2">2</a>]</p>
+</div>
+<div class="paragraph">
+<p>(This has been included only for convenience.  TFTP need not be
+implemented on top of the Internet User Datagram Protocol.)</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>  Format
+
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|          Source Port          |       Destination Port        |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|            Length             |           Checksum            |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+</pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_values_of_fields">10.1. Values of Fields</h3>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+Source Port 
+</td>
+<td class="hdlist2">
+<p>Picked by originator of packet.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Dest. Port  
+</td>
+<td class="hdlist2">
+<p>Picked by destination machine (69 for RRQ or WRQ).</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Length      
+</td>
+<td class="hdlist2">
+<p>Number of bytes in UDP packet, including UDP header.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+Checksum    
+</td>
+<td class="hdlist2">
+<p>Reference 2 describes rules for computing checksum.<br>
+(The implementor of this should be sure that the<br>
+correct algorithm is used here.)<br>
+Field contains zero if unused.</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Note: TFTP passes transfer identifiers (TID&#8217;s) to the Internet User
+Datagram protocol to be used as the source and destination ports.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_references">References</h2>
+<div class="sectionbody">
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+<a id="ref1"></a> [1] 
+</td>
+<td class="hdlist2">
+<p>USA Standard Code for Information Interchange, USASI X3.4-1968.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref2"></a> [2] 
+</td>
+<td class="hdlist2">
+<p>Postel, J., "User Datagram  Protocol," RFC 768, USC/Information
+Sciences Institute, 28 August 1980.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref3"></a> [3] 
+</td>
+<td class="hdlist2">
+<p>Postel, J., "Telnet Protocol Specification," RFC 764,
+USC/Information Sciences Institute, June, 1980.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref4"></a> [4] 
+</td>
+<td class="hdlist2">
+<p>Braden, R., Editor, "Requirements for Internet Hosts&#8201;&#8212;&#8201;Application and Support", RFC 1123, USC/Information Sciences
+Institute, October 1989.</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_security_considerations">Security Considerations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Since TFTP includes no login or access control mechanisms, care must
+be taken in the rights granted to a TFTP server process so as not to
+violate the security of the server hosts file system.  TFTP is often
+installed with controls such that only files that have public read
+access are available via TFTP and writing files via TFTP is
+disallowed.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_authors_address">Author&#8217;s Address</h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Karen R. Sollins<br>
+Massachusetts Institute of Technology<br>
+Laboratory for Computer Science<br>
+545 Technology Square<br>
+Cambridge, MA 02139-1986<br></p>
+</div>
+<div class="paragraph">
+<p>Phone: (617) 253-6006</p>
+</div>
+<div class="paragraph">
+<p>EMail: <a href="mailto:SOLLINS@LCS.MIT.EDU">SOLLINS@LCS.MIT.EDU</a></p>
+</div>
+</div>
+</div>
+<hr>
+<hr>
+<table class="tableblock frame-none grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">END OF THE RFC</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_errata">Errata</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_verified">Verified</h3>
+<div class="sect3">
+<h4 id="_4971">4971</h4>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Errata ID: <a href="https://www.rfc-editor.org/errata/eid4971">4971</a><br>
+Status: Verified<br>
+Type: Editorial<br>
+Publication Format(s) : TEXT<br>
+Reported By: Ondrej<br>
+Date Reported: 2017-03-15<br>
+Verifier Name: Barry Leiba<br>
+Date Verified: 2019-04-30<br></p>
+</div>
+<div class="paragraph">
+<p><a href="#errata_4971">Section 6</a> says:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>(i.e., Datagram length &lt; <strong>516</strong>)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It should say:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>(i.e., Datagram length &lt; <strong>512</strong>)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_held_for_document_update">Held for Document Update</h3>
+<div class="sect3">
+<h4 id="_1712">1712</h4>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Errata ID: <a href="https://www.rfc-editor.org/errata/eid1712">1712</a><br>
+Status: Held for Document Update<br>
+Type: Editorial<br>
+Publication Format(s) : TEXT<br>
+Reported By: Andy<br>
+Date Reported: 2009-03-11<br>
+Held for Document Update by: Alexey Melnikov<br></p>
+</div>
+<div class="paragraph">
+<p><a href="#errata_1712">Section 3</a> says:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Acknowlegements</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It should say:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Acknowle<strong>d</strong>gements</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -859,16 +1688,12 @@ Type=136 Length=4</pre>
 </div>
 </div>
 <div id="footer">
-   <div id="footer-text">
-
-      <p style="text-align:left;">
-         <a href="https://github.com/gris8/betterfc" align="left"  style="color:yellow">Source Project</a>
-         <span style="float:right;">
-            <a href="https://gris8.github.io/betterfc"  align="right" style="color:yellow">BetteRFC</a>
-         </span>
-      </p>
-
-   </div>
+    <div id="footer-text">
+       <a href="https://gris8.github.io/betterfc" style="color:yellow">BetteRFC</a>
+       document v1.0 created with
+       <a href="https://www.asciidoctor.org" style="color:yellow">Asciidoctor</a>
+       v2.0.11.dev
+    </div>
 </div>
 </body>
 </html>
