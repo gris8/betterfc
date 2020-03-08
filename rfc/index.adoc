@@ -49,5 +49,6 @@ I will slowly port other RFC, asymptotically one day ... all icon:smile-o[role="
 | {RFC_PATH}rfc792.html[792]   | INTERNET CONTROL MESSAGE PROTOCOL
 | {RFC_PATH}rfc814.html[814]   | NAME, ADDRESSES, PORTS, AND ROUTES
 | {RFC_PATH}rfc1350.html[1350] | THE TFTP PROTOCOL (REVISION 2)
+| {RFC_PATH}rfc6762.html[6762] | Multicast DNS
 |===
 
