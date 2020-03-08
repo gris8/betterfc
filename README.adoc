@@ -1,3 +1,5 @@
+:RFC_PATH: link:https://gris8.github.io/betterfc
+
 = BetteRFC
 
 == Introduction
@@ -29,3 +31,16 @@ It isn't necessary to know anything about HTML and CSS. You can install https://
 == The future
 
 I will slowly port other RFC, asymptotically one day ... all :smile:
+
+
+== List of the RFC
+
+[options="header", cols="<,~"]
+|===
+|            RFC                | Description
+| {RFC_PATH}/rfc791.html[791]   | INTERNET PROTOCOL
+| {RFC_PATH}/rfc792.html[792]   | INTERNET CONTROL MESSAGE PROTOCOL
+| {RFC_PATH}/rfc814.html[814]   | NAME, ADDRESSES, PORTS, AND ROUTES
+| {RFC_PATH}/rfc1350.html[1350] | THE TFTP PROTOCOL (REVISION 2)
+| {RFC_PATH}/rfc6762.html[6762] | Multicast DNS
+|===
