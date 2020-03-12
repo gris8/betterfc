@@ -9,6 +9,7 @@
 :example-caption:
 :toc: left
 :toclevels: 4
+:sectnumlevels: 4
 :doctype: article
 :backend: html5
 :reproducible:
