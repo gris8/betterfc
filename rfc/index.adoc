@@ -51,5 +51,6 @@ I will slowly port other RFC, asymptotically one day ... all icon:smile-o[role="
 | {RFC_PATH}rfc1350.html[1350] | THE TFTP PROTOCOL (REVISION 2)
 | {RFC_PATH}rfc3549.html[3549] | Linux Netlink as an IP Services Protocol
 | {RFC_PATH}rfc6762.html[6762] | Multicast DNS
+| {RFC_PATH}rfc6763.html[6763] | DNS-Based Service Discovery
 |===
 

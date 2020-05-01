@@ -1,0 +1,3929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.11.dev">
+<title>RFC 6763</title>
+<style>
+@import url(https://fonts.googleapis.com/css?family=Varela+Round|Open+Sans:400italic,600italic,400,600|Ubuntu+Mono:400);
+/*! normalize.css v2.1.2 | MIT License | git.io/normalize */
+/* ========================================================================== HTML5 display definitions ========================================================================== */
+/** Correct `block` display not defined in IE 8/9. */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary { display: block; }
+
+/** Correct `inline-block` display not defined in IE 8/9. */
+audio, canvas, video { display: inline-block; }
+
+/** Prevent modern browsers from displaying `audio` without controls. Remove excess height in iOS 5 devices. */
+audio:not([controls]) { display: none; height: 0; }
+
+/** Address `[hidden]` styling not present in IE 8/9. Hide the `template` element in IE, Safari, and Firefox < 22. */
+[hidden], template { display: none; }
+
+script { display: none !important; }
+
+/* ========================================================================== Base ========================================================================== */
+/** 1. Set default font family to sans-serif. 2. Prevent iOS text size adjust after orientation change, without disabling user zoom. */
+html { font-family: sans-serif; /* 1 */ -ms-text-size-adjust: 100%; /* 2 */ -webkit-text-size-adjust: 100%; /* 2 */ }
+
+/** Remove default margin. */
+body { margin: 0; }
+
+/* ========================================================================== Links ========================================================================== */
+/** Remove the gray background color from active links in IE 10. */
+a { background: transparent; }
+
+/** Address `outline` inconsistency between Chrome and other browsers. */
+a:focus { outline: thin dotted; }
+
+/** Improve readability when focused and also mouse hovered in all browsers. */
+a:active, a:hover { outline: 0; }
+
+/* ========================================================================== Typography ========================================================================== */
+/** Address variable `h1` font-size and margin within `section` and `article` contexts in Firefox 4+, Safari 5, and Chrome. */
+h1 { font-size: 2em; margin: 0.67em 0; }
+
+/** Address styling not present in IE 8/9, Safari 5, and Chrome. */
+abbr[title] { border-bottom: 1px dotted; }
+
+/** Address style set to `bolder` in Firefox 4+, Safari 5, and Chrome. */
+b, strong { font-weight: bold; }
+
+/** Address styling not present in Safari 5 and Chrome. */
+dfn { font-style: italic; }
+
+/** Address differences between Firefox and other browsers. */
+hr { -moz-box-sizing: content-box; box-sizing: content-box; height: 0; }
+
+/** Address styling not present in IE 8/9. */
+mark { background: #ff0; color: #000; }
+
+/** Correct font family set oddly in Safari 5 and Chrome. */
+code, kbd, pre, samp { font-family: monospace, serif; font-size: 1em; }
+
+/** Improve readability of pre-formatted text in all browsers. */
+pre { white-space: pre-wrap; }
+
+/** Set consistent quote types. */
+q { quotes: "\201C" "\201D" "\2018" "\2019"; }
+
+/** Address inconsistent and variable font size in all browsers. */
+small { font-size: 80%; }
+
+/** Prevent `sub` and `sup` affecting `line-height` in all browsers. */
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+
+sup { top: -0.5em; }
+
+sub { bottom: -0.25em; }
+
+/* ========================================================================== Embedded content ========================================================================== */
+/** Remove border when inside `a` element in IE 8/9. */
+img { border: 0; }
+
+/** Correct overflow displayed oddly in IE 9. */
+svg:not(:root) { overflow: hidden; }
+
+/* ========================================================================== Figures ========================================================================== */
+/** Address margin not present in IE 8/9 and Safari 5. */
+figure { margin: 0; }
+
+/* ========================================================================== Forms ========================================================================== */
+/** Define consistent border, margin, and padding. */
+fieldset { border: 1px solid #c0c0c0; margin: 0 2px; padding: 0.35em 0.625em 0.75em; }
+
+/** 1. Correct `color` not being inherited in IE 8/9. 2. Remove padding so people aren't caught out if they zero out fieldsets. */
+legend { border: 0; /* 1 */ padding: 0; /* 2 */ }
+
+/** 1. Correct font family not being inherited in all browsers. 2. Correct font size not being inherited in all browsers. 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome. */
+button, input, select, textarea { font-family: inherit; /* 1 */ font-size: 100%; /* 2 */ margin: 0; /* 3 */ }
+
+/** Address Firefox 4+ setting `line-height` on `input` using `!important` in the UA stylesheet. */
+button, input { line-height: normal; }
+
+/** Address inconsistent `text-transform` inheritance for `button` and `select`. All other form control elements do not inherit `text-transform` values. Correct `button` style inheritance in Chrome, Safari 5+, and IE 8+. Correct `select` style inheritance in Firefox 4+ and Opera. */
+button, select { text-transform: none; }
+
+/** 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio` and `video` controls. 2. Correct inability to style clickable `input` types in iOS. 3. Improve usability and consistency of cursor style between image-type `input` and others. */
+button, html input[type="button"], input[type="reset"], input[type="submit"] { -webkit-appearance: button; /* 2 */ cursor: pointer; /* 3 */ }
+
+/** Re-set default cursor for disabled elements. */
+button[disabled], html input[disabled] { cursor: default; }
+
+/** 1. Address box sizing set to `content-box` in IE 8/9. 2. Remove excess padding in IE 8/9. */
+input[type="checkbox"], input[type="radio"] { box-sizing: border-box; /* 1 */ padding: 0; /* 2 */ }
+
+/** 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome. 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome (include `-moz` to future-proof). */
+input[type="search"] { -webkit-appearance: textfield; /* 1 */ -moz-box-sizing: content-box; -webkit-box-sizing: content-box; /* 2 */ box-sizing: content-box; }
+
+/** Remove inner padding and search cancel button in Safari 5 and Chrome on OS X. */
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; }
+
+/** Remove inner padding and border in Firefox 4+. */
+button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
+
+/** 1. Remove default vertical scrollbar in IE 8/9. 2. Improve readability and alignment in all browsers. */
+textarea { overflow: auto; /* 1 */ vertical-align: top; /* 2 */ }
+
+/* ========================================================================== Tables ========================================================================== */
+/** Remove most spacing between table cells. */
+table { border-collapse: collapse; border-spacing: 0; }
+
+meta.foundation-mq-small { font-family: "only screen and (min-width: 768px)"; width: 768px; }
+
+meta.foundation-mq-medium { font-family: "only screen and (min-width:1280px)"; width: 1280px; }
+
+meta.foundation-mq-large { font-family: "only screen and (min-width:1440px)"; width: 1440px; }
+
+*, *:before, *:after { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+html, body { font-size: 100%; }
+
+body { background: #fefdfd; color: rgba(0, 0, 0, 0.8); padding: 0; margin: 0; font-family: "Open Sans", sans-serif; font-weight: normal; font-style: normal; line-height: 1; position: relative; cursor: auto; }
+
+a:hover { cursor: pointer; }
+
+img, object, embed { max-width: 100%; height: auto; }
+
+object, embed { height: 100%; }
+
+img { -ms-interpolation-mode: bicubic; }
+
+#map_canvas img, #map_canvas embed, #map_canvas object, .map_canvas img, .map_canvas embed, .map_canvas object { max-width: none !important; }
+
+.left { float: left !important; }
+
+.right { float: right !important; }
+
+.text-left { text-align: left !important; }
+
+.text-right { text-align: right !important; }
+
+.text-center { text-align: center !important; }
+
+.text-justify { text-align: justify !important; }
+
+.hide { display: none; }
+
+.antialiased { -webkit-font-smoothing: antialiased; }
+
+img { display: inline-block; vertical-align: middle; }
+
+textarea { height: auto; min-height: 50px; }
+
+select { width: 100%; }
+
+object, svg { display: inline-block; vertical-align: middle; }
+
+.center { margin-left: auto; margin-right: auto; }
+
+.stretch { width: 100%; }
+
+p.lead { font-size: 1.21875em; line-height: 1.6; }
+
+.subheader, .admonitionblock td.content > .title, .audioblock > .title, .exampleblock > .title, .imageblock > .title, .listingblock > .title, .literalblock > .title, .stemblock > .title, .openblock > .title, .paragraph > .title, .quoteblock > .title, table.tableblock > .title, .verseblock > .title, .videoblock > .title, .dlist > .title, .olist > .title, .ulist > .title, .qlist > .title, .hdlist > .title { line-height: 1.25; color: #002c5e; font-weight: 300; margin-top: 0.2em; margin-bottom: 0.5em; }
+
+/* Typography resets */
+div, dl, dt, dd, ul, ol, li, h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6, pre, form, p, blockquote, th, td { margin: 0; padding: 0; direction: ltr; }
+
+/* Default Link Styles */
+a { color: #005580; text-decoration: underline; line-height: inherit; }
+a:hover, a:focus { color: #078d71; }
+a img { border: none; }
+
+/* Default paragraph styles */
+p { font-family: inherit; font-weight: normal; font-size: 1em; line-height: 1.5; margin-bottom: 1.25em; text-rendering: optimizeLegibility; }
+p aside { font-size: 0.875em; line-height: 1.35; font-style: italic; }
+
+/* Default header styles */
+h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 { font-family: "Varela Round", sans-serif; font-weight: 400; font-style: normal; color: #00326b; text-rendering: optimizeLegibility; margin-top: 0.8em; margin-bottom: 0.5em; line-height: 1.0625em; }
+h1 small, h2 small, h3 small, #toctitle small, .sidebarblock > .content > .title small, h4 small, h5 small, h6 small { font-size: 60%; color: #057aff; line-height: 0; }
+
+h1 { font-size: 2.125em; }
+
+h2 { font-size: 1.6875em; }
+
+h3, #toctitle, .sidebarblock > .content > .title { font-size: 1.375em; }
+
+h4 { font-size: 1.125em; }
+
+h5 { font-size: 1.125em; }
+
+h6 { font-size: 1em; }
+
+hr { border: solid rgba(145, 135, 84, 0.15); border-width: 1px 0 0; clear: both; margin: 1.25em 0 1.1875em; height: 0; }
+
+/* Helpful Typography Defaults */
+em, i { font-style: italic; line-height: inherit; }
+
+strong, b { font-weight: bold; line-height: inherit; }
+
+small { font-size: 60%; line-height: inherit; }
+
+code { font-family: "Ubuntu Mono", "Inconsolata", monospace; font-weight: 400; color: #331d00; }
+
+/* Lists */
+ul, ol, dl { font-size: 1em; line-height: 1.5; margin-bottom: 1.25em; list-style-position: outside; font-family: inherit; }
+
+ul, ol { margin-left: 1.5em; }
+ul.no-bullet, ol.no-bullet { margin-left: 1.5em; }
+
+/* Unordered Lists */
+ul li ul, ul li ol { margin-left: 1.25em; margin-bottom: 0; font-size: 1em; /* Override nested font-size change */ }
+ul.square li ul, ul.circle li ul, ul.disc li ul { list-style: inherit; }
+ul.square { list-style-type: square; }
+ul.circle { list-style-type: circle; }
+ul.disc { list-style-type: disc; }
+ul.no-bullet { list-style: none; }
+
+/* Ordered Lists */
+ol li ul, ol li ol { margin-left: 1.25em; margin-bottom: 0; }
+
+/* Definition Lists */
+dl dt { margin-bottom: 0.3125em; font-weight: bold; }
+dl dd { margin-bottom: 1.25em; }
+
+/* Abbreviations */
+abbr, acronym { text-transform: uppercase; font-size: 90%; color: rgba(0, 0, 0, 0.8); border-bottom: 1px dotted #dddddd; cursor: help; }
+
+abbr { text-transform: none; }
+
+/* Blockquotes */
+blockquote { margin: 0 0 1.25em; padding: 0.5625em 1.25em 0 1.1875em; border-left: 1px solid #dddddd; }
+blockquote cite { display: block; font-size: 0.8125em; color: #666666; }
+blockquote cite:before { content: "\2014 \0020"; }
+blockquote cite a, blockquote cite a:visited { color: #666666; }
+
+blockquote, blockquote p { line-height: 1.5; color: #999999; }
+
+/* Microformats */
+.vcard { display: inline-block; margin: 0 0 1.25em 0; border: 1px solid #dddddd; padding: 0.625em 0.75em; }
+.vcard li { margin: 0; display: block; }
+.vcard .fn { font-weight: bold; font-size: 0.9375em; }
+
+.vevent .summary { font-weight: bold; }
+.vevent abbr { cursor: auto; text-decoration: none; font-weight: bold; border: none; padding: 0 0.0625em; }
+
+@media only screen and (min-width: 768px) { h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 { line-height: 1.25; }
+  h1 { font-size: 2.75em; }
+  h2 { font-size: 2.3125em; }
+  h3, #toctitle, .sidebarblock > .content > .title { font-size: 1.6875em; }
+  h4 { font-size: 1.4375em; } }
+/* Tables */
+table { background: white; margin-bottom: 1.25em; border: solid 1px rgba(145, 135, 84, 0.15); }
+table thead, table tfoot { background: rgba(119, 84, 22, 0.1); font-weight: bold; }
+table thead tr th, table thead tr td, table tfoot tr th, table tfoot tr td { padding: 0.5em 0.625em 0.625em; font-size: inherit; color: rgba(0, 0, 0, 0.8); text-align: left; }
+table tr th, table tr td { padding: 0.5625em 0.625em; font-size: inherit; color: rgba(0, 0, 0, 0.8); }
+table tr.even, table tr.alt, table tr:nth-of-type(even) { background: rgba(119, 84, 22, 0.025); }
+table thead tr th, table tfoot tr th, table tbody tr td, table tr td, table tfoot tr td { display: table-cell; line-height: 1.5; }
+
+body { -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; tab-size: 4; }
+
+h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 { line-height: 1.25; }
+
+.clearfix:before, .clearfix:after, .float-group:before, .float-group:after { content: " "; display: table; }
+.clearfix:after, .float-group:after { clear: both; }
+
+:not(pre):not([class^=L]) > code { font-size: 1.0625em; font-style: normal !important; letter-spacing: 0; padding: 0; line-height: 1.25; word-wrap: break-word; }
+
+:not(pre) > code.nobreak { word-wrap: normal; }
+:not(pre) > code.nowrap { white-space: nowrap; }
+
+pre { color: inherit; font-family: "Liberation Mono", "Consolas", monospace; line-height: 1.4; }
+pre code, pre pre { color: inherit; font-size: inherit; line-height: inherit; }
+pre > code { display: block; }
+
+pre.nowrap, pre.nowrap pre { white-space: pre; word-wrap: normal; }
+
+em em { font-style: normal; }
+
+strong strong { font-weight: normal; }
+
+.keyseq { color: rgba(51, 51, 51, 0.8); }
+
+kbd { font-family: "Ubuntu Mono", "Inconsolata", monospace; display: inline-block; color: rgba(0, 0, 0, 0.8); font-size: 0.65em; line-height: 1.45; background-color: #f7f7f7; border: 1px solid #ccc; -webkit-border-radius: 3px; border-radius: 3px; -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 0.1em white inset; box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 0.1em white inset; margin: 0 0.15em; padding: 0.2em 0.5em; vertical-align: middle; position: relative; top: -0.1em; white-space: nowrap; }
+
+.keyseq kbd:first-child { margin-left: 0; }
+
+.keyseq kbd:last-child { margin-right: 0; }
+
+.menuseq, .menuref { color: #000; }
+
+.menuseq b:not(.caret), .menuref { font-weight: inherit; }
+
+.menuseq { word-spacing: -0.02em; }
+.menuseq b.caret { font-size: 1.25em; line-height: 0.8; }
+.menuseq i.caret { font-weight: bold; text-align: center; width: 0.45em; }
+
+b.button:before, b.button:after { position: relative; top: -1px; font-weight: normal; }
+
+b.button:before { content: "["; padding: 0 3px 0 2px; }
+
+b.button:after { content: "]"; padding: 0 2px 0 3px; }
+
+p a > code:hover { color: #1a0f00; }
+
+#header, #content, #footnotes, #footer { width: 100%; margin-left: auto; margin-right: auto; margin-top: 0; margin-bottom: 0; max-width: 62.5em; *zoom: 1; position: relative; padding-left: 0.9375em; padding-right: 0.9375em; }
+#header:before, #header:after, #content:before, #content:after, #footnotes:before, #footnotes:after, #footer:before, #footer:after { content: " "; display: table; }
+#header:after, #content:after, #footnotes:after, #footer:after { clear: both; }
+
+#content { margin-top: 1.25em; }
+
+#content:before { content: none; }
+
+#header > h1:first-child { color: #703f1c; margin-top: 2.25rem; margin-bottom: 0; }
+#header > h1:first-child + #toc { margin-top: 8px; border-top: 1px solid rgba(145, 135, 84, 0.15); }
+#header > h1:only-child, body.toc2 #header > h1:nth-last-child(2) { border-bottom: 1px solid rgba(145, 135, 84, 0.15); padding-bottom: 8px; }
+#header .details { border-bottom: 1px solid rgba(145, 135, 84, 0.15); line-height: 1.45; padding-top: 0.25em; padding-bottom: 0.25em; padding-left: 0.25em; color: #666666; display: -ms-flexbox; display: -webkit-flex; display: flex; -ms-flex-flow: row wrap; -webkit-flex-flow: row wrap; flex-flow: row wrap; }
+#header .details span:first-child { margin-left: -0.125em; }
+#header .details span.email a { color: #999999; }
+#header .details br { display: none; }
+#header .details br + span:before { content: "\00a0\2013\00a0"; }
+#header .details br + span.author:before { content: "\00a0\22c5\00a0"; color: #999999; }
+#header .details br + span#revremark:before { content: "\00a0|\00a0"; }
+#header #revnumber { text-transform: capitalize; }
+#header #revnumber:after { content: "\00a0"; }
+
+#content > h1:first-child:not([class]) { color: #703f1c; border-bottom: 1px solid rgba(145, 135, 84, 0.15); padding-bottom: 8px; margin-top: 0; padding-top: 1rem; margin-bottom: 1.25rem; }
+
+#toc { border-bottom: 0px solid #dddddd; padding-bottom: 0.5em; }
+#toc > ul { margin-left: 0.125em; }
+#toc ul.sectlevel0 > li > a { font-style: italic; }
+#toc ul.sectlevel0 ul.sectlevel1 { margin: 0.5em 0; }
+#toc ul { font-family: "Varela Round", sans-serif; list-style-type: none; }
+#toc li { line-height: 1.3334; margin-top: 0.3334em; }
+#toc a { text-decoration: none; }
+#toc a:active { text-decoration: underline; }
+
+#toctitle { color: #002c5e; font-size: 1.2em; }
+
+@media only screen and (min-width: 768px) { #toctitle { font-size: 1.375em; }
+  body.toc2 { padding-left: 15em; padding-right: 0; }
+  #toc.toc2 { margin-top: 0 !important; background: #f2f2f4; position: fixed; width: 15em; left: 0; top: 0; border-right: 1px solid #dddddd; border-top-width: 0 !important; border-bottom-width: 0 !important; z-index: 1000; padding: 1.25em 1em; height: 100%; overflow: auto; }
+  #toc.toc2 #toctitle { margin-top: 0; margin-bottom: 0.8rem; font-size: 1.2em; }
+  #toc.toc2 > ul { font-size: 0.9em; margin-bottom: 0; }
+  #toc.toc2 ul ul { margin-left: 0; padding-left: 1em; }
+  #toc.toc2 ul.sectlevel0 ul.sectlevel1 { padding-left: 0; margin-top: 0.5em; margin-bottom: 0.5em; }
+  body.toc2.toc-right { padding-left: 0; padding-right: 15em; }
+  body.toc2.toc-right #toc.toc2 { border-right-width: 0; border-left: 1px solid #dddddd; left: auto; right: 0; } }
+@media only screen and (min-width: 1280px) { body.toc2 { padding-left: 20em; padding-right: 0; }
+  #toc.toc2 { width: 20em; }
+  #toc.toc2 #toctitle { font-size: 1.375em; }
+  #toc.toc2 > ul { font-size: 0.95em; }
+  #toc.toc2 ul ul { padding-left: 1.25em; }
+  body.toc2.toc-right { padding-left: 0; padding-right: 20em; } }
+#content #toc { border-style: solid; border-width: 1px; border-color: #d6d6dd; margin-bottom: 1.25em; padding: 1.25em; background: #f2f2f4; -webkit-border-radius: 6px; border-radius: 6px; }
+#content #toc > :first-child { margin-top: 0; }
+#content #toc > :last-child { margin-bottom: 0; }
+
+#footer { max-width: 100%; background: #0b445a; padding: 1.25em; }
+
+#footer-text { color: #fefdfd; line-height: 1.35; }
+
+#content { margin-bottom: 0.625em; }
+
+.sect1 { padding-bottom: 0.625em; }
+
+@media only screen and (min-width: 768px) { #content { margin-bottom: 1.25em; }
+  .sect1 { padding-bottom: 1.25em; } }
+.sect1:last-child { padding-bottom: 0; }
+
+.sect1 + .sect1 { border-top: 0px solid #dddddd; }
+
+#content h1 > a.anchor, h2 > a.anchor, h3 > a.anchor, #toctitle > a.anchor, .sidebarblock > .content > .title > a.anchor, h4 > a.anchor, h5 > a.anchor, h6 > a.anchor { position: absolute; z-index: 1001; width: 1.5ex; margin-left: -1.5ex; display: block; text-decoration: none !important; visibility: hidden; text-align: center; font-weight: normal; }
+#content h1 > a.anchor:before, h2 > a.anchor:before, h3 > a.anchor:before, #toctitle > a.anchor:before, .sidebarblock > .content > .title > a.anchor:before, h4 > a.anchor:before, h5 > a.anchor:before, h6 > a.anchor:before { content: "\00A7"; font-size: 0.85em; display: block; padding-top: 0.1em; }
+#content h1:hover > a.anchor, #content h1 > a.anchor:hover, h2:hover > a.anchor, h2 > a.anchor:hover, h3:hover > a.anchor, #toctitle:hover > a.anchor, .sidebarblock > .content > .title:hover > a.anchor, h3 > a.anchor:hover, #toctitle > a.anchor:hover, .sidebarblock > .content > .title > a.anchor:hover, h4:hover > a.anchor, h4 > a.anchor:hover, h5:hover > a.anchor, h5 > a.anchor:hover, h6:hover > a.anchor, h6 > a.anchor:hover { visibility: visible; }
+#content h1 > a.link, h2 > a.link, h3 > a.link, #toctitle > a.link, .sidebarblock > .content > .title > a.link, h4 > a.link, h5 > a.link, h6 > a.link { color: #00326b; text-decoration: none; }
+#content h1 > a.link:hover, h2 > a.link:hover, h3 > a.link:hover, #toctitle > a.link:hover, .sidebarblock > .content > .title > a.link:hover, h4 > a.link:hover, h5 > a.link:hover, h6 > a.link:hover { color: #002652; }
+
+details, .audioblock, .imageblock, .literalblock, .listingblock, .stemblock, .videoblock { margin-bottom: 1.25em; }
+
+details > summary:first-of-type { cursor: pointer; display: list-item; outline: none; margin-bottom: 0.75em; }
+
+.admonitionblock td.content > .title, .audioblock > .title, .exampleblock > .title, .imageblock > .title, .listingblock > .title, .literalblock > .title, .stemblock > .title, .openblock > .title, .paragraph > .title, .quoteblock > .title, table.tableblock > .title, .verseblock > .title, .videoblock > .title, .dlist > .title, .olist > .title, .ulist > .title, .qlist > .title, .hdlist > .title { text-rendering: optimizeLegibility; text-align: left; }
+
+table.tableblock.fit-content > caption.title { white-space: nowrap; width: 0; }
+
+.paragraph.lead > p, #preamble > .sectionbody > [class="paragraph"]:first-of-type p { font-size: 1.21875em; line-height: 1.6; color: #703f1c; }
+
+table.tableblock #preamble > .sectionbody > [class="paragraph"]:first-of-type p { font-size: inherit; }
+
+.admonitionblock > table { border-collapse: separate; border: 0; background: none; width: 100%; }
+.admonitionblock > table td.icon { text-align: center; width: 80px; }
+.admonitionblock > table td.icon img { max-width: none; }
+.admonitionblock > table td.icon .title { font-weight: bold; font-family: "Varela Round", sans-serif; text-transform: uppercase; }
+.admonitionblock > table td.content { padding-left: 1.125em; padding-right: 1.25em; border-left: 1px solid rgba(145, 135, 84, 0.15); color: #666666; }
+.admonitionblock > table td.content > :last-child > :last-child { margin-bottom: 0; }
+
+.exampleblock > .content { border-style: solid; border-width: 1px; border-color: #eddbdb; margin-bottom: 1.25em; padding: 1.25em; background: #fefdfd; -webkit-border-radius: 6px; border-radius: 6px; }
+.exampleblock > .content > :first-child { margin-top: 0; }
+.exampleblock > .content > :last-child { margin-bottom: 0; }
+
+.sidebarblock { border-style: solid; border-width: 1px; border-color: #d1d1d8; margin-bottom: 1.25em; padding: 1.25em; background: #ececef; -webkit-border-radius: 6px; border-radius: 6px; }
+.sidebarblock > :first-child { margin-top: 0; }
+.sidebarblock > :last-child { margin-bottom: 0; }
+.sidebarblock > .content > .title { color: #002c5e; margin-top: 0; }
+
+.exampleblock > .content > :last-child > :last-child, .exampleblock > .content .olist > ol > li:last-child > :last-child, .exampleblock > .content .ulist > ul > li:last-child > :last-child, .exampleblock > .content .qlist > ol > li:last-child > :last-child, .sidebarblock > .content > :last-child > :last-child, .sidebarblock > .content .olist > ol > li:last-child > :last-child, .sidebarblock > .content .ulist > ul > li:last-child > :last-child, .sidebarblock > .content .qlist > ol > li:last-child > :last-child { margin-bottom: 0; }
+
+.literalblock pre, .listingblock > .content > pre { border: 1px solid rgba(16, 195, 196, 0.125); -webkit-border-radius: 6px; border-radius: 6px; word-wrap: break-word; overflow-x: auto; padding: 1em; font-size: 0.8125em; }
+@media only screen and (min-width: 768px) { .literalblock pre, .listingblock > .content > pre { font-size: 0.90625em; } }
+@media only screen and (min-width: 1280px) { .literalblock pre, .listingblock > .content > pre { font-size: 1em; } }
+
+.literalblock pre, .listingblock > .content > pre:not(.highlight), .listingblock > .content > pre[class="highlight"], .listingblock > .content > pre[class^="highlight "] { background: rgba(16, 195, 196, 0.05); }
+
+.literalblock.output pre { color: rgba(16, 195, 196, 0.05); background-color: inherit; }
+
+.listingblock > .content { position: relative; }
+
+.listingblock code[data-lang]:before { display: none; content: attr(data-lang); position: absolute; font-size: 0.75em; top: 0.425rem; right: 0.5rem; line-height: 1; text-transform: uppercase; color: inherit; opacity: 0.5; }
+
+.listingblock:hover code[data-lang]:before { display: block; }
+
+.listingblock.terminal pre .command:before { content: attr(data-prompt); padding-right: 0.5em; color: inherit; opacity: 0.5; }
+
+.listingblock.terminal pre .command:not([data-prompt]):before { content: "$"; }
+
+.listingblock pre.highlightjs { padding: 0; }
+.listingblock pre.highlightjs > code { padding: 1em; -webkit-border-radius: 6px; border-radius: 6px; }
+
+.prettyprint { background: rgba(16, 195, 196, 0.05); }
+
+pre.prettyprint .linenums { line-height: 1.4; margin-left: 2em; }
+
+pre.prettyprint li { background: none; list-style-type: inherit; padding-left: 0; }
+
+pre.prettyprint li code[data-lang]:before { opacity: 1; }
+
+pre.prettyprint li:not(:first-child) code[data-lang]:before { display: none; }
+
+table.linenotable { border-collapse: separate; border: 0; margin-bottom: 0; background: none; }
+table.linenotable td[class] { color: inherit; vertical-align: top; padding: 0; line-height: inherit; white-space: normal; }
+table.linenotable td.code { padding-left: 0.75em; }
+table.linenotable td.linenos { border-right: 1px solid currentColor; opacity: 0.35; padding-right: 0.5em; }
+
+pre.pygments .lineno { border-right: 1px solid currentColor; opacity: 0.35; display: inline-block; margin-right: 0.75em; }
+pre.pygments .lineno:before { content: ""; margin-right: -0.125em; }
+
+.quoteblock { margin: 0 1em 1.25em 1.5em; display: table; }
+.quoteblock:not(.excerpt) > .title { margin-left: -1.5em; margin-bottom: 0.75em; }
+.quoteblock blockquote, .quoteblock p { color: #999999; font-size: 1.15rem; line-height: 1.75; word-spacing: 0.1em; letter-spacing: 0; font-style: italic; text-align: justify; }
+.quoteblock blockquote { margin: 0; padding: 0; border: 0; }
+.quoteblock blockquote:before { content: "\201c"; float: left; font-size: 2.75em; font-weight: bold; line-height: 0.6em; margin-left: -0.6em; color: #002c5e; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); }
+.quoteblock blockquote > .paragraph:last-child p { margin-bottom: 0; }
+.quoteblock .attribution { margin-top: 0.75em; margin-right: 0.5ex; text-align: right; }
+
+.verseblock { margin: 0 1em 1.25em 1em; }
+.verseblock pre { font-family: "Open Sans", "DejaVu Sans", sans; font-size: 1.15rem; color: #999999; font-weight: 300; text-rendering: optimizeLegibility; }
+.verseblock pre strong { font-weight: 400; }
+.verseblock .attribution { margin-top: 1.25rem; margin-left: 0.5ex; }
+
+.quoteblock .attribution, .verseblock .attribution { font-size: 0.8125em; line-height: 1.45; font-style: italic; }
+.quoteblock .attribution br, .verseblock .attribution br { display: none; }
+.quoteblock .attribution cite, .verseblock .attribution cite { display: block; letter-spacing: -0.025em; color: #666666; }
+
+.quoteblock.abstract blockquote:before, .quoteblock.excerpt blockquote:before, .quoteblock .quoteblock blockquote:before { display: none; }
+.quoteblock.abstract blockquote, .quoteblock.abstract p, .quoteblock.excerpt blockquote, .quoteblock.excerpt p, .quoteblock .quoteblock blockquote, .quoteblock .quoteblock p { line-height: 1.6; word-spacing: 0; }
+.quoteblock.abstract { margin: 0 1em 1.25em 1em; display: block; }
+.quoteblock.abstract > .title { margin: 0 0 0.375em 0; font-size: 1.15em; text-align: center; }
+.quoteblock.excerpt > blockquote, .quoteblock .quoteblock { padding: 0 0 0.25em 1em; border-left: 0.25em solid rgba(145, 135, 84, 0.15); }
+.quoteblock.excerpt, .quoteblock .quoteblock { margin-left: 0; }
+.quoteblock.excerpt blockquote, .quoteblock.excerpt p, .quoteblock .quoteblock blockquote, .quoteblock .quoteblock p { color: inherit; font-size: 1.0625rem; }
+.quoteblock.excerpt .attribution, .quoteblock .quoteblock .attribution { color: inherit; text-align: left; margin-right: 0; }
+
+table.tableblock { max-width: 100%; border-collapse: separate; }
+
+p.tableblock:last-child { margin-bottom: 0; }
+
+td.tableblock > .content > :last-child { margin-bottom: -1.25em; }
+td.tableblock > .content > :last-child.sidebarblock { margin-bottom: 0; }
+
+table.tableblock, th.tableblock, td.tableblock { border: 0 solid rgba(145, 135, 84, 0.15); }
+
+table.grid-all > thead > tr > .tableblock, table.grid-all > tbody > tr > .tableblock { border-width: 0 1px 1px 0; }
+
+table.grid-all > tfoot > tr > .tableblock { border-width: 1px 1px 0 0; }
+
+table.grid-cols > * > tr > .tableblock { border-width: 0 1px 0 0; }
+
+table.grid-rows > thead > tr > .tableblock, table.grid-rows > tbody > tr > .tableblock { border-width: 0 0 1px 0; }
+
+table.grid-rows > tfoot > tr > .tableblock { border-width: 1px 0 0 0; }
+
+table.grid-all > * > tr > .tableblock:last-child, table.grid-cols > * > tr > .tableblock:last-child { border-right-width: 0; }
+
+table.grid-all > tbody > tr:last-child > .tableblock, table.grid-all > thead:last-child > tr > .tableblock, table.grid-rows > tbody > tr:last-child > .tableblock, table.grid-rows > thead:last-child > tr > .tableblock { border-bottom-width: 0; }
+
+table.frame-all { border-width: 1px; }
+
+table.frame-sides { border-width: 0 1px; }
+
+table.frame-topbot, table.frame-ends { border-width: 1px 0; }
+
+table.stripes-all tr, table.stripes-odd tr:nth-of-type(odd), table.stripes-even tr:nth-of-type(even), table.stripes-hover tr:hover { background: rgba(119, 84, 22, 0.025); }
+
+th.halign-left, td.halign-left { text-align: left; }
+
+th.halign-right, td.halign-right { text-align: right; }
+
+th.halign-center, td.halign-center { text-align: center; }
+
+th.valign-top, td.valign-top { vertical-align: top; }
+
+th.valign-bottom, td.valign-bottom { vertical-align: bottom; }
+
+th.valign-middle, td.valign-middle { vertical-align: middle; }
+
+table thead th, table tfoot th { font-weight: bold; }
+
+tbody tr th { display: table-cell; line-height: 1.5; background: rgba(119, 84, 22, 0.1); }
+
+tbody tr th, tbody tr th p, tfoot tr th, tfoot tr th p { color: rgba(0, 0, 0, 0.8); font-weight: bold; }
+
+p.tableblock > code:only-child { background: none; padding: 0; }
+
+p.tableblock { font-size: 1em; }
+
+ol { margin-left: 1.75em; }
+
+ul li ol { margin-left: 1.5em; }
+
+dl dd { margin-left: 1.125em; }
+
+dl dd:last-child, dl dd:last-child > :last-child { margin-bottom: 0; }
+
+ol > li p, ul > li p, ul dd, ol dd, .olist .olist, .ulist .ulist, .ulist .olist, .olist .ulist { margin-bottom: 0.625em; }
+
+ul.checklist, ul.none, ol.none, ul.no-bullet, ol.no-bullet, ol.unnumbered, ul.unstyled, ol.unstyled { list-style-type: none; }
+
+ul.no-bullet, ol.no-bullet, ol.unnumbered { margin-left: 0.625em; }
+
+ul.unstyled, ol.unstyled { margin-left: 0; }
+
+ul.checklist { margin-left: 0.625em; }
+
+ul.checklist li > p:first-child > .fa-square-o:first-child, ul.checklist li > p:first-child > .fa-check-square-o:first-child { width: 1.25em; font-size: 0.8em; position: relative; bottom: 0.125em; }
+
+ul.checklist li > p:first-child > input[type="checkbox"]:first-child { margin-right: 0.25em; }
+
+ul.inline { display: -ms-flexbox; display: -webkit-box; display: flex; -ms-flex-flow: row wrap; -webkit-flex-flow: row wrap; flex-flow: row wrap; list-style: none; margin: 0 0 0.625em -1.25em; }
+
+ul.inline > li { margin-left: 1.25em; }
+
+.unstyled dl dt { font-weight: normal; font-style: normal; }
+
+ol.arabic { list-style-type: decimal; }
+
+ol.decimal { list-style-type: decimal-leading-zero; }
+
+ol.loweralpha { list-style-type: lower-alpha; }
+
+ol.upperalpha { list-style-type: upper-alpha; }
+
+ol.lowerroman { list-style-type: lower-roman; }
+
+ol.upperroman { list-style-type: upper-roman; }
+
+ol.lowergreek { list-style-type: lower-greek; }
+
+.hdlist > table, .colist > table { border: 0; background: none; }
+.hdlist > table > tbody > tr, .colist > table > tbody > tr { background: none; }
+
+td.hdlist1, td.hdlist2 { vertical-align: top; padding: 0 0.625em; }
+
+td.hdlist1 { font-weight: bold; padding-bottom: 1.25em; }
+
+.literalblock + .colist, .listingblock + .colist { margin-top: -0.5em; }
+
+.colist td:not([class]):first-child { padding: 0.4em 0.75em 0 0.75em; line-height: 1; vertical-align: top; }
+.colist td:not([class]):first-child img { max-width: none; }
+.colist td:not([class]):last-child { padding: 0.25em 0; }
+
+.thumb, .th { line-height: 0; display: inline-block; border: solid 4px white; -webkit-box-shadow: 0 0 0 1px #dddddd; box-shadow: 0 0 0 1px #dddddd; }
+
+.imageblock.left { margin: 0.25em 0.625em 1.25em 0; }
+.imageblock.right { margin: 0.25em 0 1.25em 0.625em; }
+.imageblock > .title { margin-bottom: 0; }
+.imageblock.thumb, .imageblock.th { border-width: 6px; }
+.imageblock.thumb > .title, .imageblock.th > .title { padding: 0 0.125em; }
+
+.image.left, .image.right { margin-top: 0.25em; margin-bottom: 0.25em; display: inline-block; line-height: 0; }
+.image.left { margin-right: 0.625em; }
+.image.right { margin-left: 0.625em; }
+
+a.image { text-decoration: none; display: inline-block; }
+a.image object { pointer-events: none; }
+
+sup.footnote, sup.footnoteref { font-size: 0.875em; position: static; vertical-align: super; }
+sup.footnote a, sup.footnoteref a { text-decoration: none; }
+sup.footnote a:active, sup.footnoteref a:active { text-decoration: underline; }
+
+#footnotes { padding-top: 0.75em; padding-bottom: 0.75em; margin-bottom: 0.625em; }
+#footnotes hr { width: 20%; min-width: 6.25em; margin: -0.25em 0 0.75em 0; border-width: 1px 0 0 0; }
+#footnotes .footnote { padding: 0 0.375em 0 0.225em; line-height: 1.3334; font-size: 0.875em; margin-left: 1.2em; margin-bottom: 0.2em; }
+#footnotes .footnote a:first-of-type { font-weight: bold; text-decoration: none; margin-left: -1.05em; }
+#footnotes .footnote:last-of-type { margin-bottom: 0; }
+#content #footnotes { margin-top: -0.625em; margin-bottom: 0; padding: 0.75em 0; }
+
+.gist .file-data > table { border: 0; background: #fff; width: 100%; margin-bottom: 0; }
+.gist .file-data > table td.line-data { width: 99%; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+.big { font-size: larger; }
+
+.small { font-size: smaller; }
+
+.underline { text-decoration: underline; }
+
+.overline { text-decoration: overline; }
+
+.line-through { text-decoration: line-through; }
+
+.aqua { color: #00bfbf; }
+
+.aqua-background { background-color: #00fafa; }
+
+.black { color: black; }
+
+.black-background { background-color: black; }
+
+.blue { color: #0000bf; }
+
+.blue-background { background-color: #0000fa; }
+
+.fuchsia { color: #bf00bf; }
+
+.fuchsia-background { background-color: #fa00fa; }
+
+.gray { color: #606060; }
+
+.gray-background { background-color: #7d7d7d; }
+
+.green { color: #006000; }
+
+.green-background { background-color: #007d00; }
+
+.lime { color: #00bf00; }
+
+.lime-background { background-color: #00fa00; }
+
+.maroon { color: #600000; }
+
+.maroon-background { background-color: #7d0000; }
+
+.navy { color: #000060; }
+
+.navy-background { background-color: #00007d; }
+
+.olive { color: #606000; }
+
+.olive-background { background-color: #7d7d00; }
+
+.purple { color: #600060; }
+
+.purple-background { background-color: #7d007d; }
+
+.red { color: #bf0000; }
+
+.red-background { background-color: #fa0000; }
+
+.silver { color: #909090; }
+
+.silver-background { background-color: #bcbcbc; }
+
+.teal { color: #006060; }
+
+.teal-background { background-color: #007d7d; }
+
+.white { color: #bfbfbf; }
+
+.white-background { background-color: #fafafa; }
+
+.yellow { color: #bfbf00; }
+
+.yellow-background { background-color: #fafa00; }
+
+span.icon > .fa { cursor: default; }
+a span.icon > .fa { cursor: inherit; }
+
+.admonitionblock td.icon [class^="fa icon-"] { font-size: 2.5em; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); cursor: default; }
+.admonitionblock td.icon .icon-note:before { content: "\f05a"; color: #004060; }
+.admonitionblock td.icon .icon-tip:before { content: "\f0eb"; text-shadow: 1px 1px 2px rgba(155, 155, 0, 0.8); color: #111; }
+.admonitionblock td.icon .icon-warning:before { content: "\f071"; color: #bf6900; }
+.admonitionblock td.icon .icon-caution:before { content: "\f06d"; color: #bf3400; }
+.admonitionblock td.icon .icon-important:before { content: "\f06a"; color: #bf0000; }
+
+.conum[data-value] { display: inline-block; color: #fff !important; background-color: rgba(0, 0, 0, 0.8); -webkit-border-radius: 100px; border-radius: 100px; text-align: center; font-size: 0.75em; width: 1.67em; height: 1.67em; line-height: 1.67em; font-family: "Open Sans", "DejaVu Sans", sans-serif; font-style: normal; font-weight: bold; }
+.conum[data-value] * { color: #fff !important; }
+.conum[data-value] + b { display: none; }
+.conum[data-value]:after { content: attr(data-value); }
+pre .conum[data-value] { position: relative; top: -0.125em; }
+
+b.conum * { color: inherit !important; }
+
+.conum:not([data-value]):empty { display: none; }
+
+.rfc-error pre, .listingblock pre { background: rgba(255, 187, 204, 0.4); border-color: #aaaaaa; }
+
+.rfc-error-text { background-color: rgba(255, 187, 204, 0.4); }
+
+#toc.toc2 ul ul { list-style-type: circle; padding-left: 2em; }
+
+.sect1 { padding-bottom: 0 !important; margin-bottom: 2.5em; }
+
+#header h1 { font-weight: bold; position: relative; left: -0.0625em; }
+
+#content h2, #content h3, #content #toctitle, #content .sidebarblock > .content > .title, #content h4, #content h5, #content #toctitle { position: relative; left: -0.0625em; }
+#content h2 { font-weight: bold; }
+
+.paragraph.lead > p, #preamble > .sectionbody > .paragraph:first-of-type p { color: black; }
+
+pre.pygments.highlight { background-color: rgba(16, 195, 196, 0.05); }
+
+.pygments .tok-err { border: none !important; color: #800000 !important; }
+
+.pygments .tok-c { color: #999 !important; }
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158925429-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-158925429-1');
+</script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@5/dist/gumshoe.polyfills.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.js"></script>
+<script>
+   jQuery(function () {
+      var scrollspy = new Gumshoe('#toc li > a', {
+         nested: false
+      });
+      document.addEventListener('gumshoeActivate', function (event) {
+         jQuery('#toc')
+            .stop()
+            .scrollTo(event.detail.link, 500, {
+               offset: {
+                  top:  0 - jQuery('#toc').height() / 2,
+                  left: 0,
+               }
+            });
+      }, false);
+   });
+</script>
+
+<style>
+   #toc li.active > a {
+      font-weight: bold;
+      text-decoration: underline;
+         <!-- font-style: italic; -->
+   }
+
+  #toc li a {
+     display: inline-block;
+  }
+</style>
+
+<div id="header">
+   <div style="text-align:center"> <b> This isn’t the official RFC, please refer to the IETF website for the official RFC. Errors & omissions excepted </b> </div>
+</div>
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1>RFC 6763</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_abstract">Abstract</a></li>
+<li><a href="#_status_of_this_memo">Status of This Memo</a></li>
+<li><a href="#_copyright_notice">Copyright Notice</a></li>
+<li><a href="#_introduction">1. Introduction</a></li>
+<li><a href="#_conventions_and_terminology_used_in_this_document">2. Conventions and Terminology Used in This Document</a></li>
+<li><a href="#_design_goals">3. Design Goals</a></li>
+<li><a href="#_service_instance_enumeration_browsing">4. Service Instance Enumeration (Browsing)</a>
+<ul class="sectlevel2">
+<li><a href="#_structured_service_instance_names">4.1. Structured Service Instance Names</a>
+<ul class="sectlevel3">
+<li><a href="#_instance_names">4.1.1. Instance Names</a></li>
+<li><a href="#_service_names">4.1.2. Service Names</a></li>
+<li><a href="#_domain_names">4.1.3. Domain Names</a></li>
+</ul>
+</li>
+<li><a href="#_user_interface_presentation">4.2. User Interface Presentation</a></li>
+<li><a href="#_internal_handling_of_names">4.3. Internal Handling of Names</a></li>
+</ul>
+</li>
+<li><a href="#_service_instance_resolution">5. Service Instance Resolution</a></li>
+<li><a href="#sec_6">6. Data Syntax for DNS-SD TXT Records</a>
+<ul class="sectlevel2">
+<li><a href="#_general_format_rules_for_dns_txt_records">6.1. General Format Rules for DNS TXT Records</a></li>
+<li><a href="#sec_6.2">6.2. DNS-SD TXT Record Size</a></li>
+<li><a href="#_dns_txt_record_format_rules_for_use_in_dns_sd">6.3. DNS TXT Record Format Rules for Use in DNS-SD</a></li>
+<li><a href="#sec_6.4">6.4. Rules for Keys in DNS-SD Key/Value Pairs</a></li>
+<li><a href="#sec_6.5">6.5. Rules for Values in DNS-SD Key/Value Pairs</a></li>
+<li><a href="#_example_txt_record">6.6. Example TXT Record</a></li>
+<li><a href="#_version_tag">6.7. Version Tag</a></li>
+<li><a href="#_service_instances_with_multiple_txt_records">6.8. Service Instances with Multiple TXT Records</a></li>
+</ul>
+</li>
+<li><a href="#sec_7">7. Service Names</a>
+<ul class="sectlevel2">
+<li><a href="#sec_7.1">7.1. Selective Instance Enumeration (Subtypes)</a></li>
+<li><a href="#_service_name_length_limits">7.2. Service Name Length Limits</a></li>
+</ul>
+</li>
+<li><a href="#sec_8">8. Flagship Naming</a></li>
+<li><a href="#_service_type_enumeration">9. Service Type Enumeration</a></li>
+<li><a href="#_populating_the_dns_with_information">10. Populating the DNS with Information</a></li>
+<li><a href="#sec_11">11. Discovery of Browsing and Registration Domains (Domain Enumeration)</a></li>
+<li><a href="#_dns_additional_record_generation">12. DNS Additional Record Generation</a>
+<ul class="sectlevel2">
+<li><a href="#_ptr_records">12.1. PTR Records</a></li>
+<li><a href="#_srv_records">12.2. SRV Records</a></li>
+<li><a href="#_txt_records">12.3. TXT Records</a></li>
+<li><a href="#_other_record_types">12.4. Other Record Types</a></li>
+</ul>
+</li>
+<li><a href="#_working_examples">13. Working Examples</a>
+<ul class="sectlevel2">
+<li><a href="#_what_web_pages_are_being_advertised_from_dns_sd_org">13.1. What web pages are being advertised from dns-sd.org?</a></li>
+<li><a href="#_what_printer_configuration_web_pages_are_there">13.2. What printer-configuration web pages are there?</a></li>
+<li><a href="#_how_do_i_access_the_web_page_called_service_discovery">13.3. How do I access the web page called "Service Discovery"?</a></li>
+</ul>
+</li>
+<li><a href="#_ipv6_considerations">14. IPv6 Considerations</a></li>
+<li><a href="#_security_considerations">15. Security Considerations</a></li>
+<li><a href="#_iana_considerations">16. IANA Considerations</a></li>
+<li><a href="#_acknowledgments">17. Acknowledgments</a></li>
+<li><a href="#_references">18. References</a>
+<ul class="sectlevel2">
+<li><a href="#_normative_references">18.1. Normative References</a></li>
+<li><a href="#_informative_references">18.2. Informative References</a></li>
+</ul>
+</li>
+<li><a href="#_rationale_for_using_dns_as_a_basis_for_service_discovery">Appendix A: Rationale for Using DNS as a Basis for Service Discovery</a></li>
+<li><a href="#_ordering_of_service_instance_name_components">Appendix B: Ordering of Service Instance Name Components</a>
+<ul class="sectlevel2">
+<li><a href="#sec_B.1">B.1. Semantic Structure</a></li>
+<li><a href="#sec_B.2">B.2. Network Efficiency</a></li>
+<li><a href="#sec_B.3">B.3. Operational Flexibility</a></li>
+</ul>
+</li>
+<li><a href="#_what_you_see_is_what_you_get">Appendix C: What You See Is What You Get</a></li>
+<li><a href="#_choice_of_factory_default_names">Appendix D: Choice of Factory-Default Names</a></li>
+<li><a href="#_name_encodings_in_the_domain_name_system">Appendix E: Name Encodings in the Domain Name System</a></li>
+<li><a href="#_continuous_live_update_browsing_model">Appendix F: "Continuous Live Update" Browsing Model</a></li>
+<li><a href="#_deployment_history">Appendix G: Deployment History</a></li>
+<li><a href="#_authors_addresses">Authors' Addresses</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<table class="tableblock frame-none grid-all stripes-none" style="width: 99%;">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Internet Engineering Task Force (IETF)</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">S. Cheshire</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Request for Comments: 6763</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">M. Krochmal</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Category: Standards Track</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">Apple Inc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ISSN: 2070-1721</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">February 2013</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-none grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><div class="content"><div class="paragraph">
+<p><span class="big">DNS-Based Service Discovery</span></p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_abstract">Abstract</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document specifies how DNS resource records are named and
+structured to facilitate service discovery.  Given a type of service
+that a client is looking for, and a domain in which the client is
+looking for that service, this mechanism allows clients to discover
+a list of named instances of that desired service, using standard
+DNS queries.  This mechanism is referred to as DNS-based Service
+Discovery, or DNS-SD.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_status_of_this_memo">Status of This Memo</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This is an Internet Standards Track document.</p>
+</div>
+<div class="paragraph">
+<p>This document is a product of the Internet Engineering Task Force
+(IETF).  It represents the consensus of the IETF community.  It has
+received public review and has been approved for publication by the
+Internet Engineering Steering Group (IESG).  Further information on
+Internet Standards is available in Section 2 of RFC 5741.</p>
+</div>
+<div class="paragraph">
+<p>Information about the current status of this document, any errata,
+and how to provide feedback on it may be obtained at
+<a href="http://www.rfc-editor.org/info/rfc6763" class="bare">http://www.rfc-editor.org/info/rfc6763</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_copyright_notice">Copyright Notice</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Copyright (c) 2013 IETF Trust and the persons identified as the
+document authors.  All rights reserved.</p>
+</div>
+<div class="paragraph">
+<p>This document is subject to BCP 78 and the IETF Trust&#8217;s Legal
+Provisions Relating to IETF Documents
+(<a href="http://trustee.ietf.org/license-info" class="bare">http://trustee.ietf.org/license-info</a>) in effect on the date of
+publication of this document.  Please review these documents
+carefully, as they describe your rights and restrictions with respect
+to this document.  Code Components extracted from this document must
+include Simplified BSD License text as described in Section 4.e of
+the Trust Legal Provisions and are provided without warranty as
+described in the Simplified BSD License.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_introduction">1. Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document specifies how DNS resource records are named and
+structured to facilitate service discovery.  Given a type of service
+that a client is looking for, and a domain in which the client is
+looking for that service, this mechanism allows clients to discover a
+list of named instances of that desired service, using standard DNS
+queries.  This mechanism is referred to as DNS-based Service
+Discovery, or DNS-SD.</p>
+</div>
+<div class="paragraph">
+<p>This document proposes no change to the structure of DNS messages,
+and no new operation codes, response codes, resource record types, or
+any other new DNS protocol values.</p>
+</div>
+<div class="paragraph">
+<p>This document specifies that a particular service instance can be
+described using a DNS SRV [<a href="#ref_RFC2782">RFC2782</a>] and DNS TXT [<a href="#ref_RFC1035">RFC1035</a>] record.
+The SRV record has a name of the form "&lt;Instance&gt;.&lt;Service&gt;.&lt;Domain&gt;"
+and gives the target host and port where the service instance can be
+reached.  The DNS TXT record of the same name gives additional
+information about this instance, in a structured form using key/value
+pairs, described in Section <a href="#sec_6">6</a>.  A client discovers the list of
+available instances of a given service type using a query for a DNS
+PTR [<a href="#ref_RFC1035">RFC1035</a>] record with a name of the form "&lt;Service&gt;.&lt;Domain&gt;",
+which returns a set of zero or more names, which are the names of the
+aforementioned DNS SRV/TXT record pairs.</p>
+</div>
+<div class="paragraph">
+<p>This specification is compatible with both Multicast DNS [<a href="#ref_RFC6762">RFC6762</a>]
+and with today&#8217;s existing Unicast DNS server and client software.</p>
+</div>
+<div class="paragraph">
+<p>When used with Multicast DNS, DNS-SD can provide zero-configuration
+operation&#8201;&#8212;&#8201;just connect a DNS-SD/mDNS device, and its services are
+advertised on the local link with no further user interaction [ZC].</p>
+</div>
+<div class="paragraph">
+<p>When used with conventional Unicast DNS, some configuration will
+usually be required&#8201;&#8212;&#8201;such as configuring the device with the DNS
+domain(s) in which it should advertise its services, and configuring
+it with the DNS Update [<a href="#ref_RFC2136">RFC2136</a>] [<a href="#ref_RFC3007">RFC3007</a>] keys to give it permission
+to do so.  In rare cases, such as a secure corporate network behind a
+firewall where no DNS Update keys are required, zero-configuration
+operation may be achieved by simply having the device register its
+services in a default registration domain learned from the network
+(see Section <a href="#sec_11">11</a>, "Discovery of Browsing and Registration Domains"),
+but this is the exception and usually security credentials will be
+required to perform DNS updates.</p>
+</div>
+<div class="paragraph">
+<p>Note that when using DNS-SD with Unicast DNS, the Unicast DNS-SD
+service does NOT have to be provided by the same DNS server hardware
+that is currently providing an organization&#8217;s conventional host name
+lookup service.  While many people think of "DNS" exclusively in the
+context of mapping host names to IP addresses, in fact, "the DNS is a
+general (if somewhat limited) hierarchical database, and can store
+almost any kind of data, for almost any purpose" [<a href="#ref_RFC2181">RFC2181</a>].  By
+delegating the "_tcp" and "_udp" subdomains, all the workload related
+to DNS-SD can be offloaded to a different machine.  This flexibility,
+to handle DNS-SD on the main DNS server or not, at the network
+administrator&#8217;s discretion, is one of the benefits of using DNS.</p>
+</div>
+<div class="paragraph">
+<p>Even when the DNS-SD functions are delegated to a different machine,
+the benefits of using DNS remain: it is mature technology, well
+understood, with multiple independent implementations from different
+vendors, a wide selection of books published on the subject, and an
+established workforce experienced in its operation.  In contrast,
+adopting some other service discovery technology would require every
+site in the world to install, learn, configure, operate, and maintain
+some entirely new and unfamiliar server software.  Faced with these
+obstacles, it seems unlikely that any other service discovery
+technology could hope to compete with the ubiquitous deployment that
+DNS already enjoys.  For further discussion, see Appendix A,
+"Rationale for Using DNS as a Basis for Service Discovery".</p>
+</div>
+<div class="paragraph">
+<p>This document is written for two audiences: for developers creating
+application software that offers or accesses services on the network,
+and for developers creating DNS-SD libraries to implement the
+advertising and discovery mechanisms.  For both audiences,
+understanding the entire document is helpful.  For developers
+creating application software, this document provides guidance on
+choosing instance names, service names, and other aspects that play a
+role in creating a good overall user experience.  However, also
+understanding the underlying DNS mechanisms used to provide the
+service discovery facilities helps application developers understand
+the capabilities and limitations of those underlying mechanisms
+(e.g., name length limits).  For library developers writing software
+to construct the DNS records (to advertise a service) and generate
+the DNS queries (to discover and use a service), understanding the
+ultimate user-experience goals helps them provide APIs that can meet
+those goals.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conventions_and_terminology_used_in_this_document">2. Conventions and Terminology Used in This Document</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+"SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+document are to be interpreted as described in "Key words for use in
+RFCs to Indicate Requirement Levels" [<a href="#ref_RFC2119">RFC2119</a>].</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_design_goals">3. Design Goals</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Of the many properties a good service discovery protocol needs to
+have, three of particular importance are:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>The ability to query for services of a certain type in a
+certain logical domain, and receive in response a list of named
+instances (network browsing or "Service Instance Enumeration").</p>
+</li>
+<li>
+<p>Given a particular named instance, the ability to efficiently
+resolve that instance name to the required information a client
+needs to actually use the service, i.e., IP address and port
+number, at the very least (Service Instance Resolution).</p>
+</li>
+<li>
+<p>Instance names should be relatively persistent.  If a user
+selects their default printer from a list of available choices
+today, then tomorrow they should still be able to print on that
+printer&#8201;&#8212;&#8201;even if the IP address and/or port number where the
+service resides have changed&#8201;&#8212;&#8201;without the user (or their
+software) having to repeat the step (i) (the initial network
+browsing) a second time.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>In addition, if it is to become successful, a service discovery
+protocol should be so simple to implement that virtually any device
+capable of implementing IP should not have any trouble implementing
+the service discovery software as well.</p>
+</div>
+<div class="paragraph">
+<p>These goals are discussed in more detail in the remainder of this
+document.  A more thorough treatment of service discovery
+requirements may be found in "Requirements for a Protocol to Replace
+the AppleTalk Name Binding Protocol (NBP)" [<a href="#ref_RFC6760">RFC6760</a>].  That document
+draws upon examples from two decades of operational experience with
+AppleTalk to develop a list of universal requirements that are
+broadly applicable to any potential service discovery protocol.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_service_instance_enumeration_browsing">4. Service Instance Enumeration (Browsing)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Traditional DNS SRV records [<a href="#ref_RFC2782">RFC2782</a>] are useful for locating
+instances of a particular type of service when all the instances are
+effectively indistinguishable and provide the same service to the
+client.</p>
+</div>
+<div class="paragraph">
+<p>For example, SRV records with the (hypothetical) name
+"_http._tcp.example.com." would allow a client to discover servers
+implementing the "_http._tcp" service (i.e., web servers) for the
+"example.com." domain.  The unstated assumption is that all these
+servers offer an identical set of web pages, and it doesn&#8217;t matter to
+the client which of the servers it uses, as long as it selects one at
+random according to the weight and priority rules laid out in the DNS
+SRV specification [<a href="#ref_RFC2782">RFC2782</a>].</p>
+</div>
+<div class="paragraph">
+<p>Instances of other kinds of service are less easily interchangeable.
+If a word processing application were to look up the (hypothetical)
+SRV record "_ipp._tcp.example.com." to find the list of Internet
+Printing Protocol (IPP) [<a href="#ref_RFC2910">RFC2910</a>] printers at Example Co., then
+picking one at random and printing on it would probably not be what
+the user wanted.</p>
+</div>
+<div class="paragraph">
+<p>The remainder of this section describes how SRV records may be used
+in a slightly different way, to allow a user to discover the names of
+all available instances of a given type of service, and then select,
+from that list, the particular instance they desire.</p>
+</div>
+<div class="sect2">
+<h3 id="_structured_service_instance_names">4.1. Structured Service Instance Names</h3>
+<div class="paragraph">
+<p>This document borrows the logical service-naming syntax and semantics
+from DNS SRV records, but adds one level of indirection.  Instead of
+requesting records of type "SRV" with name "_ipp._tcp.example.com.",
+the client requests records of type "PTR" (pointer from one name to
+another in the DNS namespace) [<a href="#ref_RFC1035">RFC1035</a>].</p>
+</div>
+<div class="paragraph">
+<p>In effect, if one thinks of the domain name "_ipp._tcp.example.com."
+as being analogous to an absolute path to a directory in a file
+system, then DNS-SD&#8217;s PTR lookup is akin to performing a listing of
+that directory to find all the entries it contains.  (Remember that
+domain names are expressed in reverse order compared to path names&#8201;&#8212;&#8201;an absolute path name starts with the root on the left and is read
+from left to right, whereas a fully qualified domain name starts with
+the root on the right and is read from right to left.  If the fully
+qualified domain name "_ipp._tcp.example.com." were expressed as a
+file system path name, it would be "/com/example/_tcp/_ipp".)</p>
+</div>
+<div class="paragraph">
+<p>The result of this PTR lookup for the name "&lt;Service&gt;.&lt;Domain&gt;" is a
+set of zero or more PTR records giving Service Instance Names of the
+form:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Service Instance Name = &lt;Instance&gt; . &lt;Service&gt; . &lt;Domain&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For explanation of why the components are in this order, see Appendix
+B, "Ordering of Service Instance Name Components".</p>
+</div>
+<div class="sect3">
+<h4 id="_instance_names">4.1.1. Instance Names</h4>
+<div class="paragraph">
+<p>The &lt;Instance&gt; portion of the Service Instance Name is a user-
+friendly name consisting of arbitrary Net-Unicode text [<a href="#ref_RFC5198">RFC5198</a>].  It
+MUST NOT contain ASCII control characters (byte values 0x00-0x1F and
+0x7F) [<a href="#ref_RFC20">RFC20</a>] but otherwise is allowed to contain any characters,
+without restriction, including spaces, uppercase, lowercase,
+punctuation&#8201;&#8212;&#8201;including dots&#8201;&#8212;&#8201;accented characters, non-Roman text,
+and anything else that may be represented using Net-Unicode.  For
+discussion of why the &lt;Instance&gt; name should be a user-visible, user-
+friendly name rather than an invisible machine-generated opaque
+identifier, see Appendix C, "What You See Is What You Get".</p>
+</div>
+<div class="paragraph">
+<p>The &lt;Instance&gt; portion of the name of a service being offered on the
+network SHOULD be configurable by the user setting up the service, so
+that he or she may give it an informative name.  However, the device
+or service SHOULD NOT require the user to configure a name before it
+can be used.  A sensible choice of default name can in many cases
+allow the device or service to be accessed without any manual
+configuration at all.  The default name should be short and
+descriptive, and SHOULD NOT include the device&#8217;s Media Access Control
+(MAC) address, serial number, or any similar incomprehensible
+hexadecimal string in an attempt to make the name globally unique.
+For discussion of why &lt;Instance&gt; names don&#8217;t need to be (and SHOULD
+NOT be) made unique at the factory, see Appendix D, "Choice of
+Factory-Default Names".</p>
+</div>
+<div class="paragraph">
+<p>This &lt;Instance&gt; portion of the Service Instance Name is stored
+directly in the DNS as a single DNS label of canonical precomposed
+UTF-8 [<a href="#ref_RFC3629">RFC3629</a>] "Net-Unicode" (Unicode Normalization Form C)
+[<a href="#ref_RFC5198">RFC5198</a>] text.  For further discussion of text encodings, see
+Appendix E, "Name Encodings in the Domain Name System".</p>
+</div>
+<div class="paragraph">
+<p>DNS labels are currently limited to 63 octets in length.  UTF-8
+encoding can require up to four octets per Unicode character, which
+means that in the worst case, the &lt;Instance&gt; portion of a name could
+be limited to fifteen Unicode characters.  However, the Unicode
+characters with longer octet lengths under UTF-8 encoding tend to be
+the more rarely used ones, and tend to be the ones that convey
+greater meaning per character.</p>
+</div>
+<div class="paragraph">
+<p>Note that any character in the commonly used 16-bit Unicode Basic
+Multilingual Plane [Unicode6] can be encoded with no more than three
+octets of UTF-8 encoding.  This means that an instance name can
+contain up to 21 Kanji characters, which is a sufficiently expressive
+name for most purposes.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_service_names">4.1.2. Service Names</h4>
+<div class="paragraph">
+<p>The &lt;Service&gt; portion of the Service Instance Name consists of a pair
+of DNS labels, following the convention already established for SRV
+records [<a href="#ref_RFC2782">RFC2782</a>].  The first label of the pair is an underscore
+character followed by the Service Name [<a href="#ref_RFC6335">RFC6335</a>].  The Service Name
+identifies what the service does and what application protocol it
+uses to do it.  The second label is either "_tcp" (for application
+protocols that run over TCP) or "_udp" (for all others).  For more
+details, see Section <a href="#sec_7">7</a>, "Service Names".</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_domain_names">4.1.3. Domain Names</h4>
+<div class="paragraph">
+<p>The &lt;Domain&gt; portion of the Service Instance Name specifies the DNS
+subdomain within which those names are registered.  It may be
+"local.", meaning "link-local Multicast DNS" [<a href="#ref_RFC6762">RFC6762</a>], or it may be
+a conventional Unicast DNS domain name, such as "ietf.org.",
+"cs.stanford.edu.", or "eng.us.ibm.com."  Because Service Instance
+Names are not host names, they are not constrained by the usual rules
+for host names [<a href="#ref_RFC1033">RFC1033</a>] [<a href="#ref_RFC1034">RFC1034</a>] [<a href="#ref_RFC1035">RFC1035</a>], and rich-text service
+subdomains are allowed and encouraged, for example:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre>Building 2, 1st Floor  .  example  .  com  .
+Building 2, 2nd Floor  .  example  .  com  .
+Building 2, 3rd Floor  .  example  .  com  .
+Building 2, 4th Floor  .  example  .  com  .</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>In addition, because Service Instance Names are not constrained by
+the limitations of host names, this document recommends that they be
+stored in the DNS, and communicated over the wire, encoded as
+straightforward canonical precomposed UTF-8 [<a href="#ref_RFC3629">RFC3629</a>] "Net-Unicode"
+(Unicode Normalization Form C) [<a href="#ref_RFC5198">RFC5198</a>] text.  In cases where the
+DNS server returns a negative response for the name in question,
+client software MAY choose to retry the query using the "Punycode"
+algorithm [<a href="#ref_RFC3492">RFC3492</a>] to convert the UTF-8 name to an IDNA "A-label"
+[<a href="#ref_RFC5890">RFC5890</a>], beginning with the top-level label, then issuing the query
+repeatedly, with successively more labels translated to IDNA A-labels
+each time, and giving up if it has converted all labels to IDNA
+A-labels and the query still fails.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_user_interface_presentation">4.2. User Interface Presentation</h3>
+<div class="paragraph">
+<p>The names resulting from the Service Instance Enumeration PTR lookup
+are presented to the user in a list for the user to select one (or
+more).  Typically, only the first label is shown (the user-friendly
+&lt;Instance&gt; portion of the name).</p>
+</div>
+<div class="paragraph">
+<p>In the common case the &lt;Service&gt; and &lt;Domain&gt; are already known to
+the client software, these having been provided implicitly by the
+user in the first place, by the act of indicating the service being
+sought, and the domain in which to look for it.  Note that the
+software handling the response should be careful not to make invalid
+assumptions though, since it <strong>is</strong> possible, though rare, for a
+service enumeration in one domain to return the names of services in
+a different domain.  Similarly, when using subtypes (see Section <a href="#sec_7.1">7.1</a>,
+"Selective Instance Enumeration") the &lt;Service&gt; of the discovered
+instance may not be exactly the same as the &lt;Service&gt; that was
+requested.</p>
+</div>
+<div class="paragraph">
+<p>For further discussion of Service Instance Enumeration (browsing)
+user-interface considerations, see Appendix F, "'Continuous Live
+Update' Browsing Model".</p>
+</div>
+<div class="paragraph">
+<p>Once the user has selected the desired named instance, the Service
+Instance Name may then be used immediately, or saved away in some
+persistent user-preference data structure for future use, depending
+on what is appropriate for the application in question.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_internal_handling_of_names">4.3. Internal Handling of Names</h3>
+<div class="paragraph">
+<p>If client software takes the &lt;Instance&gt;, &lt;Service&gt;, and &lt;Domain&gt;
+portions of a Service Instance Name and internally concatenates them
+together into a single string, then because the &lt;Instance&gt; portion is
+allowed to contain any characters, including dots, appropriate
+precautions MUST be taken to ensure that DNS label boundaries are
+properly preserved.  Client software can do this in a variety of
+ways, such as character escaping.</p>
+</div>
+<div class="paragraph">
+<p>This document RECOMMENDS that if concatenating the three portions of
+a Service Instance Name, any dots in the &lt;Instance&gt; portion be
+escaped following the customary DNS convention for text files: by
+preceding literal dots with a backslash (so "." becomes "\.").
+Likewise, any backslashes in the &lt;Instance&gt; portion should also be
+escaped by preceding them with a backslash (so "\" becomes "\\").</p>
+</div>
+<div class="paragraph">
+<p>Having done this, the three components of the name may be safely
+concatenated.  The backslash-escaping allows literal dots in the name
+(escaped) to be distinguished from label-separator dots (not
+escaped), and the resulting concatenated string may be safely passed
+to standard DNS APIs like res_query(), which will interpret the
+backslash-escaped string as intended.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_service_instance_resolution">5. Service Instance Resolution</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When a client needs to contact a particular service, identified by a
+Service Instance Name, previously discovered via Service Instance
+Enumeration (browsing), it queries for the SRV and TXT records of
+that name.  The SRV record for a service gives the port number and
+target host name where the service may be found.  The TXT record
+gives additional information about the service, as described in
+Section <a href="#sec_6">6</a>, "Data Syntax for DNS-SD TXT Records".</p>
+</div>
+<div class="paragraph">
+<p>SRV records are extremely useful because they remove the need for
+preassigned port numbers.  There are only 65535 TCP port numbers
+available.  These port numbers are traditionally allocated one per
+application protocol [<a href="#ref_RFC6335">RFC6335</a>].  Some protocols like the X Window
+System have a block of 64 TCP ports allocated (6000-6063).  Using a
+different TCP port for each different instance of a given service on
+a given machine is entirely sensible, but allocating each application
+its own large static range, as was done for the X Window System, is
+not a practical way to do that.  On any given host, most TCP ports
+are reserved for services that will never run on that particular host
+in its lifetime.  This is very poor utilization of the limited port
+space.  Using SRV records allows each host to allocate its available
+port numbers dynamically to those services actually running on that
+host that need them, and then advertise the allocated port numbers
+via SRV records.  Allocating the available listening port numbers
+locally on a per-host basis as needed allows much better utilization
+of the available port space than today&#8217;s centralized global
+allocation.</p>
+</div>
+<div class="paragraph">
+<p>In the event that more than one SRV is returned, clients MUST
+correctly interpret the priority and weight fields&#8201;&#8212;&#8201;i.e., lower-
+numbered priority servers should be used in preference to higher-
+numbered priority servers, and servers with equal priority should be
+selected randomly in proportion to their relative weights.  However,
+in the overwhelmingly common case, a single advertised DNS-SD service
+instance is described by exactly one SRV record, and in this common
+case the priority and weight fields of the SRV record SHOULD both be
+set to zero.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sec_6">6. Data Syntax for DNS-SD TXT Records</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Some services discovered via Service Instance Enumeration may need
+more than just an IP address and port number to completely identify
+the service instance.  For example, printing via the old Unix LPR
+(port 515) protocol [<a href="#ref_RFC1179">RFC1179</a>] often specifies a queue name [BJP].
+This queue name is typically short and cryptic, and need not be shown
+to the user.  It should be regarded the same way as the IP address
+and port number: it is another component of the addressing
+information required to identify a specific instance of a service
+being offered by some piece of hardware.  Similarly, a file server
+may have multiple volumes, each identified by its own volume name.  A
+web server typically has multiple pages, each identified by its own
+URL.  In these cases, the necessary additional data is stored in a
+TXT record with the same name as the SRV record.  The specific nature
+of that additional data, and how it is to be used, is service-
+dependent, but the overall syntax of the data in the TXT record is
+standardized, as described below.</p>
+</div>
+<div class="paragraph">
+<p>Every DNS-SD service MUST have a TXT record in addition to its SRV
+record, with the same name, even if the service has no additional
+data to store and the TXT record contains no more than a single zero
+byte.  This allows a service to have explicit control over the Time
+to Live (TTL) of its (empty) TXT record, rather than using the
+default negative caching TTL, which would otherwise be used for a "no
+error no answer" DNS response.</p>
+</div>
+<div class="paragraph">
+<p>Note that this requirement for a mandatory TXT record applies
+exclusively to DNS-SD service advertising, i.e., services advertised
+using the PTR+SRV+TXT convention specified in this document.  It is
+not a requirement of SRV records in general.  The DNS SRV record
+datatype [<a href="#ref_RFC2782">RFC2782</a>] may still be used in other contexts without any
+requirement for accompanying PTR and TXT records.</p>
+</div>
+<div class="sect2">
+<h3 id="_general_format_rules_for_dns_txt_records">6.1. General Format Rules for DNS TXT Records</h3>
+<div class="paragraph">
+<p>A DNS TXT record can be up to 65535 (0xFFFF) bytes long.  The total
+length is indicated by the length given in the resource record header
+in the DNS message.  There is no way to tell directly from the data
+alone how long it is (e.g., there is no length count at the start, or
+terminating NULL byte at the end).</p>
+</div>
+<div class="paragraph">
+<p>Note that when using Multicast DNS [<a href="#ref_RFC6762">RFC6762</a>] the maximum packet size
+is 9000 bytes, including the IP header, UDP header, and DNS message
+header, which imposes an upper limit on the size of TXT records of
+about 8900 bytes.  In practice the maximum sensible size of a DNS-SD
+TXT record is smaller even than this, typically at most a few hundred
+bytes, as described below in Section <a href="#sec_6.2">6.2</a>.</p>
+</div>
+<div class="paragraph">
+<p>The format of the data within a DNS TXT record is one or more
+strings, packed together in memory without any intervening gaps or
+padding bytes for word alignment.</p>
+</div>
+<div class="paragraph">
+<p>The format of each constituent string within the DNS TXT record is a
+single length byte, followed by 0-255 bytes of text data.</p>
+</div>
+<div class="paragraph">
+<p>These format rules for TXT records are defined in Section 3.3.14 of
+the DNS specification [<a href="#ref_RFC1035">RFC1035</a>] and are not specific to DNS-SD.
+DNS-SD specifies additional rules for what data should be stored in
+those constituent strings when used for DNS-SD service advertising,
+i.e., when used to describe services advertised using the PTR+SRV+TXT
+convention specified in this document.</p>
+</div>
+<div class="paragraph">
+<p>An empty TXT record containing zero strings is not allowed [<a href="#ref_RFC1035">RFC1035</a>].
+DNS-SD implementations MUST NOT emit empty TXT records.  DNS-SD
+clients MUST treat the following as equivalent:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>A TXT record containing a single zero byte.
+(i.e., a single empty string.)</p>
+</li>
+<li>
+<p>An empty (zero-length) TXT record.
+(This is not strictly legal, but should one be received, it should
+be interpreted as the same as a single empty string.)</p>
+</li>
+<li>
+<p>No TXT record.
+(i.e., an NXDOMAIN or no-error-no-answer response.)</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sec_6.2">6.2. DNS-SD TXT Record Size</h3>
+<div class="paragraph">
+<p>The total size of a typical DNS-SD TXT record is intended to be small&#8201;&#8212;&#8201;200 bytes or less.</p>
+</div>
+<div class="paragraph">
+<p>In cases where more data is justified (e.g., LPR printing [BJP]),
+keeping the total size under 400 bytes should allow it to fit in a
+single 512-byte DNS message [<a href="#ref_RFC1035">RFC1035</a>].</p>
+</div>
+<div class="paragraph">
+<p>In extreme cases where even this is not enough, keeping the size of
+the TXT record under 1300 bytes should allow it to fit in a single
+1500-byte Ethernet packet.</p>
+</div>
+<div class="paragraph">
+<p>Using TXT records larger than 1300 bytes is NOT RECOMMENDED at this
+time.</p>
+</div>
+<div class="paragraph">
+<p>Note that some Ethernet hardware vendors offer chipsets with
+Multicast DNS [<a href="#ref_RFC6762">RFC6762</a>] offload, so that computers can sleep and
+still be discoverable on the network.  Early versions of such
+chipsets were sometimes quite limited: for example, some were
+(unwisely) limited to handling TXT records no larger than 256 bytes
+(which meant that LPR printer services with larger TXT records did
+not work).  Developers should be aware of this real-world limitation,
+and should understand that even hardware which is otherwise perfectly
+capable may have low-power and sleep modes that are more limited.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dns_txt_record_format_rules_for_use_in_dns_sd">6.3. DNS TXT Record Format Rules for Use in DNS-SD</h3>
+<div class="paragraph">
+<p>DNS-SD uses DNS TXT records to store arbitrary key/value pairs
+conveying additional information about the named service.  Each
+key/value pair is encoded as its own constituent string within the
+DNS TXT record, in the form "key=value" (without the quotation
+marks).  Everything up to the first '=' character is the key (Section
+<a href="#sec_6.4">6.4</a>).  Everything after the first '=' character to the end of the
+string (including subsequent '=' characters, if any) is the value
+(Section <a href="#sec_6.5">6.5</a>).  No quotation marks are required around the value,
+even if it contains spaces, '=' characters, or other punctuation
+marks.  Each author defining a DNS-SD profile for discovering
+instances of a particular type of service should define the base set
+of key/value attributes that are valid for that type of service.</p>
+</div>
+<div class="paragraph">
+<p>Using this standardized key/value syntax within the TXT record makes
+it easier for these base definitions to be expanded later by defining
+additional named attributes.  If an implementation sees unknown keys
+in a service TXT record, it MUST silently ignore them.</p>
+</div>
+<div class="paragraph">
+<p>The target host name and TCP (or UDP) port number of the service are
+given in the SRV record.  This information&#8201;&#8212;&#8201;target host name and
+port number&#8201;&#8212;&#8201;MUST NOT be duplicated using key/value attributes in
+the TXT record.</p>
+</div>
+<div class="paragraph">
+<p>The intention of DNS-SD TXT records is to convey a small amount of
+useful additional information about a service.  Ideally, it should
+not be necessary for a client to retrieve this additional information
+before it can usefully establish a connection to the service.  For a
+well-designed application protocol, even if there is no information
+at all in the TXT record, it should be possible, knowing only the
+host name, port number, and protocol being used, to communicate with
+that listening process and then perform version- or feature-
+negotiation to determine any further options or capabilities of the
+service instance.  For example, when connecting to an AFP (Apple
+Filing Protocol) server [AFP] over TCP, the client enters into a
+protocol exchange with the server to determine which version of AFP
+the server implements and which optional features or capabilities (if
+any) are available.</p>
+</div>
+<div class="paragraph">
+<p>For protocols designed with adequate in-band version- and feature-
+negotiation, any information in the TXT record should be viewed as a
+performance optimization&#8201;&#8212;&#8201;when a client discovers many instances of
+a service, the TXT record allows the client to know some rudimentary
+information about each instance without having to open a TCP
+connection to each one and interrogate every service instance
+separately.  Care should be taken when doing this to ensure that the
+information in the TXT record is in agreement with the information
+that would be retrieved by a client connecting over TCP.</p>
+</div>
+<div class="paragraph">
+<p>There are legacy protocols that provide no feature negotiation
+capability, and in these cases it may be useful to convey necessary
+information in the TXT record.  For example, when printing using LPR
+[<a href="#ref_RFC1179">RFC1179</a>], the LPR protocol provides no way for the client to
+determine whether a particular printer accepts PostScript, what
+version of PostScript, etc.  In this case it is appropriate to embed
+this information in the TXT record [BJP], because the alternative
+would be worse&#8201;&#8212;&#8201;passing around written instructions to the users,
+arcane manual configuration of "/etc/printcap" files, etc.</p>
+</div>
+<div class="paragraph">
+<p>The engineering decision about what keys to define for the TXT record
+needs to be decided on a case-by-case basis for each service type.
+For some service types it is appropriate to communicate information
+via the TXT record as well as (or instead of) via in-band
+communication in the application protocol.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sec_6.4">6.4. Rules for Keys in DNS-SD Key/Value Pairs</h3>
+<div class="paragraph">
+<p>The key MUST be at least one character.  DNS-SD TXT record strings
+beginning with an '=' character (i.e., the key is missing) MUST be
+silently ignored.</p>
+</div>
+<div class="paragraph">
+<p>The key SHOULD be no more than nine characters long.  This is because
+it is beneficial to keep packet sizes small for the sake of network
+efficiency.  When using DNS-SD in conjunction with Multicast DNS
+[<a href="#ref_RFC6762">RFC6762</a>] this is important because multicast traffic is especially
+expensive on 802.11 wireless networks [IEEEW], but even when using
+conventional Unicast DNS, keeping the TXT records small helps improve
+the chance that responses will fit within the original DNS 512-byte
+size limit [<a href="#ref_RFC1035">RFC1035</a>].  Also, each constituent string of a DNS TXT
+record is limited to 255 bytes, so excessively long keys reduce the
+space available for that key&#8217;s values.</p>
+</div>
+<div class="paragraph">
+<p>The keys in key/value pairs can be as short as a single character.
+A key name needs only to be unique and unambiguous within the context
+of the service type for which it is defined.  A key name is intended
+solely to be a machine-readable identifier, not a human-readable
+essay giving detailed discussion of the purpose of a parameter, with
+a URL for a web page giving yet more details of the specification.
+For ease of development and debugging, it can be valuable to use key
+names that are mnemonic textual names, but excessively verbose keys
+are wasteful and inefficient, hence the recommendation to keep them
+to nine characters or fewer.</p>
+</div>
+<div class="paragraph">
+<p>The characters of a key MUST be printable US-ASCII values (0x20-0x7E)
+[<a href="#ref_RFC20">RFC20</a>], excluding '=' (0x3D).</p>
+</div>
+<div class="paragraph">
+<p>Spaces in the key are significant, whether leading, trailing, or in
+the middle&#8201;&#8212;&#8201;so don&#8217;t include any spaces unless you really intend
+that.</p>
+</div>
+<div class="paragraph">
+<p>Case is ignored when interpreting a key, so "papersize=A4",
+"PAPERSIZE=A4", and "Papersize=A4" are all identical.</p>
+</div>
+<div class="paragraph">
+<p>If there is no '=' in a DNS-SD TXT record string, then it is a
+boolean attribute, simply identified as being present, with no value.</p>
+</div>
+<div class="paragraph">
+<p>A given key SHOULD NOT appear more than once in a TXT record.  The
+reason for this simplifying rule is to facilitate the creation of
+client libraries that parse the TXT record into an internal data
+structure (such as a hash table or dictionary object that maps from
+keys to values) and then make that abstraction available to client
+code.  The rule that a given key may not appear more than once
+simplifies these abstractions because they aren&#8217;t required to support
+the case of returning more than one value for a given key.</p>
+</div>
+<div class="paragraph">
+<p>If a client receives a TXT record containing the same key more than
+once, then the client MUST silently ignore all but the first
+occurrence of that attribute.  For client implementations that
+process a DNS-SD TXT record from start to end, placing key/value
+pairs into a hash table using the key as the hash table key, this
+means that if the implementation attempts to add a new key/value pair
+into the table and finds an entry with the same key already present,
+then the new entry being added should be silently discarded instead.
+Client implementations that retrieve key/value pairs by searching the
+TXT record for the requested key should search the TXT record from
+the start and simply return the first matching key they find.</p>
+</div>
+<div class="paragraph">
+<p>When examining a TXT record for a given key, there are therefore four
+categories of results that may be returned:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Attribute not present (Absent)</p>
+</li>
+<li>
+<p>Attribute present, with no value
+(e.g., "passreq"&#8201;&#8212;&#8201;password required for this service)</p>
+</li>
+<li>
+<p>Attribute present, with empty value
+(e.g., "PlugIns="&#8201;&#8212;&#8201;the server supports plugins, but none are
+presently installed)</p>
+</li>
+<li>
+<p>Attribute present, with non-empty value
+(e.g., "PlugIns=JPEG,MPEG2,MPEG4")</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Each author defining a DNS-SD profile for discovering instances of a
+particular type of service should define the interpretation of these
+different kinds of result.  For example, for some keys, there may be
+a natural true/false boolean interpretation:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Absent implies 'false'</p>
+</li>
+<li>
+<p>Present implies 'true'</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For other keys it may be sensible to define other semantics, such as
+value/no-value/unknown:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Present with value implies that value.
+(e.g., "Color=4" for a four-color ink-jet printer
+or "Color=6" for a six-color ink-jet printer)</p>
+</li>
+<li>
+<p>Present with empty value implies 'false'.
+(e.g., not a color printer)</p>
+</li>
+<li>
+<p>Absent implies 'Unknown'.
+(e.g., a print server connected to some unknown printer where the
+print server doesn&#8217;t actually know if the printer does color or
+not&#8201;&#8212;&#8201;which gives a very bad user experience and should be
+avoided wherever possible)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Note that this is a hypothetical example, not an example of actual
+key/value keys used by DNS-SD network printers, which are documented
+in the "Bonjour Printing Specification" [BJP].</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sec_6.5">6.5. Rules for Values in DNS-SD Key/Value Pairs</h3>
+<div class="paragraph">
+<p>If there is an '=' in a DNS-SD TXT record string, then everything
+after the first '=' to the end of the string is the value.  The value
+can contain any eight-bit values including '='.  The value MUST NOT
+be enclosed in additional quotation marks or any similar punctuation;
+any quotation marks, or leading or trailing spaces, are part of the
+value.</p>
+</div>
+<div class="paragraph">
+<p>The value is opaque binary data.  Often the value for a particular
+attribute will be US-ASCII [<a href="#ref_RFC20">RFC20</a>] or UTF-8 [<a href="#ref_RFC3629">RFC3629</a>] text, but it is
+legal for a value to be any binary data.</p>
+</div>
+<div class="paragraph">
+<p>Generic debugging tools should generally display all attribute values
+as a hex dump, with accompanying text alongside displaying the UTF-8
+interpretation of those bytes, except for attributes where the
+debugging tool has embedded knowledge that the value is some other
+kind of data.</p>
+</div>
+<div class="paragraph">
+<p>Authors defining DNS-SD profiles SHOULD NOT generically convert
+binary attribute data types into printable text using hexadecimal
+representation, Base-64 [<a href="#ref_RFC4648">RFC4648</a>], or Unix-to-Unix (UU) encoding,
+merely for the sake of making the data appear to be printable text
+when seen in a generic debugging tool.  Doing this simply bloats the
+size of the TXT record, without actually making the data any more
+understandable to someone looking at it in a generic debugging tool.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_example_txt_record">6.6. Example TXT Record</h3>
+<div class="paragraph">
+<p>The TXT record below contains three syntactically valid key/value
+strings.  (The meaning of these key/value pairs, if any, would depend
+on the definitions pertaining to the service in question that is
+using them.)</p>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x09</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">key=value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x08</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">paper=A4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0x07</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">passreq</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_version_tag">6.7. Version Tag</h3>
+<div class="paragraph">
+<p>It is recommended that authors defining DNS-SD profiles include an
+attribute of the form "txtvers=x", where "x" is a decimal version
+number in US-ASCII [<a href="#ref_RFC20">RFC20</a>] text (e.g., "txtvers=1" or "txtvers=8"),
+in their definition, and require it to be the first key/value pair in
+the TXT record.  This information in the TXT record can be useful to
+help clients maintain backwards compatibility with older
+implementations if it becomes necessary to change or update the
+specification over time.  Even if the profile author doesn&#8217;t
+anticipate the need for any future incompatible changes, having a
+version number in the TXT record provides useful insurance should
+incompatible changes become unavoidable [<a href="#ref_RFC6709">RFC6709</a>].  Clients SHOULD
+ignore TXT records with a txtvers number higher (or lower) than the
+version(s) they know how to interpret.</p>
+</div>
+<div class="paragraph">
+<p>Note that the version number in the txtvers tag describes the version
+of the specification governing the defined keys and the meaning of
+those keys for that particular TXT record, not the version of the
+application protocol that will be used if the client subsequently
+decides to contact that service.  Ideally, every DNS-SD TXT record
+specification starts at txtvers=1 and stays that way forever.
+Improvements can be made by defining new keys that older clients
+silently ignore.  The only reason to increment the version number is
+if the old specification is subsequently found to be so horribly
+broken that there&#8217;s no way to do a compatible forward revision, so
+the txtvers number has to be incremented to tell all the old clients
+they should just not even try to understand this new TXT record.</p>
+</div>
+<div class="paragraph">
+<p>If there is a need to indicate which version number(s) of the
+application protocol the service implements, the recommended key for
+this is "protovers".</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_service_instances_with_multiple_txt_records">6.8. Service Instances with Multiple TXT Records</h3>
+<div class="paragraph">
+<p>Generally speaking, every DNS-SD service instance has exactly one TXT
+record.  However, it is possible for a particular protocol&#8217;s DNS-SD
+advertising specification to state that it allows multiple TXT
+records.  In this case, each TXT record describes a different variant
+of the same logical service, offered using the same underlying
+protocol on the same port, described by the same SRV record.</p>
+</div>
+<div class="paragraph">
+<p>Having multiple TXT records to describe a single service instance is
+very rare, and to date, of the many hundreds of registered DNS-SD
+service types [SN], only one makes use of this capability, namely LPR
+printing [BJP].  This capability is used when a printer conceptually
+supports multiple logical queue names, where each different logical
+queue name implements a different page description language, such as
+80-column monospaced plain text, seven-bit Adobe PostScript, eight-
+bit ("binary") PostScript, or some proprietary page description
+language.  When multiple TXT records are used to describe multiple
+logical LPR queue names for the same underlying service, printers
+include two additional keys in each TXT record: 'qtotal', which
+specifies the total number of TXT records associated with this SRV
+record, and 'priority', which gives the printer&#8217;s relative preference
+for this particular TXT record.  Clients then select the most
+preferred TXT record that meets the client&#8217;s needs [BJP].  The only
+reason multiple TXT records are used is because the LPR protocol
+lacks in-band feature-negotiation capabilities for the client and
+server to agree on a data representation for the print job, so this
+information has to be communicated out-of-band instead using the DNS-
+SD TXT records.  Future protocol designs should not follow this bad
+example by mimicking this inadequacy of the LPR printing protocol.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sec_7">7. Service Names</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The &lt;Service&gt; portion of a Service Instance Name consists of a pair
+of DNS labels, following the convention already established for SRV
+records [<a href="#ref_RFC2782">RFC2782</a>].</p>
+</div>
+<div class="paragraph">
+<p>The first label of the pair is an underscore character followed by
+the Service Name [<a href="#ref_RFC6335">RFC6335</a>].  The Service Name identifies what the
+service does and what application protocol it uses to do it.</p>
+</div>
+<div class="paragraph">
+<p>For applications using TCP, the second label is "_tcp".</p>
+</div>
+<div class="paragraph">
+<p>For applications using any transport protocol other than TCP, the
+second label is "_udp".  This applies to all other transport
+protocols, including User Datagram Protocol (UDP), Stream Control
+Transmission Protocol (SCTP) [<a href="#ref_RFC4960">RFC4960</a>], Datagram Congestion Control
+Protocol (DCCP) [<a href="#ref_RFC4340">RFC4340</a>], Adobe&#8217;s Real Time Media Flow Protocol
+(RTMFP), etc.  In retrospect, perhaps the SRV specification should
+not have used the "_tcp" and "_udp" labels at all, and instead should
+have used a single label "_srv" to carve off a subdomain of DNS
+namespace for this use, but that specification is already published
+and deployed.  At this point there is no benefit in changing
+established practice.  While "_srv" might be aesthetically nicer than
+"_udp", it is not a user-visible string, and all that is required
+protocol-wise is (i) that it be a label that can form a DNS
+delegation point, and (ii) that it be short so that it does not take
+up too much space in the packet, and in this respect either "_udp" or
+"_srv" is equally good.  Thus, it makes sense to use "_tcp" for TCP-
+based services and "_udp" for all other transport protocols&#8201;&#8212;&#8201;which
+are in fact, in today&#8217;s world, often encapsulated over UDP&#8201;&#8212;&#8201;rather
+than defining a new subdomain for every new transport protocol.</p>
+</div>
+<div class="paragraph">
+<p>Note that this usage of the "_udp" label for all protocols other than
+TCP applies exclusively to DNS-SD service advertising, i.e., services
+advertised using the PTR+SRV+TXT convention specified in this
+document.  It is not a requirement of SRV records in general.  Other
+specifications that are independent of DNS-SD and not intended to
+interoperate with DNS-SD records are not in any way constrained by
+how DNS-SD works just because they also use the DNS SRV record
+datatype [<a href="#ref_RFC2782">RFC2782</a>]; they are free to specify their own naming
+conventions as appropriate.</p>
+</div>
+<div class="paragraph">
+<p>The rules for Service Names [<a href="#ref_RFC6335">RFC6335</a>] state that they may be no more
+than fifteen characters long (not counting the mandatory underscore),
+consisting of only letters, digits, and hyphens, must begin and end
+with a letter or digit, must not contain consecutive hyphens, and
+must contain at least one letter.  The requirement to contain at
+least one letter is to disallow Service Names such as "80" or
+"6000-6063", which could be misinterpreted as port numbers or port
+number ranges.  While both uppercase and lowercase letters may be
+used for mnemonic clarity, case is ignored for comparison purposes,
+so the strings "HTTP" and "http" refer to the same service.</p>
+</div>
+<div class="paragraph">
+<p>Wise selection of a Service Name is important, and the choice is not
+always as obvious as it may appear.</p>
+</div>
+<div class="paragraph">
+<p>In many cases, the Service Name merely names and refers to the on-
+the-wire message format and semantics being used.  FTP is "ftp", IPP
+printing is "ipp", and so on.</p>
+</div>
+<div class="paragraph">
+<p>However, it is common to "borrow" an existing protocol and repurpose
+it for a new task.  This is entirely sensible and sound engineering
+practice, but that doesn&#8217;t mean that the new protocol is providing
+the same semantic service as the old one, even if it borrows the same
+message formats.  For example, the network music sharing protocol
+implemented by iTunes on Macintosh and Windows is built upon "HTTP
+GET" commands.  However, that does <strong>not</strong> mean that it is sensible or
+useful to try to access one of these music servers by connecting to
+it with a standard web browser.  Consequently, the DNS-SD service
+advertised (and browsed for) by iTunes is "_daap._tcp" (Digital Audio
+Access Protocol), not "_http._tcp".</p>
+</div>
+<div class="paragraph">
+<p>If iTunes were to advertise that it offered "_http._tcp" service,
+that would cause iTunes servers to appear in conventional web
+browsers (Safari, Camino, OmniWeb, Internet Explorer, Firefox,
+Chrome, etc.), which is of little use since an iTunes music library
+offers no HTML pages containing human-readable content that a web
+browser could display.</p>
+</div>
+<div class="paragraph">
+<p>Equally, if iTunes were to browse for "_http._tcp" service, that
+would cause it to discover generic web servers, such as the embedded
+web servers in devices like printers, which is of little use since
+printers generally don&#8217;t have much music to offer.</p>
+</div>
+<div class="paragraph">
+<p>Analogously, Sun Microsystems&#8217;s Network File System (NFS) is built on
+top of Sun Microsystems&#8217;s Remote Procedure Call (Sun RPC) mechanism,
+but that doesn&#8217;t mean it makes sense for an NFS server to advertise
+that it provides "Sun RPC" service.  Likewise, Microsoft&#8217;s Server
+Message Block (SMB) file service is built on top of Netbios running
+over IP, but that doesn&#8217;t mean it makes sense for an SMB file server
+to advertise that it provides "Netbios-over-IP" service.  The DNS-SD
+name of a service needs to encapsulate both the "what" (semantics)
+and the "how" (protocol implementation) of the service, since
+knowledge of both is necessary for a client to use the service
+meaningfully.  Merely advertising that a service was built on top of
+Sun RPC is no use if the client has no idea what the service does.</p>
+</div>
+<div class="paragraph">
+<p>Another common question is whether the service type advertised by
+iTunes should be "_daap._http._tcp."  This would also be incorrect.
+Similarly, a protocol designer implementing a network service that
+happens to use the Simple Object Access Protocol [SOAP] should not
+feel compelled to have "_soap" appear somewhere in the Service Name.
+Part of the confusion here is that the presence of "_tcp" or "_udp"
+in the &lt;Service&gt; portion of a Service Instance Name has led people to
+assume that the visible structure of the &lt;Service&gt; should reflect
+the private internal structure of how the protocol was implemented.
+This is not correct.  All that is required is that the service be
+identified by some unique opaque Service Name.  Making the Service
+Name be English text that is at least marginally descriptive of what
+the service does may be convenient, but it is by no means essential.</p>
+</div>
+<div class="sect2">
+<h3 id="sec_7.1">7.1. Selective Instance Enumeration (Subtypes)</h3>
+<div class="paragraph">
+<p>This document does not attempt to define a sophisticated (e.g.,
+Turing complete, or even regular expression) query language for
+service discovery, nor do we believe one is necessary.</p>
+</div>
+<div class="paragraph">
+<p>However, there are some limited circumstances where narrowing the set
+of results may be useful.  For example, many network printers offer a
+web-based user interface, for management and administration, using
+HTML/HTTP.  A web browser wanting to discover all advertised web
+pages issues a query for "_http._tcp.&lt;Domain&gt;".  On the other hand,
+there are cases where users wish to manage printers specifically, not
+to discover web pages in general, and it is good accommodate this.
+In this case, we define the "_printer" subtype of "_http._tcp", and
+to discover only the subset of pages advertised as having that
+subtype property, the web browser issues a query for
+"_printer._sub._http._tcp.&lt;Domain&gt;".</p>
+</div>
+<div class="paragraph">
+<p>The Safari web browser on Mac OS X 10.5 "Leopard" and later uses
+subtypes in this way.  If an "_http._tcp" service is discovered both
+via "_printer._sub._http._tcp" browsing and via "_http._tcp" browsing
+then it is displayed in the "Printers" section of Safari&#8217;s UI.  If a
+service is discovered only via "_http._tcp" browsing then it is
+displayed in the "Webpages" section of Safari&#8217;s UI.  This can be seen
+by using the commands below on Mac OS X to advertise two "fake"
+services.  The service instance "A web page" is displayed in the
+"Webpages" section of Safari&#8217;s Bonjour list, while the instance
+"A printer&#8217;s web page" is displayed in the "Printers" section.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre>dns-sd -R "A web page"           _http._tcp          local 100
+dns-sd -R "A printer's web page" _http._tcp,_printer local 101</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that the advertised web page&#8217;s Service Instance Name is
+unchanged by the use of subtypes&#8201;&#8212;&#8201;it is still something of the form
+"The Server._http._tcp.example.com.", and the advertised web page is
+still discoverable using a standard browsing query for services of
+type "_http._tcp".  The subdomain in which HTTP server SRV records
+are registered defines the namespace within which HTTP server names
+are unique.  Additional subtypes (e.g., "_printer") of the basic
+service type (e.g., "_http._tcp") serve to allow clients to query for
+a narrower set of results, not to create more namespace.</p>
+</div>
+<div class="paragraph">
+<p>Using DNS zone file syntax, the service instance "A web page" is
+advertised using one PTR record, while the instance "A printer&#8217;s web
+page" is advertised using two: the primary service type and the
+additional subtype.  Even though the "A printer&#8217;s web page" service
+is advertised two different ways, both PTR records refer to the name
+of the same SRV+TXT record pair:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>; One PTR record advertises "A web page"
+_http._tcp.local. PTR A\032web\032page._http._tcp.local.
+
+; Two different PTR records advertise "A printer's web page"
+_http._tcp.local. PTR A\032printer's\032web\032page._http._tcp.local.
+_printer._sub._http._tcp.local.
+                  PTR A\032printer's\032web\032page._http._tcp.local.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Subtypes are appropriate when it is desirable for different kinds of
+client to be able to browse for services at two levels of
+granularity.  In the example above, we describe two classes of HTTP
+clients: general web browsing clients that are interested in all web
+pages, and specific printer management tools that would like to
+discover only web UI pages advertised by printers.  The set of HTTP
+servers on the network is the same in both cases; the difference is
+that some clients want to discover all of them, whereas other clients
+only want to find the subset of HTTP servers whose purpose is printer
+administration.</p>
+</div>
+<div class="paragraph">
+<p>Subtypes are only appropriate in two-level scenarios such as this
+one, where some clients want to find the full set of services of a
+given type, and at the same time other clients only want to find some
+subset.  Generally speaking, if there is no client that wants to find
+the entire set, then it&#8217;s neither necessary nor desirable to use the
+subtype mechanism.  If all clients are browsing for some particular
+subtype, and no client exists that browses for the parent type, then
+a new Service Name representing the logical service should be
+defined, and software should simply advertise and browse for that
+particular service type directly.  In particular, just because a
+particular network service happens to be implemented in terms of some
+other underlying protocol, like HTTP, Sun RPC, or SOAP, doesn&#8217;t mean
+that it&#8217;s sensible for that service to be defined as a subtype of
+"_http", "_sunrpc", or "_soap".  That would only be useful if there
+were some class of client for which it is sensible to say, "I want to
+discover a service on the network, and I don&#8217;t care what it does, as
+long as it does it using the SOAP XML RPC mechanism."</p>
+</div>
+<div class="paragraph">
+<p>Subtype strings are not required to begin with an underscore, though
+they often do.  As with the TXT record key/value pairs, the list of
+possible subtypes, if any (including whether some or all begin with
+an underscore) are defined and specified separately for each basic
+service type.</p>
+</div>
+<div class="paragraph">
+<p>Subtype strings (e.g., "_printer" in the example above) may be
+constructed using arbitrary 8-bit data values.  In many cases these
+data values may be UTF-8 [<a href="#ref_RFC3629">RFC3629</a>] representations of text, or even
+(as in the example above) plain ASCII [<a href="#ref_RFC20">RFC20</a>], but they do not have
+to be.  Note, however, that even when using arbitrary 8-bit data for
+subtype strings, DNS name comparisons are still case-insensitive, so
+(for example) the byte values 0x41 and 0x61 will be considered
+equivalent for subtype comparison purposes.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_service_name_length_limits">7.2. Service Name Length Limits</h3>
+<div class="paragraph">
+<p>As specified above, Service Names are allowed to be no more than
+fifteen characters long.  The reason for this limit is to conserve
+bytes in the domain name for use both by the network administrator
+(choosing service domain names) and by the end user (choosing
+instance names).</p>
+</div>
+<div class="paragraph">
+<p>A fully qualified domain name may be up to 255 bytes long, plus one
+byte for the final terminating root label at the end.  Domain names
+used by DNS-SD take the following forms:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre>             &lt;sn&gt;._tcp . &lt;servicedomain&gt; . &lt;parentdomain&gt;.
+&lt;Instance&gt; . &lt;sn&gt;._tcp . &lt;servicedomain&gt; . &lt;parentdomain&gt;.
+&lt;sub&gt;._sub . &lt;sn&gt;._tcp . &lt;servicedomain&gt; . &lt;parentdomain&gt;.</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The first example shows the name used for PTR queries.  The second
+shows a Service Instance Name, i.e., the name of the service&#8217;s SRV
+and TXT records.  The third shows a subtype browsing name, i.e., the
+name of a PTR record pointing to a Service Instance Name (see Section
+<a href="#sec_7.1">7.1</a>, "Selective Instance Enumeration").</p>
+</div>
+<div class="paragraph">
+<p>The Service Name &lt;sn&gt; may be up to 15 bytes, plus the underscore and
+length byte, making a total of 17.  Including the "_udp" or "_tcp"
+and its length byte, this makes 22 bytes.</p>
+</div>
+<div class="paragraph">
+<p>The instance name &lt;Instance&gt; may be up to 63 bytes.  Including the
+length byte used by the DNS format when the name is stored in a
+packet, that makes 64 bytes.</p>
+</div>
+<div class="paragraph">
+<p>When using subtypes, the subtype identifier is allowed to be up to 63
+bytes, plus the length byte, making 64.  Including the "_sub" and its
+length byte, this makes 69 bytes.</p>
+</div>
+<div class="paragraph">
+<p>Typically, DNS-SD service records are placed into subdomains of their
+own beneath a company&#8217;s existing domain name.  Since these subdomains
+are intended to be accessed through graphical user interfaces, not
+typed on a command line, they are frequently long and descriptive.
+Including the length byte, the user-visible service domain may be up
+to 64 bytes.</p>
+</div>
+<div class="paragraph">
+<p>Of our available 255 bytes, we have now accounted for 69+22+64 = 155
+bytes.  This leaves 100 bytes to accommodate the organization&#8217;s
+existing domain name &lt;parentdomain&gt;.  When used with Multicast DNS,
+&lt;parentdomain&gt; is "local.", which easily fits.  When used with parent
+domains of 100 bytes or less, the full functionality of DNS-SD is
+available without restriction.  When used with parent domains longer
+than 100 bytes, the protocol risks exceeding the maximum possible
+length of domain names, causing failures.  In this case, careful
+choice of short &lt;servicedomain&gt; names can help avoid overflows.  If
+the &lt;servicedomain&gt; and &lt;parentdomain&gt; are too long, then service
+instances with long instance names will not be discoverable or
+resolvable, and applications making use of long subtype names may
+fail.</p>
+</div>
+<div class="paragraph">
+<p>Because of this constraint, we choose to limit Service Names to 15
+characters or less.  Allowing more characters would not increase the
+expressive power of the protocol and would needlessly reduce the
+maximum &lt;parentdomain&gt; length that may be safely used.</p>
+</div>
+<div class="paragraph">
+<p>Note that &lt;Instance&gt; name lengths affect the maximum number of
+services of a given type that can be discovered in a given
+&lt;servicedomain&gt;.  The largest Unicast DNS response than can be sent
+(typically using TCP, not UDP) is 64 kB.  Using DNS name compression,
+a Service Instance Enumeration PTR record requires 2 bytes for the
+(compressed) name, plus 10 bytes for type, class, ttl, and rdata
+length.  The rdata of the PTR record requires up to 64 bytes for the
+&lt;Instance&gt; part of the name, plus 2 bytes for a name compression
+pointer to the common suffix, making a maximum of 78 bytes total.
+This means that using maximum-sized &lt;Instance&gt; names, up to 839
+instances of a given service type can be discovered in a given
+&lt;servicedomain&gt;.</p>
+</div>
+<div class="paragraph">
+<p>Multicast DNS aggregates response packets, so it does not have the
+same hard limit, but in practice it is also useful for up to a few
+hundred instances of a given service type, but probably not
+thousands.</p>
+</div>
+<div class="paragraph">
+<p>However, displaying even 100 instances in a flat list is probably too
+many to be helpful to a typical user.  If a network has more than 100
+instances of a given service type, it&#8217;s probably appropriate to
+divide those services into logical subdomains by building, by floor,
+by department, etc.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sec_8">8. Flagship Naming</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In some cases, there may be several network protocols available that
+all perform roughly the same logical function.  For example, the
+printing world has the lineprinter (LPR) protocol [<a href="#ref_RFC1179">RFC1179</a>] and the
+Internet Printing Protocol (IPP) [<a href="#ref_RFC2910">RFC2910</a>], both of which cause
+printed sheets to be emitted from printers in much the same way.  In
+addition, many printer vendors send their own proprietary page
+description language (PDL) data over a TCP connection to TCP port
+9100, herein referred to generically as the "pdl-datastream"
+protocol.  In an ideal world, we would have only one network printing
+protocol, and it would be sufficiently good that no one felt a
+compelling need to invent a different one.  However, in practice,
+multiple legacy protocols do exist, and a service discovery protocol
+has to accommodate that.</p>
+</div>
+<div class="paragraph">
+<p>Many printers implement all three printing protocols: LPR, IPP, and
+pdl-datastream.  For the benefit of clients that may speak only one
+of those protocols, all three are advertised.</p>
+</div>
+<div class="paragraph">
+<p>However, some clients may implement two, or all three of those
+printing protocols.  When a client looks for all three service types
+on the network, it will find three distinct services&#8201;&#8212;&#8201;an LPR
+service, an IPP service, and a pdl-datastream service&#8201;&#8212;&#8201;all of which
+cause printed sheets to be emitted from the same physical printer.</p>
+</div>
+<div class="paragraph">
+<p>In a case like this, where multiple protocols all perform effectively
+the same function, a client may browse for all the service types it
+supports and display all the discovered instance names in a single
+aggregated list.  Where the same instance name is discovered more
+than once because that entity supports more than one service type
+(e.g. a single printer which implements multiple printing protocols)
+the duplicates should be suppressed and the name should appear only
+once in the list.  When the user indicates their desire to print on a
+given named printer, the printing client is responsible for choosing
+which of the available protocols will best achieve the desired
+effect, without, for example, requiring the user to make a manual
+choice between LPR and IPP.</p>
+</div>
+<div class="paragraph">
+<p>As described so far, this all works very well.  However, consider the
+case of: some future printer that only supports IPP printing, and
+some other future printer that only supports pdl-datastream printing.</p>
+</div>
+<div class="paragraph">
+<p>The namespaces for different service types are intentionally disjoint
+(it is acceptable and desirable to be able to have both a file server
+called "Sales Department" and a printer called "Sales Department").
+However, it is not desirable, in the common case, to allow two
+different printers both to be called "Sales Department" merely
+because those two printers implement different printing protocols.</p>
+</div>
+<div class="paragraph">
+<p>To help guard against this, when there are two or more network
+protocols that perform roughly the same logical function, one of the
+protocols is declared the "flagship" of the fleet of related
+protocols.  Typically the flagship protocol is the oldest and/or
+best-known protocol of the set.</p>
+</div>
+<div class="paragraph">
+<p>If a device does not implement the flagship protocol, then it instead
+creates a placeholder SRV record (priority=0, weight=0, port=0,
+target host = host name of device) with that name.  If, when it
+attempts to create this SRV record, it finds that a record with the
+same name already exists, then it knows that this name is already
+taken by some other entity implementing at least one of the protocols
+from the fleet, and it must choose another.  If no SRV record already
+exists, then the act of creating it stakes a claim to that name so
+that future devices in the same protocol fleet will detect a conflict
+when they try to use it.</p>
+</div>
+<div class="paragraph">
+<p>Note: When used with Multicast DNS [<a href="#ref_RFC6762">RFC6762</a>], the target host field
+of the placeholder SRV record MUST NOT be the empty root label.  The
+SRV record needs to contain a real target host name in order for the
+Multicast DNS conflict detection rules to operate.  If two different
+devices were to create placeholder SRV records both using a null
+target host name (just the root label), then the two SRV records
+would be seen to be in agreement, and no conflict would be detected.</p>
+</div>
+<div class="paragraph">
+<p>By defining a common well-known flagship protocol for the class,
+future devices that may not even know about each other&#8217;s protocols
+establish a common ground where they can coordinate to verify
+uniqueness of names.</p>
+</div>
+<div class="paragraph">
+<p>No PTR record is created advertising the presence of empty flagship
+SRV records, since they do not represent a real service being
+advertised, and hence are not (and should not be) discoverable via
+Service Instance Enumeration (browsing).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_service_type_enumeration">9. Service Type Enumeration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In general, a normal client is not interested in finding <strong>every</strong>
+service on the network, just the services that the client knows how
+to use.</p>
+</div>
+<div class="paragraph">
+<p>However, for problem diagnosis and network management tools, it may
+be useful for network administrators to find the list of advertised
+service types on the network, even if those Service Names are just
+opaque identifiers and not particularly informative in isolation.</p>
+</div>
+<div class="paragraph">
+<p>For this purpose, a special meta-query is defined.  A DNS query for
+PTR records with the name "_services._dns-sd._udp.&lt;Domain&gt;" yields a
+set of PTR records, where the rdata of each PTR record is the two-
+label &lt;Service&gt; name, plus the same domain, e.g.,
+"_http._tcp.&lt;Domain&gt;".  Including the domain in the PTR rdata allows
+for slightly better name compression in Unicast DNS responses, but
+only the first two labels are relevant for the purposes of service
+type enumeration.  These two-label service types can then be used to
+construct subsequent Service Instance Enumeration PTR queries, in
+this &lt;Domain&gt; or others, to discover instances of that service type.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_populating_the_dns_with_information">10. Populating the DNS with Information</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>How a service&#8217;s PTR, SRV, and TXT records make their way into the DNS
+is outside the scope of this document, but, for illustrative
+purposes, some examples are given here.</p>
+</div>
+<div class="paragraph">
+<p>On some networks, the administrator might manually enter the records
+into the name server&#8217;s configuration file.</p>
+</div>
+<div class="paragraph">
+<p>A network monitoring tool could output a standard zone file to be
+read into a conventional DNS server.  For example, a tool that can
+find networked PostScript laser printers using AppleTalk NBP could
+find the list of printers, communicate with each one to find its IP
+address, PostScript version, installed options, etc., and then write
+out a DNS zone file describing those printers and their capabilities
+using DNS resource records.  That information would then be available
+to IP-only clients that implement DNS-SD but not AppleTalk NBP.</p>
+</div>
+<div class="paragraph">
+<p>A printer manager device that has knowledge of printers on the
+network through some other management protocol could also output a
+zone file or use DNS Update [<a href="#ref_RFC2136">RFC2136</a>] [<a href="#ref_RFC3007">RFC3007</a>].</p>
+</div>
+<div class="paragraph">
+<p>Alternatively, a printer manager device could implement enough of the
+DNS protocol that it is able to answer DNS queries directly, and
+Example Co.'s main DNS server could delegate the
+"_ipp._tcp.example.com." subdomain to the printer manager device.</p>
+</div>
+<div class="paragraph">
+<p>IP printers could use Dynamic DNS Update [<a href="#ref_RFC2136">RFC2136</a>] [<a href="#ref_RFC3007">RFC3007</a>] to
+automatically register their own PTR, SRV, and TXT records with the
+DNS server.</p>
+</div>
+<div class="paragraph">
+<p>Zeroconf printers answer Multicast DNS queries on the local link for
+their own PTR, SRV, and TXT names ending with ".local." [<a href="#ref_RFC6762">RFC6762</a>].</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sec_11">11. Discovery of Browsing and Registration Domains (Domain Enumeration)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>One of the motivations for DNS-based Service Discovery is to enable a
+visiting client (e.g., a Wi-Fi-equipped [IEEEW] laptop computer,
+tablet, or mobile telephone) arriving on a new network to discover
+what services are available on that network, without any manual
+configuration.  The logic that discovering services without manual
+configuration is a good idea also dictates that discovering
+recommended registration and browsing domains without manual
+configuration is a similarly good idea.</p>
+</div>
+<div class="paragraph">
+<p>This discovery is performed using DNS queries, using Unicast or
+Multicast DNS.  Five special RR names are reserved for this purpose:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre> b._dns-sd._udp.&lt;domain&gt;.
+db._dns-sd._udp.&lt;domain&gt;.
+ r._dns-sd._udp.&lt;domain&gt;.
+dr._dns-sd._udp.&lt;domain&gt;.
+lb._dns-sd._udp.&lt;domain&gt;.</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>By performing PTR queries for these names, a client can learn,
+respectively:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A list of domains recommended for browsing.</p>
+</li>
+<li>
+<p>A single recommended default domain for browsing.</p>
+</li>
+<li>
+<p>A list of domains recommended for registering services using
+Dynamic Update.</p>
+</li>
+<li>
+<p>A single recommended default domain for registering services.</p>
+</li>
+<li>
+<p>The "legacy browsing" or "automatic browsing" domain(s).
+Sophisticated client applications that care to present choices of
+domain to the user use the answers learned from the previous four
+queries to discover the domains to present.  In contrast, many
+current applications browse without specifying an explicit domain,
+allowing the operating system to automatically select an
+appropriate domain on their behalf.  It is for this class of
+application that the "automatic browsing" query is provided, to
+allow the network administrator to communicate to the client
+operating systems which domain(s) should be used automatically for
+these applications.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These domains are purely advisory.  The client or user is free to
+register services and/or browse in any domains.  The purpose of these
+special queries is to allow software to create a user interface that
+displays a useful list of suggested choices to the user, from which
+the user may make an informed selection, or ignore the offered
+suggestions and manually enter their own choice.</p>
+</div>
+<div class="paragraph">
+<p>The &lt;domain&gt; part of the Domain Enumeration query name may be
+"local." (meaning "perform the query using link-local multicast") or
+it may be learned through some other mechanism, such as the DHCP
+"Domain" option (option code 15) [<a href="#ref_RFC2132">RFC2132</a>], the DHCP "Domain Search"
+option (option code 119) [<a href="#ref_RFC3397">RFC3397</a>], or IPv6 Router Advertisement
+Options [<a href="#ref_RFC6106">RFC6106</a>].</p>
+</div>
+<div class="paragraph">
+<p>The &lt;domain&gt; part of the query name may also be derived a different
+way, from the host&#8217;s IP address.  The host takes its IP address and
+calculates the logical AND of that address and its subnet mask, to
+derive the 'base' address of the subnet (the 'network address' of
+that subnet, or, equivalently, the IP address of the 'all-zero' host
+address on that subnet).  It then constructs the conventional DNS
+"reverse mapping" name corresponding to that base address, and uses
+that as the &lt;domain&gt; part of the name for the queries described
+above.  For example, if a host has the address 192.168.12.34, with
+the subnet mask 255.255.0.0, then the 'base' address of the subnet is
+192.168.0.0, and to discover the recommended automatic browsing
+domain(s) for devices on this subnet, the host issues a DNS PTR query
+for the name "lb._dns-sd._udp.0.0.168.192.in-addr.arpa."</p>
+</div>
+<div class="paragraph">
+<p>Equivalent address-derived Domain Enumeration queries should also be
+done for the host&#8217;s IPv6 address(es).</p>
+</div>
+<div class="paragraph">
+<p>Address-derived Domain Enumeration queries SHOULD NOT be done for
+IPv4 link-local addresses [<a href="#ref_RFC3927">RFC3927</a>] or IPv6 link-local addresses
+[<a href="#ref_RFC4862">RFC4862</a>].</p>
+</div>
+<div class="paragraph">
+<p>Sophisticated clients may perform Domain Enumeration queries both in
+"local." and in one or more unicast domains, using both name-derived
+and address-derived queries, and then present the user with an
+combined result, aggregating the information received from all
+sources.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_dns_additional_record_generation">12. DNS Additional Record Generation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>DNS has an efficiency feature whereby a DNS server may place
+additional records in the additional section of the DNS message.
+These additional records are records that the client did not
+explicitly request, but the server has reasonable grounds to expect
+that the client might request them shortly, so including them can
+save the client from having to issue additional queries.</p>
+</div>
+<div class="paragraph">
+<p>This section recommends which additional records SHOULD be generated
+to improve network efficiency, for both Unicast and Multicast DNS-SD
+responses.</p>
+</div>
+<div class="paragraph">
+<p>Note that while servers SHOULD add these additional records for
+efficiency purposes, as with all DNS additional records, it is the
+client&#8217;s responsibility to determine whether or not to trust them.</p>
+</div>
+<div class="paragraph">
+<p>Generally speaking, stub resolvers that talk to a single recursive
+name server for all their queries will trust all records they receive
+from that recursive name server (whom else would they ask?).
+Recursive name servers that talk to multiple authoritative name
+servers should verify that any records they receive from a given
+authoritative name server are "in bailiwick" for that server, and
+ignore them if not.</p>
+</div>
+<div class="paragraph">
+<p>Clients MUST be capable of functioning correctly with DNS servers
+(and Multicast DNS Responders) that fail to generate these additional
+records automatically, by issuing subsequent queries for any further
+record(s) they require.  The additional-record generation rules in
+this section are RECOMMENDED for improving network efficiency, but
+are not required for correctness.</p>
+</div>
+<div class="sect2">
+<h3 id="_ptr_records">12.1. PTR Records</h3>
+<div class="paragraph">
+<p>When including a DNS-SD Service Instance Enumeration or Selective
+Instance Enumeration (subtype) PTR record in a response packet, the
+server/responder SHOULD include the following additional records:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The SRV record(s) named in the PTR rdata.</p>
+</li>
+<li>
+<p>The TXT record(s) named in the PTR rdata.</p>
+</li>
+<li>
+<p>All address records (type "A" and "AAAA") named in the SRV rdata.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_srv_records">12.2. SRV Records</h3>
+<div class="paragraph">
+<p>When including an SRV record in a response packet, the
+server/responder SHOULD include the following additional records:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>All address records (type "A" and "AAAA") named in the SRV rdata.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_txt_records">12.3. TXT Records</h3>
+<div class="paragraph">
+<p>When including a TXT record in a response packet, no additional
+records are required.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_other_record_types">12.4. Other Record Types</h3>
+<div class="paragraph">
+<p>In response to address queries, or other record types, no new
+additional records are recommended by this document.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_working_examples">13. Working Examples</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following examples were prepared using standard unmodified
+nslookup and standard unmodified BIND running on GNU/Linux.</p>
+</div>
+<div class="paragraph">
+<p>Note: In real products, this information is obtained and presented to
+the user using graphical network browser software, not command-line
+tools.  However, if you wish, you can try these examples for yourself
+as you read along, using the nslookup command already available on
+most Unix machines.</p>
+</div>
+<div class="sect2">
+<h3 id="_what_web_pages_are_being_advertised_from_dns_sd_org">13.1. What web pages are being advertised from dns-sd.org?</h3>
+<div class="literalblock">
+<div class="content">
+<pre>nslookup -q=ptr _http._tcp.dns-sd.org.
+_http._tcp.dns-sd.org
+             name = Zeroconf._http._tcp.dns-sd.org
+_http._tcp.dns-sd.org
+             name = Multicast\032DNS._http._tcp.dns-sd.org
+_http._tcp.dns-sd.org
+             name = Service\032Discovery._http._tcp.dns-sd.org
+_http._tcp.dns-sd.org
+             name = Stuart's\032Printer._http._tcp.dns-sd.org</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Answer: There are four, called "Zeroconf", "Multicast DNS", "Service
+Discovery", and "Stuart&#8217;s Printer".</p>
+</div>
+<div class="paragraph">
+<p>Note that nslookup escapes spaces as "\032" for display purposes, but
+a graphical DNS-SD browser should not.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_what_printer_configuration_web_pages_are_there">13.2. What printer-configuration web pages are there?</h3>
+<div class="literalblock">
+<div class="content">
+<pre>nslookup -q=ptr _printer._sub._http._tcp.dns-sd.org.
+_printer._sub._http._tcp.dns-sd.org
+             name = Stuart's\032Printer._http._tcp.dns-sd.org</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Answer: "Stuart&#8217;s Printer" is the web configuration UI of a network
+printer.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_how_do_i_access_the_web_page_called_service_discovery">13.3. How do I access the web page called "Service Discovery"?</h3>
+<div class="literalblock">
+<div class="content">
+<pre>nslookup -q=any "Service\032Discovery._http._tcp.dns-sd.org."
+Service\032Discovery._http._tcp.dns-sd.org
+               priority = 0, weight = 0, port = 80, host = dns-sd.org
+Service\032Discovery._http._tcp.dns-sd.org
+               text = "txtvers=1" "path=/"
+dns-sd.org     nameserver = ns1.dns-sd.org
+dns-sd.org     internet address = 64.142.82.154
+ns1.dns-sd.org internet address = 64.142.82.152</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Answer: You need to connect to dns-sd.org port 80, path "/".
+The address for dns-sd.org is also given (64.142.82.154).</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ipv6_considerations">14. IPv6 Considerations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>IPv6 has only minor differences from IPv4.</p>
+</div>
+<div class="paragraph">
+<p>The address of the SRV record&#8217;s target host is given by the
+appropriate IPv6 "AAAA" address records instead of (or in addition
+to) IPv4 "A" records.</p>
+</div>
+<div class="paragraph">
+<p>Address-based Domain Enumeration queries are performed using names
+under the IPv6 reverse-mapping tree, which is different from the IPv4
+reverse-mapping tree and has longer names in it.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_security_considerations">15. Security Considerations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Since DNS-SD is just a specification for how to name and use records
+in the existing DNS system, it has no specific additional security
+requirements over and above those that already apply to DNS queries
+and DNS updates.</p>
+</div>
+<div class="paragraph">
+<p>For DNS queries, DNS Security Extensions (DNSSEC) [<a href="#ref_RFC4033">RFC4033</a>] should be
+used where the authenticity of information is important.</p>
+</div>
+<div class="paragraph">
+<p>For DNS updates, secure updates [<a href="#ref_RFC2136">RFC2136</a>] [<a href="#ref_RFC3007">RFC3007</a>] should generally
+be used to control which clients have permission to update DNS
+records.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_iana_considerations">16. IANA Considerations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>IANA manages the namespace of unique Service Names [<a href="#ref_RFC6335">RFC6335</a>].</p>
+</div>
+<div class="paragraph">
+<p>When a protocol service advertising specification includes subtypes,
+these should be documented in the protocol specification in question
+and/or in the "notes" field of the registration request sent to IANA.
+In the event that a new subtype becomes relevant after a protocol
+specification has been published, this can be recorded by requesting
+that IANA add it to the "notes" field.  For example, vendors of
+network printers advertise their embedded web servers using the
+subtype _printer.  This allows printer management clients to browse
+for only printer-related web servers by browsing for the _printer
+subtype.  While the existence of the _printer subtype of _http._tcp
+is not directly relevant to the HTTP protocol specification, it is
+useful to record this usage in the IANA registry to help avoid
+another community of developers inadvertently using the same subtype
+string for a different purpose.  The namespace of possible subtypes
+is separate for each different service type.  For example, the
+existence of the _printer subtype of _http._tcp does not imply that
+the _printer subtype is defined or has any meaning for any other
+service type.</p>
+</div>
+<div class="paragraph">
+<p>When IANA records a Service Name registration, if the new application
+protocol is one that conceptually duplicates existing functionality
+of an older protocol, and the implementers desire the Flagship Naming
+behavior described in Section <a href="#sec_8">8</a>, then the registrant should request
+that IANA record the name of the flagship protocol in the "notes"
+field of the new registration.  For example, the registrations for
+"ipp" and "pdl-datastream" both reference "printer" as the flagship
+name for this family of printing-related protocols.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_acknowledgments">17. Acknowledgments</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The concepts described in this document have been explored,
+developed, and implemented with help from Ran Atkinson, Richard
+Brown, Freek Dijkstra, Ralph Droms, Erik Guttman, Pasi Sarolahti,
+Pekka Savola, Mark Townsley, Paul Vixie, Bill Woodcock, and others.
+Special thanks go to Bob Bradley, Josh Graessley, Scott Herscher,
+Rory McGuire, Roger Pantos, and Kiren Sekar for their significant
+contributions.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_references">18. References</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_normative_references">18.1. Normative References</h3>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC20"></a>   [RFC20] 
+</td>
+<td class="hdlist2">
+<p>Cerf, V., "ASCII format for network interchange", RFC 20,
+October 1969.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC1033"></a>   [RFC1033] 
+</td>
+<td class="hdlist2">
+<p>Lottor, M., "Domain Administrators Operations Guide", RFC
+1033, November 1987.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC1034"></a>   [RFC1034] 
+</td>
+<td class="hdlist2">
+<p>Mockapetris, P., "Domain names - concepts and
+facilities", STD 13, RFC 1034, November 1987.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC1035"></a>   [RFC1035] 
+</td>
+<td class="hdlist2">
+<p>Mockapetris, P., "Domain names - implementation and
+specification", STD 13, RFC 1035, November 1987.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC2119"></a>   [RFC2119] 
+</td>
+<td class="hdlist2">
+<p>Bradner, S., "Key words for use in RFCs to Indicate
+Requirement Levels", BCP 14, RFC 2119, March 1997.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC2782"></a>   [RFC2782] 
+</td>
+<td class="hdlist2">
+<p>Gulbrandsen, A., Vixie, P., and L. Esibov, "A DNS RR for
+specifying the location of services (DNS SRV)", RFC 2782,
+February 2000.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC3492"></a>   [RFC3492] 
+</td>
+<td class="hdlist2">
+<p>Costello, A., "Punycode: A Bootstring encoding of Unicode
+for Internationalized Domain Names in Applications
+(IDNA)", RFC 3492, March 2003.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC3629"></a>   [RFC3629] 
+</td>
+<td class="hdlist2">
+<p>Yergeau, F., "UTF-8, a transformation format of ISO
+10646", STD 63, RFC 3629, November 2003.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC3927"></a>   [RFC3927] 
+</td>
+<td class="hdlist2">
+<p>Cheshire, S., Aboba, B., and E. Guttman, "Dynamic
+Configuration of IPv4 Link-Local Addresses", RFC 3927,
+May 2005.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC4862"></a>   [RFC4862] 
+</td>
+<td class="hdlist2">
+<p>Thomson, S., Narten, T., and T. Jinmei, "IPv6 Stateless
+Address Autoconfiguration", RFC 4862, September 2007.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC5198"></a>   [RFC5198] 
+</td>
+<td class="hdlist2">
+<p>Klensin, J. and M. Padlipsky, "Unicode Format for Network
+Interchange", RFC 5198, March 2008.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC5890"></a>   [RFC5890] 
+</td>
+<td class="hdlist2">
+<p>Klensin, J., "Internationalized Domain Names for
+Applications (IDNA): Definitions and Document Framework",
+RFC 5890, August 2010.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC6335"></a>   [RFC6335] 
+</td>
+<td class="hdlist2">
+<p>Cotton, M., Eggert, L., Touch, J., Westerlund, M., and S.
+Cheshire, "Internet Assigned Numbers Authority (IANA)
+Procedures for the Management of the Service Name and
+Transport Protocol Port Number Registry", BCP 165, RFC
+6335, August 2011.</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_informative_references">18.2. Informative References</h3>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+<a id="ref_AFP"></a>   [AFP] 
+</td>
+<td class="hdlist2">
+<p>Mac OS X Developer Library, "Apple Filing Protocol
+Programming Guide", &lt;<a href="http://developer.apple.com/" class="bare">http://developer.apple.com/</a>
+documentation/Networking/Conceptual/AFP/&gt;.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_BJ"></a>   [BJ] 
+</td>
+<td class="hdlist2">
+<p>Apple Bonjour Open Source Software,
+<a href="http://developer.apple.com/bonjour/" class="bare">http://developer.apple.com/bonjour/</a>.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_BJP"></a>   [BJP] 
+</td>
+<td class="hdlist2">
+<p>Bonjour Printing Specification,
+&lt;<a href="https://developer.apple.com/bonjour/" class="bare">https://developer.apple.com/bonjour/</a>
+printing-specification/bonjourprinting-1.0.2.pdf&gt;.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_IEEEW"></a>   [IEEEW] 
+</td>
+<td class="hdlist2">
+<p>IEEE 802 LAN/MAN Standards Committee,
+<a href="http://standards.ieee.org/wireless/" class="bare">http://standards.ieee.org/wireless/</a>.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_NIAS"></a>   [NIAS] 
+</td>
+<td class="hdlist2">
+<p>Cheshire, S., "Discovering Named Instances of Abstract
+Services using DNS", Work in Progress, July 2001.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_NSD"></a>   [NSD] 
+</td>
+<td class="hdlist2">
+<p>"NsdManager | Android Developer", June 2012,
+&lt;<a href="http://developer.android.com/reference/android/" class="bare">http://developer.android.com/reference/android/</a>
+net/nsd/NsdManager.html&gt;.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC1179"></a>   [RFC1179] 
+</td>
+<td class="hdlist2">
+<p>McLaughlin, L., "Line printer daemon protocol", RFC 1179,
+August 1990.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC2132"></a>   [RFC2132] 
+</td>
+<td class="hdlist2">
+<p>Alexander, S. and R. Droms, "DHCP Options and BOOTP
+Vendor Extensions", RFC 2132, March 1997.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC2136"></a>   [RFC2136] 
+</td>
+<td class="hdlist2">
+<p>Vixie, P., Ed., Thomson, S., Rekhter, Y., and J. Bound,
+"Dynamic Updates in the Domain Name System (DNS UPDATE)",
+RFC 2136, April 1997.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC2181"></a>   [RFC2181] 
+</td>
+<td class="hdlist2">
+<p>Elz, R. and R. Bush, "Clarifications to the DNS
+Specification", RFC 2181, July 1997.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC2910"></a>   [RFC2910] 
+</td>
+<td class="hdlist2">
+<p>Herriot, R., Ed., Butler, S., Moore, P., Turner, R., and J. Wenn,
+"Internet Printing Protocol/1.1: Encoding and
+Transport", RFC 2910, September 2000.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC4960"></a>   [RFC4960] 
+</td>
+<td class="hdlist2">
+<p>Stewart, R., Ed., "Stream Control Transmission Protocol",
+RFC 4960, September 2007.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC3007"></a>   [RFC3007] 
+</td>
+<td class="hdlist2">
+<p>Wellington, B., "Secure Domain Name System (DNS) Dynamic
+Update", RFC 3007, November 2000.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC4340"></a>   [RFC4340] 
+</td>
+<td class="hdlist2">
+<p>Kohler, E., Handley, M., and S. Floyd, "Datagram
+Congestion Control Protocol (DCCP)", RFC 4340, March
+2006.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC3397"></a>   [RFC3397] 
+</td>
+<td class="hdlist2">
+<p>Aboba, B. and S. Cheshire, "Dynamic Host Configuration
+Protocol (DHCP) Domain Search Option", RFC 3397, November
+2002.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC4033"></a>   [RFC4033] 
+</td>
+<td class="hdlist2">
+<p>Arends, R., Austein, R., Larson, M., Massey, D., and S.
+Rose, "DNS Security Introduction and Requirements", RFC
+4033, March 2005.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC4648"></a>   [RFC4648] 
+</td>
+<td class="hdlist2">
+<p>Josefsson, S., "The Base16, Base32, and Base64 Data
+Encodings", RFC 4648, October 2006.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC4795"></a>   [RFC4795] 
+</td>
+<td class="hdlist2">
+<p>Aboba, B., Thaler, D., and L. Esibov, "Link-local
+Multicast Name Resolution (LLMNR)", RFC 4795, January
+2007.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC6106"></a>   [RFC6106] 
+</td>
+<td class="hdlist2">
+<p>Jeong, J., Park, S., Beloeil, L., and S. Madanapalli,
+"IPv6 Router Advertisement Options for DNS
+Configuration", RFC 6106, November 2010.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC6281"></a>   [RFC6281] 
+</td>
+<td class="hdlist2">
+<p>Cheshire, S., Zhu, Z., Wakikawa, R., and L. Zhang,
+"Understanding Apple&#8217;s Back to My Mac (BTMM) Service",
+RFC 6281, June 2011.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC6709"></a>   [RFC6709] 
+</td>
+<td class="hdlist2">
+<p>Carpenter, B., Aboba, B., Ed., and S. Cheshire, "Design
+Considerations for Protocol Extensions", RFC 6709,
+September 2012.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC6760"></a>   [RFC6760] 
+</td>
+<td class="hdlist2">
+<p>Cheshire, S. and M. Krochmal, "Requirements for a
+Protocol to Replace the AppleTalk Name Binding Protocol
+(NBP)", RFC 6760, February 2013.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC6762"></a>   [RFC6762] 
+</td>
+<td class="hdlist2">
+<p>Cheshire, S. and M. Krochmal, "Multicast DNS", RFC 6762,
+February 2013.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_SN"></a>   [SN] 
+</td>
+<td class="hdlist2">
+<p>IANA, "Service Name and Transport Protocol Port Number
+Registry", &lt;<a href="http://www.iana.org/assignments/" class="bare">http://www.iana.org/assignments/</a>
+service-names-port-numbers/&gt;.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_SOAP"></a>   [SOAP] 
+</td>
+<td class="hdlist2">
+<p>Mitra, N., "SOAP Version 1.2 Part 0: Primer", W3C
+Proposed Recommendation 24 June 2003,
+<a href="http://www.w3.org/TR/2003/REC-soap12-part0-20030624" class="bare">http://www.w3.org/TR/2003/REC-soap12-part0-20030624</a>.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_Unicode6"></a>   [Unicode6] 
+</td>
+<td class="hdlist2">
+<p>The Unicode Consortium. The Unicode Standard, Version
+6.0.0, (Mountain View, CA: The Unicode Consortium, 2011.
+ISBN 978-1-936213-01-6)
+<a href="http://www.unicode.org/versions/Unicode6.0.0/" class="bare">http://www.unicode.org/versions/Unicode6.0.0/</a>.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_ZC"></a>   [ZC] 
+</td>
+<td class="hdlist2">
+<p>Cheshire, S. and D. Steinberg, "Zero Configuration
+Networking: The Definitive Guide", O&#8217;Reilly Media, Inc.,
+ISBN 0-596-10100-7, December 2005.</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rationale_for_using_dns_as_a_basis_for_service_discovery">Appendix A: Rationale for Using DNS as a Basis for Service Discovery</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Over the years, there have been many proposed ways to do network
+service discovery with IP, but none achieved ubiquity in the
+marketplace.  Certainly none has achieved anything close to the
+ubiquity of today&#8217;s deployment of DNS servers, clients, and other
+infrastructure.</p>
+</div>
+<div class="paragraph">
+<p>The advantage of using DNS as the basis for service discovery is that
+it makes use of those existing servers, clients, protocols,
+infrastructure, and expertise.  Existing network analyzer tools
+already know how to decode and display DNS packets for network
+debugging.</p>
+</div>
+<div class="paragraph">
+<p>For ad hoc networks such as Zeroconf environments, peer-to-peer
+multicast protocols are appropriate.  Using DNS-SD running over
+Multicast DNS [<a href="#ref_RFC6762">RFC6762</a>] provides zero-configuration ad hoc service
+discovery, while maintaining the DNS-SD semantics and record types
+described here.</p>
+</div>
+<div class="paragraph">
+<p>In larger networks, a high volume of enterprise-wide IP multicast
+traffic may not be desirable, so any credible service discovery
+protocol intended for larger networks has to provide some facility to
+aggregate registrations and lookups at a central server (or servers)
+instead of working exclusively using multicast.  This requires some
+service discovery aggregation server software to be written,
+debugged, deployed, and maintained.  This also requires some service
+discovery registration protocol to be implemented and deployed for
+clients to register with the central aggregation server.  Virtually
+every company with an IP network already runs a DNS server, and DNS
+already has a dynamic registration protocol [<a href="#ref_RFC2136">RFC2136</a>] [<a href="#ref_RFC3007">RFC3007</a>].
+Given that virtually every company already has to operate and
+maintain a DNS server anyway, it makes sense to take advantage of
+this expertise instead of also having to learn, operate, and maintain
+a different service registration server.  It should be stressed again
+that using the same software and protocols doesn&#8217;t necessarily mean
+using the same physical piece of hardware.  The DNS-SD service
+discovery functions do not have to be provided by the same piece of
+hardware that is currently providing the company&#8217;s DNS name service.
+The "_tcp.&lt;Domain&gt;" and "_udp.&lt;Domain&gt;" subdomains may be delegated
+to a different piece of hardware.  However, even when the DNS-SD
+service is being provided by a different piece of hardware, it is
+still the same familiar DNS server software, with the same
+configuration file syntax, the same log file format, and so forth.</p>
+</div>
+<div class="paragraph">
+<p>Service discovery needs to be able to provide appropriate security.
+DNS already has existing mechanisms for security [<a href="#ref_RFC4033">RFC4033</a>].</p>
+</div>
+<div class="paragraph">
+<p>In summary:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Service discovery requires a central aggregation server.
+DNS already has one: a DNS server.</p>
+</div>
+<div class="paragraph">
+<p>Service discovery requires a service registration protocol.
+DNS already has one: DNS Dynamic Update.</p>
+</div>
+<div class="paragraph">
+<p>Service discovery requires a query protocol.
+DNS already has one: DNS queries.</p>
+</div>
+<div class="paragraph">
+<p>Service discovery requires security mechanisms.
+DNS already has security mechanisms: DNSSEC.</p>
+</div>
+<div class="paragraph">
+<p>Service discovery requires a multicast mode for ad hoc networks.
+Using DNS-SD in conjunction with Multicast DNS provides this,
+using peer-to-peer multicast instead of a DNS server.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>It makes more sense to use the existing software that every network
+needs already, instead of deploying an entire parallel system just
+for service discovery.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ordering_of_service_instance_name_components">Appendix B: Ordering of Service Instance Name Components</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There have been questions about why services are named using DNS
+Service Instance Names of the form:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Service Instance Name = &lt;Instance&gt; . &lt;Service&gt; . &lt;Domain&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>instead of:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Service Instance Name = &lt;Service&gt; . &lt;Instance&gt; . &lt;Domain&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There are three reasons why it is beneficial to name service
+instances with the parent domain as the most-significant (rightmost)
+part of the name, then the abstract service type as the next-most
+significant, and then the specific instance name as the least-
+significant (leftmost) part of the name.  These reasons are discussed
+below in Sections <a href="#sec_B.1">B.1</a>, <a href="#sec_B.2">B.2</a>, and <a href="#sec_B.3">B.3</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="sec_B.1">B.1. Semantic Structure</h3>
+<div class="paragraph">
+<p>The facility being provided by browsing ("Service Instance
+Enumeration") is effectively enumerating the leaves of a tree
+structure.  A given domain offers zero or more services.  For each of
+those service types, there may be zero or more instances of that
+service.</p>
+</div>
+<div class="paragraph">
+<p>The user knows what type of service they are seeking.  (If they are
+running an FTP client, they are looking for FTP servers.  If they
+have a document to print, they are looking for entities that speak
+some known printing protocol.)  The user knows in which
+organizational or geographical domain they wish to search.  (The user
+does not want a single flat list of every single printer on the
+planet, even if such a thing were possible.)  What the user does not
+know in advance is whether the service they seek is offered in the
+given domain, or if so, the number of instances that are offered and
+the names of those instances.</p>
+</div>
+<div class="paragraph">
+<p>Hence, having the instance names be the leaves of the tree is
+consistent with this semantic model.</p>
+</div>
+<div class="paragraph">
+<p>Having the service types be the terminal leaves of the tree would
+imply that the user knows the domain name and the name of the service
+instance, but doesn&#8217;t have any idea what the service does.  We would
+argue that this is a less useful model.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sec_B.2">B.2. Network Efficiency</h3>
+<div class="paragraph">
+<p>When a DNS response contains multiple answers, name compression works
+more effectively if all the names contain a common suffix.  If many
+answers in the packet have the same &lt;Service&gt; and &lt;Domain&gt;, then each
+occurrence of a Service Instance Name can be expressed using only the
+&lt;Instance&gt; part followed by a two-byte compression pointer
+referencing a previous appearance of "&lt;Service&gt;.&lt;Domain&gt;".  This
+efficiency would not be possible if the &lt;Service&gt; component appeared
+first in each name.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sec_B.3">B.3. Operational Flexibility</h3>
+<div class="paragraph">
+<p>This name structure allows subdomains to be delegated along logical
+service boundaries.  For example, the network administrator at
+Example Co. could choose to delegate the "_tcp.example.com."
+subdomain to a different machine, so that the machine handling
+service discovery doesn&#8217;t have to be the machine that handles other
+day-to-day DNS operations.  (It <strong>can</strong> be the same machine if the
+administrator so chooses, but the administrator is free to make that
+choice.)  Furthermore, if the network administrator wishes to
+delegate all information related to IPP printers to a machine
+dedicated to that specific task, this is easily done by delegating
+the "_ipp._tcp.example.com." subdomain to the desired machine.  It is
+also convenient to set security policies on a per-zone/per-subdomain
+basis.  For example, the administrator may choose to enable DNS
+Dynamic Update [<a href="#ref_RFC2136">RFC2136</a>] [<a href="#ref_RFC3007">RFC3007</a>] for printers registering in the</p>
+</div>
+<div class="paragraph">
+<p>"_ipp._tcp.example.com." subdomain, but not for other
+zones/subdomains.  This easy flexibility would not exist if the
+&lt;Service&gt; component appeared first in each name.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_you_see_is_what_you_get">Appendix C: What You See Is What You Get</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Some service discovery protocols decouple the true service identifier
+from the name presented to the user.  The true service identifier
+used by the protocol is an opaque unique identifier, often
+represented using a long string of hexadecimal digits, which should
+never be seen by the typical user.  The name presented to the user is
+merely one of the decorative ephemeral attributes attached to this
+opaque identifier.</p>
+</div>
+<div class="paragraph">
+<p>The problem with this approach is that it decouples user perception
+from network reality:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>What happens if there are two service instances, with different
+unique ids, but they have inadvertently been given the same user-
+visible name?  If two instances appear in an on-screen list with
+the same name, how does the user know which is which?</p>
+</li>
+<li>
+<p>Suppose a printer breaks down, and the user replaces it with
+another printer of the same make and model, and configures the new
+printer with the exact same name as the one being replaced:
+"Stuart&#8217;s Printer".  Now, when the user tries to print, the on-
+screen print dialog tells them that their selected default printer
+is "Stuart&#8217;s Printer".  When they browse the network to see what
+is there, they see a printer called "Stuart&#8217;s Printer", yet when
+the user tries to print, they are told that the printer "Stuart&#8217;s
+Printer" can&#8217;t be found.  The hidden internal unique identifier
+that the software is trying to find on the network doesn&#8217;t match
+the hidden internal unique identifier of the new printer, even
+though its apparent "name" and its logical purpose for being there
+are the same.  To remedy this, the user typically has to delete
+the print queue they have created, and then create a new
+(apparently identical) queue for the new printer, so that the new
+queue will contain the right hidden internal unique identifier.
+Having all this hidden information that the user can&#8217;t see makes
+for a confusing and frustrating user experience, and exposing
+long, ugly hexadecimal strings to the user and forcing them to
+understand what they mean is even worse.</p>
+</li>
+<li>
+<p>Suppose an existing printer is moved to a new department, and
+given a new name and a new function.  Changing the user-visible
+name of that piece of hardware doesn&#8217;t change its hidden internal
+unique identifier.  Users who had previously created a print queue
+for that printer will still be accessing the same hardware by its
+unique identifier, even though the logical service that used to be
+offered by that hardware has ceased to exist.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Solving these problems requires the user or administrator to be aware
+of the supposedly hidden unique identifier, and to set its value
+correctly as hardware is moved around, repurposed, or replaced,
+thereby contradicting the notion that it is a hidden identifier that
+human users never need to deal with.  Requiring the user to
+understand this expert behind-the-scenes knowledge of what is
+<strong>really</strong> going on is just one more burden placed on the user when
+they are trying to diagnose why their computers and network devices
+are not working as expected.</p>
+</div>
+<div class="paragraph">
+<p>These anomalies and counterintuitive behaviors can be eliminated by
+maintaining a tight bidirectional one-to-one mapping between what the
+user sees on the screen and what is really happening "behind the
+curtain".  If something is configured incorrectly, then that is
+apparent in the familiar day-to-day user interface that everyone
+understands, not in some little-known, rarely used "expert"
+interface.</p>
+</div>
+<div class="paragraph">
+<p>In summary: in DNS-SD the user-visible name is also the primary
+identifier for a service.  If the user-visible name is changed, then
+conceptually the service being offered is a different logical service&#8201;&#8212;&#8201;even though the hardware offering the service may have stayed the
+same.  If the user-visible name doesn&#8217;t change, then conceptually the
+service being offered is the same logical service&#8201;&#8212;&#8201;even if the
+hardware offering the service is new hardware brought in to replace
+some old equipment.</p>
+</div>
+<div class="paragraph">
+<p>There are certainly arguments on both sides of this debate.
+Nonetheless, the designers of any service discovery protocol have to
+make a choice between having the primary identifiers be hidden, or
+having them be visible, and these are the reasons that we chose to
+make them visible.  We&#8217;re not claiming that there are no
+disadvantages of having primary identifiers be visible.  We
+considered both alternatives, and we believe that the few
+disadvantages of visible identifiers are far outweighed by the many
+problems caused by use of hidden identifiers.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_choice_of_factory_default_names">Appendix D: Choice of Factory-Default Names</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When a DNS-SD service is advertised using Multicast DNS [<a href="#ref_RFC6762">RFC6762</a>], if
+there is already another service of the same type advertising with
+the same name then automatic name conflict resolution will occur.  As
+described in the Multicast DNS specification [<a href="#ref_RFC6762">RFC6762</a>], upon
+detecting a conflict, the service should:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Automatically select a new name (typically by appending or
+incrementing a digit at the end of the name),</p>
+</li>
+<li>
+<p>Try advertising with the new name, and</p>
+</li>
+<li>
+<p>Upon success, record the new name in persistent storage.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This renaming behavior is very important, because it is key to
+providing user-friendly instance names in the out-of-the-box factory-
+default configuration.  Some product developers apparently have not
+realized this, because there are some products today where the
+factory-default name is distinctly unfriendly, containing random-
+looking strings of characters, such as the device&#8217;s Ethernet address
+in hexadecimal.  This is unnecessary and undesirable, because the
+point of the user-visible name is that it should be friendly and
+meaningful to human users.  If the name is not unique on the local
+network then the protocol will remedy this as necessary.  It is
+ironic that many of the devices with this design mistake are network
+printers, given that these same printers also simultaneously support
+AppleTalk-over-Ethernet, with nice user-friendly default names (and
+automatic conflict detection and renaming).  Some examples of good
+factory-default names are:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre>Brother 5070N
+Canon W2200
+HP LaserJet 4600
+Lexmark W840
+Okidata C5300
+Ricoh Aficio CL7100
+Xerox Phaser 6200DX</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>To make the case for why adding long, ugly factory-unique serial
+numbers to the end of names is neither necessary nor desirable,
+consider the cases where the user has (a) only one network printer,
+(b) two network printers, and (c) many network printers.</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha">
+<li>
+<p>In the case where the user has only one network printer,
+a simple name like (to use a vendor-neutral example)
+"Printer" is more user-friendly than an ugly name like
+"Printer_0001E68C74FB".  Appending ugly hexadecimal goop to the
+end of the name to make sure the name is unique is irrelevant to
+a user who only has one printer anyway.</p>
+</li>
+<li>
+<p>In the case where the user gets a second network printer, having
+the new printer detect that the name "Printer" is already in use
+and automatically name itself "Printer (2)" instead, provides a
+good user experience.  For most users, remembering that the old
+printer is "Printer" and the new one is "Printer (2)" is easy
+and intuitive.  Seeing a printer called "Printer_0001E68C74FB"
+and another called "Printer_00306EC3FD1C" is a lot less helpful.</p>
+</li>
+<li>
+<p>In the case of a network with ten network printers, seeing a
+list of ten names all of the form "Printer_xxxxxxxxxxxx" has
+effectively taken what was supposed to be a list of user-
+friendly rich-text names (supporting mixed case, spaces,
+punctuation, non-Roman characters, and other symbols) and turned
+it into just about the worst user interface imaginable: a list
+of incomprehensible random-looking strings of letters and
+digits.  In a network with a lot of printers, it would be
+advisable for the people setting up the printers to take a
+moment to give each one a descriptive name, but in the event
+they don&#8217;t, presenting the users with a list of sequentially
+numbered printers is a much more desirable default user
+experience than showing a list of raw Ethernet addresses.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_name_encodings_in_the_domain_name_system">Appendix E: Name Encodings in the Domain Name System</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Although the original DNS specifications [<a href="#ref_RFC1033">RFC1033</a>] [<a href="#ref_RFC1034">RFC1034</a>]
+[<a href="#ref_RFC1035">RFC1035</a>] recommend that host names contain only letters, digits, and
+hyphens (because of the limitations of the typing-based user
+interfaces of that era), Service Instance Names are not host names.
+Users generally access a service by selecting it from a list
+presented by a user interface, not by typing in its Service Instance
+Name. "Clarifications to the DNS Specification" [<a href="#ref_RFC2181">RFC2181</a>] directly
+discusses the subject of allowable character set in Section 11 ("Name
+syntax"), and explicitly states that the traditional letters-digits-
+hyphens rule applies only to conventional host names:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Occasionally it is assumed that the Domain Name System serves only
+the purpose of mapping Internet host names to data, and mapping
+Internet addresses to host names.  This is not correct, the DNS is
+a general (if somewhat limited) hierarchical database, and can
+store almost any kind of data, for almost any purpose.</p>
+</div>
+<div class="paragraph">
+<p>The DNS itself places only one restriction on the particular
+labels that can be used to identify resource records.  That one
+restriction relates to the length of the label and the full name.
+The length of any one label is limited to between 1 and 63 octets.
+A full domain name is limited to 255 octets (including the
+separators).  The zero length full name is defined as representing
+the root of the DNS tree, and is typically written and displayed
+as ".".  Those restrictions aside, any binary string whatever can
+be used as the label of any resource record.  Similarly, any
+binary string can serve as the value of any record that includes a
+domain name as some or all of its value (SOA, NS, MX, PTR, CNAME,
+and any others that may be added).  Implementations of the DNS
+protocols must not place any restrictions on the labels that can
+be used.  In particular, DNS servers must not refuse to serve a
+zone because it contains labels that might not be acceptable to
+some DNS client programs.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that just because DNS-based Service Discovery supports arbitrary
+UTF-8-encoded names doesn&#8217;t mean that any particular user or
+administrator is obliged to make use of that capability.  Any user is
+free, if they wish, to continue naming their services using only
+letters, digits, and hyphens, with no spaces, capital letters, or
+other punctuation.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_continuous_live_update_browsing_model">Appendix F: "Continuous Live Update" Browsing Model</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Of particular concern in the design of DNS-SD, especially when used
+in conjunction with ad hoc Multicast DNS, is the dynamic nature of
+service discovery in a changing network environment.  Other service
+discovery protocols seem to have been designed with an implicit
+unstated assumption that the usage model is:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha">
+<li>
+<p>client software calls the service discovery API,</p>
+</li>
+<li>
+<p>service discovery code spends a few seconds getting a list of
+instances available at a particular moment in time, and then</p>
+</li>
+<li>
+<p>client software displays the list for the user to select from.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Superficially this usage model seems reasonable, but the problem is
+that it&#8217;s too optimistic.  It only considers the success case, where
+the software immediately finds the service instance the user is
+looking for.</p>
+</div>
+<div class="paragraph">
+<p>In the case where the user is looking for (say) a particular printer,
+and that printer is not turned on or not connected, the user first
+has to attempt to remedy the problem, and then has to click a
+"refresh" button to retry the service discovery to find out whether
+they were successful.  Because nothing happens instantaneously in
+networking, and packets can be lost, necessitating some number of
+retransmissions, a service discovery search is not instantaneous and
+typically takes a few seconds.  As a result, a fairly typical user
+experience is:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha">
+<li>
+<p>display an empty window,</p>
+</li>
+<li>
+<p>display some animation like a searchlight sweeping back and
+forth for ten seconds, and then</p>
+</li>
+<li>
+<p>at the end of the ten-second search, display a static list
+showing what was discovered.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Every time the user clicks the "refresh" button they have to endure
+another ten-second wait, and every time the discovered list is
+finally shown at the end of the ten-second wait, it&#8217;s already
+beginning to get stale and out-of-date the moment it&#8217;s displayed on
+the screen.</p>
+</div>
+<div class="paragraph">
+<p>The service discovery user experience that the DNS-SD designers had
+in mind has some rather different properties:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Displaying the initial list of discovered services should be
+effectively instantaneous&#8201;&#8212;&#8201;i.e., typically 0.1 seconds, not 10
+seconds.</p>
+</li>
+<li>
+<p>The list of discovered services should not be getting stale and
+out-of-date from the moment it&#8217;s displayed.  The list should be
+'live' and should continue to update as new services are
+discovered.  Because of the delays, packet losses, and
+retransmissions inherent in networking, it is to be expected that
+sometimes, after the initial list is displayed showing the
+majority of discovered services, a few remaining stragglers may
+continue to trickle in during the subsequent few seconds.  Even
+after this stable list has been built and displayed, it should
+remain 'live' and should continue to update.  At any future time,
+be it minutes, hours, or even days later, if a new service of the
+desired type is discovered, it should be displayed in the list
+automatically, without the user having to click a "refresh"
+button or take any other explicit action to update the display.</p>
+</li>
+<li>
+<p>With users getting in the habit of leaving service discovery
+windows open, and expecting them to show a continuous 'live' view
+of current network reality, this gives us an additional
+requirement: deletion of stale services.  When a service
+discovery list shows just a static snapshot at a moment in time,
+then the situation is simple: either a service was discovered and
+appears in the list, or it was not and does not.  However, when
+our list is live and updates continuously with the discovery of
+new services, then this implies the corollary: when a service
+goes away, it needs to <strong>disappear</strong> from the service discovery
+list.  Otherwise, the service discovery list would simply grow
+monotonically over time, accreting stale data, and would require
+a periodic "refresh" (or complete dismissal and recreation) to
+restore correct display.</p>
+</li>
+<li>
+<p>Another consequence of users leaving service discovery windows
+open for extended periods of time is that these windows should
+update not only in response to services coming and going, but
+also in response to changes in configuration and connectivity of
+the client machine itself.  For example, if a user opens a
+service discovery window when the client machine has no network
+connectivity, then the window will typically appear empty, with
+no discovered services.  When the user connects an Ethernet cable
+or joins an 802.11 [IEEEW] wireless network the window should
+then automatically populate with discovered services, without
+requiring any explicit user action.  If the user disconnects the
+Ethernet cable or turns off 802.11 wireless then all the services
+discovered via that network interface should automatically
+disappear.  If the user switches from one 802.11 wireless access
+point to another, the service discovery window should
+automatically update to remove all the services discovered via
+the old wireless access point, and add all the services
+discovered via the new one.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deployment_history">Appendix G: Deployment History</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In July 1997, in an email to the <a href="mailto:net-thinkers@thumper.vmeng.com">net-thinkers@thumper.vmeng.com</a>
+mailing list, Stuart Cheshire first proposed the idea of running the
+AppleTalk Name Binding Protocol [<a href="#ref_RFC6760">RFC6760</a>] over IP.  As a result of
+this and related IETF discussions, the IETF Zeroconf working group
+was chartered September 1999.  After various working group
+discussions and other informal IETF discussions, several Internet-
+Drafts were written that were loosely related to the general themes
+of DNS and multicast, but did not address the service discovery
+aspect of NBP.</p>
+</div>
+<div class="paragraph">
+<p>In April 2000, Stuart Cheshire registered IPv4 multicast address
+224.0.0.251 with IANA and began writing code to test and develop the
+idea of performing NBP-like service discovery using Multicast DNS,
+which was documented in a group of three Internet-Drafts:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>"Requirements for a Protocol to Replace the AppleTalk Name Binding
+Protocol (NBP)" [<a href="#ref_RFC6760">RFC6760</a>] is an overview explaining the AppleTalk
+Name Binding Protocol, because many in the IETF community had
+little first-hand experience using AppleTalk, and confusion in the
+IETF community about what AppleTalk NBP did was causing confusion
+about what would be required in an IP-based replacement.</p>
+</li>
+<li>
+<p>"Discovering Named Instances of Abstract Services using DNS"
+[NIAS], which later became this document, proposed a way to
+perform NBP-like service discovery using DNS-compatible names and
+record types.</p>
+</li>
+<li>
+<p>"Multicast DNS" [<a href="#ref_RFC6762">RFC6762</a>] specifies a way to transport those DNS-
+compatible queries and responses using IP multicast, for zero-
+configuration environments where no conventional Unicast DNS
+server was available.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In 2001, an update to Mac OS 9 added resolver library support for
+host name lookup using Multicast DNS.  If the user typed a name such
+as "MyPrinter.local." into any piece of networking software that used
+the standard Mac OS 9 name lookup APIs, then those name lookup APIs
+would recognize the name as a dot-local name and query for it by
+sending simple one-shot Multicast DNS queries to 224.0.0.251:5353.
+This enabled the user to, for example, enter the name
+"MyPrinter.local." into their web browser in order to view a
+printer&#8217;s status and configuration web page, or enter the name
+"MyPrinter.local." into the printer setup utility to create a print
+queue for printing documents on that printer.</p>
+</div>
+<div class="paragraph">
+<p>Multicast DNS responder software, with full service discovery, first
+began shipping to end users in volume with the launch of Mac OS X
+10.2 "Jaguar" in August 2002, and network printer makers (who had
+historically supported AppleTalk in their network printers and were
+receptive to IP-based technologies that could offer them similar
+ease-of-use) started adopting Multicast DNS shortly thereafter.</p>
+</div>
+<div class="paragraph">
+<p>In September 2002, Apple released the source code for the
+mDNSResponder daemon as Open Source under Apple&#8217;s standard Apple
+Public Source License (APSL).</p>
+</div>
+<div class="paragraph">
+<p>Multicast DNS responder software became available for Microsoft
+Windows users in June 2004 with the launch of Apple&#8217;s "Rendezvous for
+Windows" (now "Bonjour for Windows"), both in executable form (a
+downloadable installer for end users) and as Open Source (one of the
+supported platforms within Apple&#8217;s body of cross-platform code in the
+publicly accessible mDNSResponder CVS source code repository) [BJ].</p>
+</div>
+<div class="paragraph">
+<p>In August 2006, Apple re-licensed the cross-platform mDNSResponder
+source code under the Apache License, Version 2.0.</p>
+</div>
+<div class="paragraph">
+<p>In addition to desktop and laptop computers running Mac OS X and
+Microsoft Windows, Multicast DNS is now implemented in a wide range
+of hardware devices, such as Apple&#8217;s "AirPort" wireless base
+stations, iPhone and iPad, and in home gateways from other vendors,
+network printers, network cameras, TiVo DVRs, etc.</p>
+</div>
+<div class="paragraph">
+<p>The Open Source community has produced many independent
+implementations of Multicast DNS, some in C like Apple&#8217;s
+mDNSResponder daemon, and others in a variety of different languages
+including Java, Python, Perl, and C#/Mono.</p>
+</div>
+<div class="paragraph">
+<p>In January 2007, the IETF published the Informational RFC "Link-Local
+Multicast Name Resolution (LLMNR)" [<a href="#ref_RFC4795">RFC4795</a>], which is substantially
+similar to Multicast DNS, but incompatible in some small but
+important ways.  In particular, the LLMNR design explicitly excluded
+support for service discovery, which made it an unsuitable candidate
+for a protocol to replace AppleTalk NBP [<a href="#ref_RFC6760">RFC6760</a>].</p>
+</div>
+<div class="paragraph">
+<p>While the original focus of Multicast DNS and DNS-Based Service
+Discovery was for zero-configuration environments without a
+conventional Unicast DNS server, DNS-Based Service Discovery also
+works using Unicast DNS servers, using DNS Update [<a href="#ref_RFC2136">RFC2136</a>] [<a href="#ref_RFC3007">RFC3007</a>]
+to create service discovery records and standard DNS queries to query
+for them.  Apple&#8217;s Back to My Mac service, launched with Mac OS X
+10.5 "Leopard" in October 2007, uses DNS-Based Service Discovery over
+Unicast DNS [<a href="#ref_RFC6281">RFC6281</a>].</p>
+</div>
+<div class="paragraph">
+<p>In June 2012, Google&#8217;s Android operating system added native support
+for DNS-SD and Multicast DNS with the android.net.nsd.NsdManager
+class in Android 4.1 "Jelly Bean" (API Level 16) [NSD].</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_authors_addresses">Authors' Addresses</h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Stuart Cheshire<br>
+Apple Inc.<br>
+1 Infinite Loop<br>
+Cupertino, CA  95014<br>
+USA</p>
+</div>
+<div class="paragraph">
+<p>Phone: +1 408 974 3207<br>
+EMail: <a href="mailto:cheshire@apple.com">cheshire@apple.com</a></p>
+</div>
+<div class="paragraph">
+<p>Marc Krochmal<br>
+Apple Inc.<br>
+1 Infinite Loop<br>
+Cupertino, CA  95014<br>
+USA</p>
+</div>
+<div class="paragraph">
+<p>Phone: +1 408 974 4368<br>
+EMail: <a href="mailto:marc@apple.com">marc@apple.com</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+</div>
+</div>
+<div id="footer">
+    <div id="footer-text">
+       <a href="https://gris8.github.io/betterfc" style="color:yellow">BetteRFC</a>
+       document v1.0 created with
+       <a href="https://www.asciidoctor.org" style="color:yellow">Asciidoctor</a>
+       v2.0.11.dev
+    </div>
+</div>
+</body>
+</html>
