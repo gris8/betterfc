@@ -1,4 +1,4 @@
-:revnumber: 1.0
+:revnumber: 1.1
 
 include::header.adoc[]
 
@@ -99,6 +99,7 @@ to a name with structure indicated by dots, but no relation to the DNS.
 This is particularly true in mail addressing [<<ref_Quarterman_86>>].
 
 // sec.2.2
+[[errata_1074a]]
 === DNS design goals
 
 The design goals of the DNS influence its structure.  They are:
@@ -118,7 +119,7 @@ The design goals of the DNS influence its structure.  They are:
   of the name space, and in particular mechanisms for creating
   and deleting names; these should also be distributed.
 
-- Where there tradeoffs between the cost of acquiring data, the
+- Where [.rfc-error-text]#there tradeoffs# between the cost of acquiring data, the
   speed of updates, and the accuracy of caches, the source of
   the data should control the tradeoff.
 
@@ -151,11 +152,12 @@ The design goals of the DNS influence its structure.  They are:
   different ways.
 
 // sec.2.3
+[[sec_2.3]]
 === Assumptions about usage
 
 The organization of the domain system derives from some assumptions
 about the needs and usage patterns of its user community and is designed
-to avoid many of the the complicated problems found in general purpose
+to avoid many of [.rfc-error-text]#the the# complicated problems found in general purpose
 database systems.
 
 The assumptions are:
@@ -256,6 +258,7 @@ The domain system provides: ::
   foreign name servers.
 
 // sec.2.4
+[[sec_2.4]]
 === Elements of the DNS
 
 The DNS has three major components: ::
@@ -316,7 +319,7 @@ These three components roughly correspond to the three layers or views of the do
 
 In the interests of performance, implementations may couple these
 functions.  For example, a resolver on the same machine as a name server
-might share a database consisting of the the zones managed by the name
+might share a database consisting of [.rfc-error-text]#the the# zones managed by the name
 server and the cache managed by the resolver.
 
 // sec.3
@@ -423,6 +426,7 @@ special characters, leading digits, etc., are likely to break older
 software which depends on more restrictive choices.
 
 // sec.3.3
+[[errata_564]]
 === Technical guidelines on use
 
 Before the DNS can be used to hold naming information for some kind of
@@ -447,7 +451,7 @@ mapping for addresses into the IN-ADDR.ARPA domain is also defined.
 
 For mailboxes, the mapping is slightly more complex.  The usual mail
 address <local-part>@<mail-domain> is mapped into a domain name by
-converting <local-part> into a single label (regardles of dots it
+converting <local-part> into a single label ([.rfc-error-text]#regardles# of dots it
 contains), converting <mail-domain> into a domain name using the usual
 text format for domain names (dots denote label breaks), and
 concatenating the two to form a single domain name.  Thus the mailbox
@@ -553,6 +557,7 @@ A.ISI.EDU  XX.LCS.MIT.EDU  SRI-NIC.ARPA
 ....
 
 // sec.3.6
+[[sec_3.6]]
 === Resource Records
 
 A domain name identifies a node.  Each node has a set of resource
@@ -584,7 +589,7 @@ CNAME  ::       identifies the canonical name of an
 HINFO  ::       identifies the CPU and OS used by a host
 
 MX     ::       identifies a mail exchange for the
-                domain.  See [<<ref_RFC-974>> for details.
+                domain.  See [.rfc-error-text]#[<<ref_RFC-974>># for details.
 
 NS     ::
 the authoritative name server for the domain
@@ -718,6 +723,7 @@ This example shows two addresses for XX.LCS.MIT.EDU, each of a different
 class.
 
 // sec.3.6.2.
+[[errata_1074b]]
 ==== Aliases and canonical names
 
 In existing systems, hosts and other resources often have several names
@@ -747,8 +753,8 @@ record in the response and restarts the query at the domain name
 specified in the data field of the CNAME record.  The one exception to
 this rule is that queries which match the CNAME type are not restarted.
 
-For example, suppose a name server was processing a query with for USC-
-ISIC.ARPA, asking for type A information, and had the following resource
+For example, suppose a name server was processing a query [.rfc-error-text]#with for#
+USC-ISIC.ARPA, asking for type A information, and had the following resource
 records:
 
 [options="autowidth",cols="<,^,<,<", stripes=none, frame=all]
@@ -822,6 +828,7 @@ Note that the content, but not the format, of these sections varies with
 header opcode.
 
 // sec.3.7.1
+[[sec_3.7.1]]
 ==== Standard queries
 
 A standard query specifies a target domain name (QNAME), query type
@@ -863,9 +870,9 @@ requested information may know a name server that does; a name server
 that returns a domain name in a relevant RR may also return the RR that
 binds that domain name to an address.
 
-For example, a mailer tying to send mail to Mockapetris@ISI.EDU might
+[.rfc-error-text]#For example, a mailer tying to send mail to Mockapetris@ISI.EDU might
 ask the resolver for mail information about ISI.EDU, resulting in a
-query for QNAME=ISI.EDU, QTYPE=MX, QCLASS=IN.  The response's answer
+query for QNAME=ISI.EDU, QTYPE=MX, QCLASS=IN.#  The response's answer
 section would be:
 
 [options="autowidth",cols="<,^,<,<", stripes=none, frame=all]
@@ -1061,6 +1068,7 @@ These RRs are only necessary if the name server's name is "below" the
 cut, and are only used as part of a referral response.
 
 // sec.4.2.2.
+[[sec_4.2.2]]
 ==== Administrative considerations
 
 When some organization wants to control its own domain, the first step
@@ -1072,7 +1080,7 @@ deal with top level organization, and middle level zones are free to
 create their own rules.  For example, one university might choose to use
 a single zone, while another might choose to organize by subzones
 dedicated to individual departments or schools.  [<<ref_RFC-1033>>] catalogs
-available DNS software an discusses administration procedures.
+available DNS software [.rfc-error-text]#an# discusses administration procedures.
 
 Once the proper name for the new subzone is selected, the new owners
 should be required to demonstrate redundant name server support.  Note
@@ -1094,6 +1102,7 @@ glue RRs which mark both sides of the cut are consistent and remain so.
 === Name server internals
 
 // sec.4.3.1.
+[[errata_565]]
 ==== Queries and responses
 
 The principal activity of name servers is to answer standard queries.
@@ -1144,7 +1153,7 @@ the use of two bits in query and response messages:
   That is, RA signals availability rather than use.
 
 - Queries contain a bit called recursion desired or RD.  This
-  bit specifies specifies whether the requester wants recursive
+  bit [.rfc-error-text]#specifies specifies# whether the requester wants recursive
   service for this query.  Clients may request recursive service
   from any name server, though they should depend upon receiving
   it only from servers which have previously sent an RA, or
@@ -1193,6 +1202,7 @@ ancestors to the name than the server sending the reply.
 
 
 // sec.4.3.2.
+[[errata_4740]]
 ==== Algorithm
 
 The actual algorithm used by the name server will depend on the local OS
@@ -1264,9 +1274,10 @@ not the node with the "{snglstar_}" label.  Go to step 6.
    section of the response.
 
 6. Using local data only, attempt to add other RRs which may be
-   useful to the additional section of the query.  Exit.
+   useful to the additional section of the [.rfc-error-text]#query#.  Exit.
 
 // sec.4.3.3.
+[[sec_4.3.3]]
 ==== Wildcards
 
 In the previous algorithm, special treatment was given to RRs with owner
@@ -1301,7 +1312,7 @@ Wildcard RRs do not apply:
   the wildcard defaults.
 
 - When the query name or a name between the wildcard domain and
-  the query name is know to exist.  For example, if a wildcard
+  the query name is [.rfc-error-text]#know# to exist.  For example, if a wildcard
   RR has an owner name of "{snglstar_}.X", and the zone also contains RRs
   attached to B.X, the wildcards would apply to queries for name
   Z.X (presuming there is no explicit information for Z.X), but
@@ -1337,6 +1348,7 @@ MX data at X.COM and A.X.COM is required, and that none of the RRs above
 would match a query name of XX.COM.
 
 // sec.4.3.4.
+[[errata_1074c]]
 ==== Negative response caching (Optional)
 
 The DNS provides an optional service which allows name servers to
@@ -1349,7 +1361,7 @@ with a QTYPE which matches multiple types, and cache the fact that some
 of the types are not present.
 
 This feature can be particularly important in a system which implements
-naming shorthands that use search lists beacuse a popular shorthand,
+naming shorthands that use search lists [.rfc-error-text]#beacuse# a popular shorthand,
 which happens to require a suffix toward the end of the search list,
 will generate multiple name errors whenever it is used.
 
@@ -1390,6 +1402,7 @@ recommended as yet.
 
 
 // sec.4.3.5.
+[[errata_4943]]
 ==== Zone maintenance and transfers
 
 Part of the job of a zone administrator is to maintain the zones at all
@@ -1432,7 +1445,7 @@ the zone.  If the serial field in the secondary's zone copy is equal to
 the serial returned by the primary, then no changes have occurred, and
 the REFRESH interval wait is restarted.  If the secondary finds it
 impossible to perform a serial check for the EXPIRE interval, it must
-assume that its copy of the zone is obsolete an discard it.
+assume that its copy of the zone is obsolete [.rfc-error-text]#an# discard it.
 
 When the poll shows that the zone has changed, then the secondary server
 must request a zone transfer via an AXFR request for the zone.  The AXFR
@@ -2281,16 +2294,18 @@ server being asked, but would be common for other aliases.
 
 
 // sec.6.2.8.
+[[sec_6.2.8]]
 ==== QNAME=USC-ISIC.ARPA, QTYPE=CNAME
 
 If this query is sent to either A.ISI.EDU or C.ISI.EDU, the reply would
 be:
 
+[.rfc-error, subs=+macros]
 ....
            +---------------------------------------------------+
 Header     | OPCODE=SQUERY, RESPONSE, AA                       |
            +---------------------------------------------------+
-Question   | QNAME=USC-ISIC.ARPA., QCLASS=IN, QTYPE=A          |
+Question   | QNAME=USC-ISIC.ARPA., QCLASS=IN, pass:quotes[*QTYPE=A*]          |
            +---------------------------------------------------+
 Answer     | USC-ISIC.ARPA. 86400 IN CNAME      C.ISI.EDU.     |
            +---------------------------------------------------+
@@ -2693,3 +2708,467 @@ Wildcards   25 +
 
 Zone transfers   28 +
 Zones   19 +
+
+
+// horizontal rule
+'''
+'''
+[frame=none, cols="^", width="99%"]
+|===
+| END OF THE RFC
+|===
+'''
+'''
+
+// it disables the section numbering
+:numbered!:
+
+== Errata
+
+=== Verified
+
+==== 564
+
+====
+Errata ID: https://www.rfc-editor.org/errata/eid564[564] +
+Status: Verified +
+Type: Technical +
+Publication Format(s) : TEXT +
+Reported By: Chlisin +
+Date Reported: 2003-02-06 +
+
+<<errata_564,Section 3.3>> says:
+
+[subs=+macros]
+....
+The usual mail address <local-part>@<mail-domain> is mapped into a
+domain name by converting <local-part> into a single label
+(regardles of dots it contains), converting <mail-domain> into a
+domain name using the usual text format for domain names (dots
+denote label breaks), and concatenating the two to form a single
+domain name.
+....
+
+
+It should say:
+
+[subs=+macros]
+....
+The usual mail address <local-part>@<mail-domain> is mapped into a
+domain name by converting <local-part> into a single label
+(regardlespass:quotes[*s*] of dots it contains), converting <mail-domain> into a
+domain name using the usual text format for domain names (dots
+denote label breaks), and concatenating the two to form a single
+domain name.
+....
+====
+
+==== 4740
+Errata ID: https://www.rfc-editor.org/errata/eid4740[4740] +
+Status: Verified +
+Type: Technical +
+Publication Format(s) : TEXT +
+Reported By: Robert Edmonds +
+Date Reported: 2016-07-11 +
+Verifier Name: Warren Kumari (Ops AD) +
+Date Verified: 2018-04-01 +
+
+<<errata_4740,Section 4.3.2>> says:
+
+[subs=+macros]
+....
+6. Using local data only, attempt to add other RRs which may be
+   useful to the additional section of the query.  Exit.
+....
+
+It should say:
+
+[subs=+macros]
+....
+6. Using local data only, attempt to add other RRs which may be
+   useful to the additional section of the pass:quotes[*response*].  Exit.
+....
+
+NOTE: Changed "query" to "response".
+
+<<errata_4740,Section 4.3.2>> describes the algorithm used by nameservers to answer queries. I.e.,
+a nameserver receives a query from a client, and then it performs this algorithm
+in order to construct a response to send to the client.
+
+Steps 1, 3, and 5 of this algorithm talk about setting fields or bits in the response,
+or about adding resource records to the answer section of the response,
+but then step 6 says to add resource records to the additional section of the *query*.
+This doesn't make any sense, because the server is constructing a response to a query that
+it's already received. "Response" must have been intended instead.
+
+==== 565
+
+Errata ID: https://www.rfc-editor.org/errata/eid565[565] +
+Status: Verified +
+Type: Editorial +
+Publication Format(s) : TEXT +
+Reported By: "Yin Shuming" +
+Date Reported: 2006-02-18 +
+
+<<errata_565,Section 4.3.1>> says:
+
+[subs=+macros]
+....
+This bit specifies specifies whether the requester wants recursive service
+for this query. Clients may.....
+....
+
+It should say:
+
+[subs=+macros]
+....
+This bit pass:quotes[*specifies*] whether the requester wants recursive service for this
+query. Clients may.....
+....
+
+
+==== 1074
+
+Errata ID: https://www.rfc-editor.org/errata/eid1074[1074] +
+Status: Verified +
+Type: Editorial +
+Publication Format(s) : TEXT +
+Reported By: John Kristoff +
+Date Reported: 2006-03-13 +
+
+<<errata_1074a,Section 2.2.>> says:
+
+[subs=+macros]
+....
+  - Where there tradeoffs between the cost of acquiring data, the
+....
+
+but should probably say:
+
+[subs=+macros]
+....
+  - Where there pass:quotes[*are*] tradeoffs between the cost of acquiring data, the
+....
+
+<<errata_1074b,Section 3.6.2.>> says:
+
+[subs=+macros]
+....
+  For example, suppose a name server was processing a query with for
+....
+
+but should probably simply say:
+
+[subs=+macros]
+....
+  For example, suppose a name server was processing a query pass:quotes[*for*]
+....
+
+<<errata_1074c,Section 4.3.4.>> misspells 'because':
+
+[subs=+macros]
+....
+  This feature can be particularly important in a system which
+  implements naming short shorts that use search lists pass:quotes[*beacuse*]
+....
+
+It should say:
+
+....
+[see above]
+
+Notes:
+
+from pending
+....
+
+
+==== 4943
+
+Errata ID: https://www.rfc-editor.org/errata/eid4943[4943] +
+Status: Verified +
+Type: Editorial +
+Publication Format(s) : TEXT +
+Reported By: Shane Kerr +
+Date Reported: 2017-02-20 +
+Verifier Name: Terry Manderson +
+Date Verified: 2017-03-01 +
+
+<<errata_4943,Section 4.3.5.>> says:
+
+[subs=+macros]
+....
+it must assume that its copy of the zone is obsolete pass:quotes[*an*] discard it.
+....
+
+It should say:
+
+[subs=+macros]
+....
+it must assume that its copy of the zone is obsolete pass:quotes[*and*] discard it.
+....
+
+NOTE: Fix typo; "an" should be "and".
+
+=== Held for Document Update
+
+==== 755
+
+Errata ID: https://www.rfc-editor.org/errata/eid755[755] +
+Status: Held for Document Update +
+Type: Technical +
+Publication Format(s) : TEXT +
+Reported By: John Kristoff +
+Date Reported: 2006-03-13 +
+Held for Document Update by: Brian Haberman +
+Date Held: 2012-04-26 +
+
+Section 6.1. ends this way:
+
+====
+Relative and absolute domain names may be freely intermixed in a master
+====
+
+which is incomplete.  It's unclear exactly how that sentence may have
+been intended to end, but minimally I would suggeste it at least
+terminated with 'file.'.
+
+Section <<sec_6.2.8,6.2.8>>. in the diagram shows
+
+....
+'QTYPE=A'
+....
+
+
+but should be of type
+
+....
+'CNAME'
+....
+
+based on the context of the example.
+
+
+==== 5316
+
+Errata ID: https://www.rfc-editor.org/errata/eid5316[5316] +
+Status: Held for Document Update +
+Type: Technical +
+Publication Format(s) : TEXT +
+Reported By: Mukund Sivaraman +
+Date Reported: 2018-03-31 +
+Held for Document Update by: Warren Kumari (Ops AD) +
+Date Held: 2018-04-09 +
+
+Section 4.3.3 says:
+
+[subs=+macros]
+....
+A * label appearing in a query name has no special effect, but can be
+used to test for wildcards in an authoritative zone; such a query is the
+only way to get a response containing RRs with an owner name with * in
+it.  The result of such a query should not be pass:quotes[*cached*].
+....
+
+It should say:
+
+[subs=+macros]
+....
+A * label appearing in a query name has no special effect, but can be
+used to test for wildcards in an authoritative zone; such a query is the
+only way to get a response containing RRs with an owner name with * in
+it.  The result of such a query should not be pass:quotes[*used to synthesize RRs*].
+....
+
+[NOTE]
+====
+It is perfectly OK for an RR with a wildcard label '*' to be cached as long as it's not used to synthesize any RRs on a caching resolver. The DNS implementations BIND and Unbound both cache such RRsets with wildcard label in the owner name.
+
+WK (OpsAD): Please see thread https://www.ietf.org/mail-archive/web/dnsop/current/msg22563.html for additional information.
+====
+
+
+==== 4270
+
+Errata ID: https://www.rfc-editor.org/errata/eid4270[4270]
+Status: Held for Document Update +
+Type: Editorial +
+Publication Format(s) : TEXT +
+Reported By: Jean-Philippe Paradis +
+Date Reported: 2015-02-12 +
+Held for Document Update by: Ted Lemon +
+Date Held: 2015-02-12 +
+
+Section <<sec_2.4,2.4>> says:
+
+[subs=+macros]
+....
+In the interests of performance, implementations may couple these
+functions.  For example, a resolver on the same machine as a name server
+might share a database consisting of pass:quotes[*the the*] zones managed by the name
+server and the cache managed by the resolver.
+....
+
+It should say:
+
+[subs=+macros]
+....
+In the interests of performance, implementations may couple these
+functions.  For example, a resolver on the same machine as a name server
+might share a database consisting of pass:quotes[*the*] zones managed by the name
+server and the cache managed by the resolver.
+....
+
+NOTE: Just a duplicate "the".
+
+
+==== 4269
+
+Errata ID: https://www.rfc-editor.org/errata/eid4269[4269] +
+Status: Held for Document Update +
+Type: Editorial +
+Publication Format(s) : TEXT +
+Reported By: Jean-Philippe Paradis +
+Date Reported: 2015-02-12 +
+Held for Document Update by: Ted Lemon +
+Date Held: 2015-02-12 +
+
+Section <<sec_2.3,2.3>> says:
+
+[subs=+macros]
+....
+The organization of the domain system derives from some assumptions
+about the needs and usage patterns of its user community and is designed
+to avoid many of pass:quotes[*the the*] complicated problems found in general purpose
+database systems.
+....
+
+It should say:
+
+[subs=+macros]
+....
+The organization of the domain system derives from some assumptions
+about the needs and usage patterns of its user community and is designed
+to avoid many of pass:quotes[*the*] complicated problems found in general purpose
+database systems.
+....
+
+NOTE: Just a duplicate "the".
+
+
+==== 4229
+
+Errata ID: https://www.rfc-editor.org/errata/eid4229[4229] +
+Status: Held for Document Update +
+Type: Editorial +
+Publication Format(s) : TEXT +
+Reported By: Sun Congyou +
+Date Reported: 2015-01-11 +
+Held for Document Update by: Ted Lemon +
+Date Held: 2015-01-14 +
+
+Section <<sec_4.2.2,4.2.2>> says:
+
+[subs=+macros]
+....
+[RFC-1033] catalogs available DNS software pass:quotes[*an*] discusses administration
+procedures.
+....
+
+It should say:
+
+[subs=+macros]
+....
+[RFC-1033] catalogs available DNS software pass:quotes[*and*] discusses administration
+procedures.
+....
+
+
+==== 4230
+
+Errata ID: https://www.rfc-editor.org/errata/eid4230[4230] +
+Status: Held for Document Update +
+Type: Editorial +
+Publication Format(s) : TEXT +
+Reported By: Sun Congyou +
+Date Reported: 2015-01-11 +
+Held for Document Update by: Ted Lemon +
+Date Held: 2015-01-14 +
+
+Section <<sec_4.3.3,4.3.3>> says:
+
+[subs=+macros]
+....
+- When the query name or a name between the wildcard domain and
+  the query name is pass:quotes[*know*] to exist.
+....
+
+It should say:
+
+[subs=+macros]
+....
+- When the query name or a name between the wildcard domain and
+  the query name is pass:quotes[*known*] to exist.
+....
+
+
+==== 4511
+
+Errata ID: https://www.rfc-editor.org/errata/eid4511[4511] +
+Status: Held for Document Update +
+Type: Editorial +
+Publication Format(s) : TEXT +
+Reported By: Han Ge Xin +
+Date Reported: 2015-10-23 +
+Held for Document Update by: Terry Manderson +
+Date Held: 2015-11-01 +
+
+Section <<sec_3.6,3.6>> says:
+
+
+[subs=+macros]
+....
+identifies a mail exchange for the domain. See pass:quotes[*[RFC-974*] for details.
+....
+
+It should say:
+
+[subs=+macros]
+....
+identifies a mail exchange for the domain. See [RFC-974] for details.
+....
+
+NOTE:  Just missing the "]"
+
+
+==== 4893
+
+Errata ID: https://www.rfc-editor.org/errata/eid4893[4893] +
+Status: Held for Document Update +
+Type: Editorial +
+Publication Format(s) : TEXT +
+Reported By: anonymous +
+Date Reported: 2016-12-22 +
+Held for Document Update by: Warren Kumari (Ops AD) +
+Date Held: 2018-04-01 +
+
+Section <<sec_3.7.1,3.7.1>> says:
+
+[subs=+macros]
+....
+For example, a mailer tying to send mail to Mockapetris@ISI.EDU might
+ask the resolver for mail information about ISI.EDU, resulting in a
+query for QNAME=ISI.EDU, QTYPE=MX, QCLASS=IN.
+....
+
+It should say:
+
+[subs=+macros]
+....
+For example, a mailer trying to send mail to Mockapetris@ISI.EDU might
+ask the resolver for mail information about ISI.EDU, resulting in a
+query for QNAME=ISI.EDU, QTYPE=MX, QCLASS=IN.
+....
+
+NOTE: Trying, not tying.
+

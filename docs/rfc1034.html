@@ -805,27 +805,27 @@ pre.pygments.highlight { background-color: rgba(16, 195, 196, 0.05); }
 <li><a href="#_introduction">2. INTRODUCTION</a>
 <ul class="sectlevel2">
 <li><a href="#_the_history_of_domain_names">2.1. The history of domain names</a></li>
-<li><a href="#_dns_design_goals">2.2. DNS design goals</a></li>
-<li><a href="#_assumptions_about_usage">2.3. Assumptions about usage</a></li>
-<li><a href="#_elements_of_the_dns">2.4. Elements of the DNS</a></li>
+<li><a href="#errata_1074a">2.2. DNS design goals</a></li>
+<li><a href="#sec_2.3">2.3. Assumptions about usage</a></li>
+<li><a href="#sec_2.4">2.4. Elements of the DNS</a></li>
 </ul>
 </li>
 <li><a href="#_domain_name_space_and_resource_records">3. DOMAIN NAME SPACE and RESOURCE RECORDS</a>
 <ul class="sectlevel2">
 <li><a href="#_name_space_specifications_and_terminology">3.1. Name space specifications and terminology</a></li>
 <li><a href="#_administrative_guidelines_on_use">3.2. Administrative guidelines on use</a></li>
-<li><a href="#_technical_guidelines_on_use">3.3. Technical guidelines on use</a></li>
+<li><a href="#errata_564">3.3. Technical guidelines on use</a></li>
 <li><a href="#_example_name_space">3.4. Example name space</a></li>
 <li><a href="#_preferred_name_syntax">3.5. Preferred name syntax</a></li>
-<li><a href="#_resource_records">3.6. Resource Records</a>
+<li><a href="#sec_3.6">3.6. Resource Records</a>
 <ul class="sectlevel3">
 <li><a href="#_textual_expression_of_rrs">3.6.1. Textual expression of RRs</a></li>
-<li><a href="#_aliases_and_canonical_names">3.6.2. Aliases and canonical names</a></li>
+<li><a href="#errata_1074b">3.6.2. Aliases and canonical names</a></li>
 </ul>
 </li>
 <li><a href="#_queries">3.7. Queries</a>
 <ul class="sectlevel3">
-<li><a href="#_standard_queries">3.7.1. Standard queries</a></li>
+<li><a href="#sec_3.7.1">3.7.1. Standard queries</a></li>
 <li><a href="#_inverse_queries_optional">3.7.2. Inverse queries (Optional)</a></li>
 </ul>
 </li>
@@ -839,16 +839,16 @@ pre.pygments.highlight { background-color: rgba(16, 195, 196, 0.05); }
 <li><a href="#_how_the_database_is_divided_into_zones">4.2. How the database is divided into zones</a>
 <ul class="sectlevel3">
 <li><a href="#_technical_considerations">4.2.1. Technical considerations</a></li>
-<li><a href="#_administrative_considerations">4.2.2. Administrative considerations</a></li>
+<li><a href="#sec_4.2.2">4.2.2. Administrative considerations</a></li>
 </ul>
 </li>
 <li><a href="#_name_server_internals">4.3. Name server internals</a>
 <ul class="sectlevel3">
-<li><a href="#_queries_and_responses">4.3.1. Queries and responses</a></li>
-<li><a href="#_algorithm">4.3.2. Algorithm</a></li>
-<li><a href="#_wildcards">4.3.3. Wildcards</a></li>
-<li><a href="#_negative_response_caching_optional">4.3.4. Negative response caching (Optional)</a></li>
-<li><a href="#_zone_maintenance_and_transfers">4.3.5. Zone maintenance and transfers</a></li>
+<li><a href="#errata_565">4.3.1. Queries and responses</a></li>
+<li><a href="#errata_4740">4.3.2. Algorithm</a></li>
+<li><a href="#sec_4.3.3">4.3.3. Wildcards</a></li>
+<li><a href="#errata_1074c">4.3.4. Negative response caching (Optional)</a></li>
+<li><a href="#errata_4943">4.3.5. Zone maintenance and transfers</a></li>
 </ul>
 </li>
 </ul>
@@ -867,7 +867,7 @@ pre.pygments.highlight { background-color: rgba(16, 195, 196, 0.05); }
 <ul class="sectlevel3">
 <li><a href="#_stub_resolvers">5.3.1. Stub resolvers</a></li>
 <li><a href="#_resources">5.3.2. Resources</a></li>
-<li><a href="#_algorithm_2">5.3.3. Algorithm</a></li>
+<li><a href="#_algorithm">5.3.3. Algorithm</a></li>
 </ul>
 </li>
 </ul>
@@ -884,7 +884,7 @@ pre.pygments.highlight { background-color: rgba(16, 195, 196, 0.05); }
 <li><a href="#_qnamesir_nic_arpa_qtypea">6.2.5. QNAME=SIR-NIC.ARPA, QTYPE=A</a></li>
 <li><a href="#_qnamebrl_mil_qtypea">6.2.6. QNAME=BRL.MIL, QTYPE=A</a></li>
 <li><a href="#_qnameusc_isic_arpa_qtypea">6.2.7. QNAME=USC-ISIC.ARPA, QTYPE=A</a></li>
-<li><a href="#_qnameusc_isic_arpa_qtypecname">6.2.8. QNAME=USC-ISIC.ARPA, QTYPE=CNAME</a></li>
+<li><a href="#sec_6.2.8">6.2.8. QNAME=USC-ISIC.ARPA, QTYPE=CNAME</a></li>
 </ul>
 </li>
 <li><a href="#_example_resolution">6.3. Example resolution</a>
@@ -898,6 +898,31 @@ pre.pygments.highlight { background-color: rgba(16, 195, 196, 0.05); }
 </li>
 <li><a href="#_references_and_bibliography">7. REFERENCES and BIBLIOGRAPHY</a></li>
 <li><a href="#_index">Index</a></li>
+<li><a href="#_errata">Errata</a>
+<ul class="sectlevel2">
+<li><a href="#_verified">Verified</a>
+<ul class="sectlevel3">
+<li><a href="#_564">564</a></li>
+<li><a href="#_4740">4740</a></li>
+<li><a href="#_565">565</a></li>
+<li><a href="#_1074">1074</a></li>
+<li><a href="#_4943">4943</a></li>
+</ul>
+</li>
+<li><a href="#_held_for_document_update">Held for Document Update</a>
+<ul class="sectlevel3">
+<li><a href="#_755">755</a></li>
+<li><a href="#_5316">5316</a></li>
+<li><a href="#_4270">4270</a></li>
+<li><a href="#_4269">4269</a></li>
+<li><a href="#_4229">4229</a></li>
+<li><a href="#_4230">4230</a></li>
+<li><a href="#_4511">4511</a></li>
+<li><a href="#_4893">4893</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -1032,7 +1057,7 @@ This is particularly true in mail addressing [<a href="#ref_Quarterman_86">Quart
 </div>
 </div>
 <div class="sect2">
-<h3 id="_dns_design_goals">2.2. DNS design goals</h3>
+<h3 id="errata_1074a">2.2. DNS design goals</h3>
 <div class="paragraph">
 <p>The design goals of the DNS influence its structure.  They are:</p>
 </div>
@@ -1056,7 +1081,7 @@ of the name space, and in particular mechanisms for creating
 and deleting names; these should also be distributed.</p>
 </li>
 <li>
-<p>Where there tradeoffs between the cost of acquiring data, the
+<p>Where <span class="rfc-error-text">there tradeoffs</span> between the cost of acquiring data, the
 speed of updates, and the accuracy of caches, the source of
 the data should control the tradeoff.</p>
 </li>
@@ -1096,11 +1121,11 @@ different ways.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_assumptions_about_usage">2.3. Assumptions about usage</h3>
+<h3 id="sec_2.3">2.3. Assumptions about usage</h3>
 <div class="paragraph">
 <p>The organization of the domain system derives from some assumptions
 about the needs and usage patterns of its user community and is designed
-to avoid many of the the complicated problems found in general purpose
+to avoid many of <span class="rfc-error-text">the the</span> complicated problems found in general purpose
 database systems.</p>
 </div>
 <div class="paragraph">
@@ -1238,7 +1263,7 @@ foreign name servers.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_elements_of_the_dns">2.4. Elements of the DNS</h3>
+<h3 id="sec_2.4">2.4. Elements of the DNS</h3>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">The DNS has three major components: </dt>
@@ -1318,7 +1343,7 @@ concurrently process queries that arrive from resolvers.</p>
 <div class="paragraph">
 <p>In the interests of performance, implementations may couple these
 functions.  For example, a resolver on the same machine as a name server
-might share a database consisting of the the zones managed by the name
+might share a database consisting of <span class="rfc-error-text">the the</span> zones managed by the name
 server and the cache managed by the resolver.</p>
 </div>
 </div>
@@ -1446,7 +1471,7 @@ software which depends on more restrictive choices.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_technical_guidelines_on_use">3.3. Technical guidelines on use</h3>
+<h3 id="errata_564">3.3. Technical guidelines on use</h3>
 <div class="paragraph">
 <p>Before the DNS can be used to hold naming information for some kind of
 object, two needs must be met:</p>
@@ -1479,7 +1504,7 @@ mapping for addresses into the IN-ADDR.ARPA domain is also defined.</p>
 <div class="paragraph">
 <p>For mailboxes, the mapping is slightly more complex.  The usual mail
 address &lt;local-part&gt;@&lt;mail-domain&gt; is mapped into a domain name by
-converting &lt;local-part&gt; into a single label (regardles of dots it
+converting &lt;local-part&gt; into a single label (<span class="rfc-error-text">regardles</span> of dots it
 contains), converting &lt;mail-domain&gt; into a domain name using the usual
 text format for domain names (dots denote label breaks), and
 concatenating the two to form a single domain name.  Thus the mailbox
@@ -1597,7 +1622,7 @@ restrictions on the length.  Labels must be 63 characters or less.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_resource_records">3.6. Resource Records</h3>
+<h3 id="sec_3.6">3.6. Resource Records</h3>
 <div class="paragraph">
 <p>A domain name identifies a node.  Each node has a set of resource
 information, which may be empty.  The set of resource information
@@ -1666,7 +1691,7 @@ MX
 </td>
 <td class="hdlist2">
 <p>identifies a mail exchange for the
-domain.  See [<a href="#ref_RFC-974">RFC-974</a> for details.</p>
+domain.  See <span class="rfc-error-text">[<a href="#ref_RFC-974">RFC-974</a></span> for details.</p>
 </td>
 </tr>
 <tr>
@@ -1957,7 +1982,7 @@ class.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_aliases_and_canonical_names">3.6.2. Aliases and canonical names</h4>
+<h4 id="errata_1074b">3.6.2. Aliases and canonical names</h4>
 <div class="paragraph">
 <p>In existing systems, hosts and other resources often have several names
 that identify the same resource.  For example, the names C.ISI.EDU and
@@ -1990,8 +2015,8 @@ specified in the data field of the CNAME record.  The one exception to
 this rule is that queries which match the CNAME type are not restarted.</p>
 </div>
 <div class="paragraph">
-<p>For example, suppose a name server was processing a query with for USC-
-ISIC.ARPA, asking for type A information, and had the following resource
+<p>For example, suppose a name server was processing a query <span class="rfc-error-text">with for</span>
+USC-ISIC.ARPA, asking for type A information, and had the following resource
 records:</p>
 </div>
 <table class="tableblock frame-all grid-all stripes-none fit-content">
@@ -2130,7 +2155,7 @@ other sections.</p>
 header opcode.</p>
 </div>
 <div class="sect3">
-<h4 id="_standard_queries">3.7.1. Standard queries</h4>
+<h4 id="sec_3.7.1">3.7.1. Standard queries</h4>
 <div class="paragraph">
 <p>A standard query specifies a target domain name (QNAME), query type
 (QTYPE), and query class (QCLASS) and asks for RRs which match.  This
@@ -2224,9 +2249,9 @@ that returns a domain name in a relevant RR may also return the RR that
 binds that domain name to an address.</p>
 </div>
 <div class="paragraph">
-<p>For example, a mailer tying to send mail to <a href="mailto:Mockapetris@ISI.EDU">Mockapetris@ISI.EDU</a> might
+<p><span class="rfc-error-text">For example, a mailer tying to send mail to <a href="mailto:Mockapetris@ISI.EDU">Mockapetris@ISI.EDU</a> might
 ask the resolver for mail information about ISI.EDU, resulting in a
-query for QNAME=ISI.EDU, QTYPE=MX, QCLASS=IN.  The response&#8217;s answer
+query for QNAME=ISI.EDU, QTYPE=MX, QCLASS=IN.</span>  The response&#8217;s answer
 section would be:</p>
 </div>
 <table class="tableblock frame-all grid-all stripes-none fit-content">
@@ -2496,7 +2521,7 @@ cut, and are only used as part of a referral response.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_administrative_considerations">4.2.2. Administrative considerations</h4>
+<h4 id="sec_4.2.2">4.2.2. Administrative considerations</h4>
 <div class="paragraph">
 <p>When some organization wants to control its own domain, the first step
 is to identify the proper parent zone, and get the parent zone&#8217;s owners
@@ -2507,7 +2532,7 @@ deal with top level organization, and middle level zones are free to
 create their own rules.  For example, one university might choose to use
 a single zone, while another might choose to organize by subzones
 dedicated to individual departments or schools.  [<a href="#ref_RFC-1033">RFC-1033</a>] catalogs
-available DNS software an discusses administration procedures.</p>
+available DNS software <span class="rfc-error-text">an</span> discusses administration procedures.</p>
 </div>
 <div class="paragraph">
 <p>Once the proper name for the new subzone is selected, the new owners
@@ -2532,7 +2557,7 @@ glue RRs which mark both sides of the cut are consistent and remain so.</p>
 <div class="sect2">
 <h3 id="_name_server_internals">4.3. Name server internals</h3>
 <div class="sect3">
-<h4 id="_queries_and_responses">4.3.1. Queries and responses</h4>
+<h4 id="errata_565">4.3.1. Queries and responses</h4>
 <div class="paragraph">
 <p>The principal activity of name servers is to answer standard queries.
 Both the query and its response are carried in a standard message format
@@ -2603,7 +2628,7 @@ That is, RA signals availability rather than use.</p>
 </li>
 <li>
 <p>Queries contain a bit called recursion desired or RD.  This
-bit specifies specifies whether the requester wants recursive
+bit <span class="rfc-error-text">specifies specifies</span> whether the requester wants recursive
 service for this query.  Clients may request recursive service
 from any name server, though they should depend upon receiving
 it only from servers which have previously sent an RA, or
@@ -2676,7 +2701,7 @@ requester.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_algorithm">4.3.2. Algorithm</h4>
+<h4 id="errata_4740">4.3.2. Algorithm</h4>
 <div class="paragraph">
 <p>The actual algorithm used by the name server will depend on the local OS
 and data structures used to store RRs.  The following algorithm assumes
@@ -2769,13 +2794,13 @@ section of the response.</p>
 </li>
 <li>
 <p>Using local data only, attempt to add other RRs which may be
-useful to the additional section of the query.  Exit.</p>
+useful to the additional section of the <span class="rfc-error-text">query</span>.  Exit.</p>
 </li>
 </ol>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_wildcards">4.3.3. Wildcards</h4>
+<h4 id="sec_4.3.3">4.3.3. Wildcards</h4>
 <div class="paragraph">
 <p>In the previous algorithm, special treatment was given to RRs with owner
 names starting with the label "*".  Such RRs are called wildcards.
@@ -2816,7 +2841,7 @@ the wildcard defaults.</p>
 </li>
 <li>
 <p>When the query name or a name between the wildcard domain and
-the query name is know to exist.  For example, if a wildcard
+the query name is <span class="rfc-error-text">know</span> to exist.  For example, if a wildcard
 RR has an owner name of "*.X", and the zone also contains RRs
 attached to B.X, the wildcards would apply to queries for name
 Z.X (presuming there is no explicit information for Z.X), but
@@ -2889,7 +2914,7 @@ would match a query name of XX.COM.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_negative_response_caching_optional">4.3.4. Negative response caching (Optional)</h4>
+<h4 id="errata_1074c">4.3.4. Negative response caching (Optional)</h4>
 <div class="paragraph">
 <p>The DNS provides an optional service which allows name servers to
 distribute, and resolvers to cache, negative results with TTLs.  For
@@ -2902,7 +2927,7 @@ of the types are not present.</p>
 </div>
 <div class="paragraph">
 <p>This feature can be particularly important in a system which implements
-naming shorthands that use search lists beacuse a popular shorthand,
+naming shorthands that use search lists <span class="rfc-error-text">beacuse</span> a popular shorthand,
 which happens to require a suffix toward the end of the search list,
 will generate multiple name errors whenever it is used.</p>
 </div>
@@ -2948,7 +2973,7 @@ recommended as yet.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_zone_maintenance_and_transfers">4.3.5. Zone maintenance and transfers</h4>
+<h4 id="errata_4943">4.3.5. Zone maintenance and transfers</h4>
 <div class="paragraph">
 <p>Part of the job of a zone administrator is to maintain the zones at all
 of the name servers which are authoritative for the zone.  When the
@@ -2993,7 +3018,7 @@ the zone.  If the serial field in the secondary&#8217;s zone copy is equal to
 the serial returned by the primary, then no changes have occurred, and
 the REFRESH interval wait is restarted.  If the secondary finds it
 impossible to perform a serial check for the EXPIRE interval, it must
-assume that its copy of the zone is obsolete an discard it.</p>
+assume that its copy of the zone is obsolete <span class="rfc-error-text">an</span> discard it.</p>
 </div>
 <div class="paragraph">
 <p>When the poll shows that the zone has changed, then the secondary server
@@ -3331,7 +3356,7 @@ reclaim the memory consumed by old RRs.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_algorithm_2">5.3.3. Algorithm</h4>
+<h4 id="_algorithm">5.3.3. Algorithm</h4>
 <div class="paragraph">
 <p>The top level algorithm has four steps:</p>
 </div>
@@ -3999,24 +4024,24 @@ server being asked, but would be common for other aliases.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_qnameusc_isic_arpa_qtypecname">6.2.8. QNAME=USC-ISIC.ARPA, QTYPE=CNAME</h4>
+<h4 id="sec_6.2.8">6.2.8. QNAME=USC-ISIC.ARPA, QTYPE=CNAME</h4>
 <div class="paragraph">
 <p>If this query is sent to either A.ISI.EDU or C.ISI.EDU, the reply would
 be:</p>
 </div>
-<div class="literalblock">
+<div class="literalblock rfc-error">
 <div class="content">
-<pre>           +---------------------------------------------------+
+<pre>           ---------------------------------------------------
 Header     | OPCODE=SQUERY, RESPONSE, AA                       |
-           +---------------------------------------------------+
-Question   | QNAME=USC-ISIC.ARPA., QCLASS=IN, QTYPE=A          |
-           +---------------------------------------------------+
+           ---------------------------------------------------
+Question   | QNAME=USC-ISIC.ARPA., QCLASS=IN, <strong>QTYPE=A</strong>          |
+           ---------------------------------------------------
 Answer     | USC-ISIC.ARPA. 86400 IN CNAME      C.ISI.EDU.     |
-           +---------------------------------------------------+
+           ---------------------------------------------------
 Authority  | &lt;empty&gt;                                           |
-           +---------------------------------------------------+
+           ---------------------------------------------------
 Additional | &lt;empty&gt;                                           |
-           +---------------------------------------------------+</pre>
+           ---------------------------------------------------</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4649,6 +4674,602 @@ Stub resolvers   32<br></p>
 <p>Zone transfers   28<br>
 Zones   19<br></p>
 </div>
+<hr>
+<hr>
+<table class="tableblock frame-none grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">END OF THE RFC</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_errata">Errata</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_verified">Verified</h3>
+<div class="sect3">
+<h4 id="_564">564</h4>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Errata ID: <a href="https://www.rfc-editor.org/errata/eid564">564</a><br>
+Status: Verified<br>
+Type: Technical<br>
+Publication Format(s) : TEXT<br>
+Reported By: Chlisin<br>
+Date Reported: 2003-02-06<br></p>
+</div>
+<div class="paragraph">
+<p><a href="#errata_564">Section 3.3</a> says:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>The usual mail address &lt;local-part&gt;@&lt;mail-domain&gt; is mapped into a
+domain name by converting &lt;local-part&gt; into a single label
+(regardles of dots it contains), converting &lt;mail-domain&gt; into a
+domain name using the usual text format for domain names (dots
+denote label breaks), and concatenating the two to form a single
+domain name.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It should say:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>The usual mail address &lt;local-part&gt;@&lt;mail-domain&gt; is mapped into a
+domain name by converting &lt;local-part&gt; into a single label
+(regardles<strong>s</strong> of dots it contains), converting &lt;mail-domain&gt; into a
+domain name using the usual text format for domain names (dots
+denote label breaks), and concatenating the two to form a single
+domain name.</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4740">4740</h4>
+<div class="paragraph">
+<p>Errata ID: <a href="https://www.rfc-editor.org/errata/eid4740">4740</a><br>
+Status: Verified<br>
+Type: Technical<br>
+Publication Format(s) : TEXT<br>
+Reported By: Robert Edmonds<br>
+Date Reported: 2016-07-11<br>
+Verifier Name: Warren Kumari (Ops AD)<br>
+Date Verified: 2018-04-01<br></p>
+</div>
+<div class="paragraph">
+<p><a href="#errata_4740">Section 4.3.2</a> says:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>6. Using local data only, attempt to add other RRs which may be
+   useful to the additional section of the query.  Exit.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It should say:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>6. Using local data only, attempt to add other RRs which may be
+   useful to the additional section of the <strong>response</strong>.  Exit.</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Changed "query" to "response".
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><a href="#errata_4740">Section 4.3.2</a> describes the algorithm used by nameservers to answer queries. I.e.,
+a nameserver receives a query from a client, and then it performs this algorithm
+in order to construct a response to send to the client.</p>
+</div>
+<div class="paragraph">
+<p>Steps 1, 3, and 5 of this algorithm talk about setting fields or bits in the response,
+or about adding resource records to the answer section of the response,
+but then step 6 says to add resource records to the additional section of the <strong>query</strong>.
+This doesn&#8217;t make any sense, because the server is constructing a response to a query that
+it&#8217;s already received. "Response" must have been intended instead.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_565">565</h4>
+<div class="paragraph">
+<p>Errata ID: <a href="https://www.rfc-editor.org/errata/eid565">565</a><br>
+Status: Verified<br>
+Type: Editorial<br>
+Publication Format(s) : TEXT<br>
+Reported By: "Yin Shuming"<br>
+Date Reported: 2006-02-18<br></p>
+</div>
+<div class="paragraph">
+<p><a href="#errata_565">Section 4.3.1</a> says:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>This bit specifies specifies whether the requester wants recursive service
+for this query. Clients may.....</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It should say:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>This bit <strong>specifies</strong> whether the requester wants recursive service for this
+query. Clients may.....</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_1074">1074</h4>
+<div class="paragraph">
+<p>Errata ID: <a href="https://www.rfc-editor.org/errata/eid1074">1074</a><br>
+Status: Verified<br>
+Type: Editorial<br>
+Publication Format(s) : TEXT<br>
+Reported By: John Kristoff<br>
+Date Reported: 2006-03-13<br></p>
+</div>
+<div class="paragraph">
+<p><a href="#errata_1074a">Section 2.2.</a> says:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>  - Where there tradeoffs between the cost of acquiring data, the</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>but should probably say:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>  - Where there <strong>are</strong> tradeoffs between the cost of acquiring data, the</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="#errata_1074b">Section 3.6.2.</a> says:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>  For example, suppose a name server was processing a query with for</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>but should probably simply say:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>  For example, suppose a name server was processing a query <strong>for</strong></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="#errata_1074c">Section 4.3.4.</a> misspells 'because':</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>  This feature can be particularly important in a system which
+  implements naming short shorts that use search lists <strong>beacuse</strong></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It should say:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[see above]
+
+Notes:
+
+from pending</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4943">4943</h4>
+<div class="paragraph">
+<p>Errata ID: <a href="https://www.rfc-editor.org/errata/eid4943">4943</a><br>
+Status: Verified<br>
+Type: Editorial<br>
+Publication Format(s) : TEXT<br>
+Reported By: Shane Kerr<br>
+Date Reported: 2017-02-20<br>
+Verifier Name: Terry Manderson<br>
+Date Verified: 2017-03-01<br></p>
+</div>
+<div class="paragraph">
+<p><a href="#errata_4943">Section 4.3.5.</a> says:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>it must assume that its copy of the zone is obsolete <strong>an</strong> discard it.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It should say:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>it must assume that its copy of the zone is obsolete <strong>and</strong> discard it.</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Fix typo; "an" should be "and".
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_held_for_document_update">Held for Document Update</h3>
+<div class="sect3">
+<h4 id="_755">755</h4>
+<div class="paragraph">
+<p>Errata ID: <a href="https://www.rfc-editor.org/errata/eid755">755</a><br>
+Status: Held for Document Update<br>
+Type: Technical<br>
+Publication Format(s) : TEXT<br>
+Reported By: John Kristoff<br>
+Date Reported: 2006-03-13<br>
+Held for Document Update by: Brian Haberman<br>
+Date Held: 2012-04-26<br></p>
+</div>
+<div class="paragraph">
+<p>Section 6.1. ends this way:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Relative and absolute domain names may be freely intermixed in a master</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>which is incomplete.  It&#8217;s unclear exactly how that sentence may have
+been intended to end, but minimally I would suggeste it at least
+terminated with 'file.'.</p>
+</div>
+<div class="paragraph">
+<p>Section <a href="#sec_6.2.8">6.2.8</a>. in the diagram shows</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>'QTYPE=A'</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>but should be of type</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>'CNAME'</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>based on the context of the example.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_5316">5316</h4>
+<div class="paragraph">
+<p>Errata ID: <a href="https://www.rfc-editor.org/errata/eid5316">5316</a><br>
+Status: Held for Document Update<br>
+Type: Technical<br>
+Publication Format(s) : TEXT<br>
+Reported By: Mukund Sivaraman<br>
+Date Reported: 2018-03-31<br>
+Held for Document Update by: Warren Kumari (Ops AD)<br>
+Date Held: 2018-04-09<br></p>
+</div>
+<div class="paragraph">
+<p>Section 4.3.3 says:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>A * label appearing in a query name has no special effect, but can be
+used to test for wildcards in an authoritative zone; such a query is the
+only way to get a response containing RRs with an owner name with * in
+it.  The result of such a query should not be <strong>cached</strong>.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It should say:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>A * label appearing in a query name has no special effect, but can be
+used to test for wildcards in an authoritative zone; such a query is the
+only way to get a response containing RRs with an owner name with * in
+it.  The result of such a query should not be <strong>used to synthesize RRs</strong>.</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>It is perfectly OK for an RR with a wildcard label '*' to be cached as long as it&#8217;s not used to synthesize any RRs on a caching resolver. The DNS implementations BIND and Unbound both cache such RRsets with wildcard label in the owner name.</p>
+</div>
+<div class="paragraph">
+<p>WK (OpsAD): Please see thread <a href="https://www.ietf.org/mail-archive/web/dnsop/current/msg22563.html" class="bare">https://www.ietf.org/mail-archive/web/dnsop/current/msg22563.html</a> for additional information.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4270">4270</h4>
+<div class="paragraph">
+<p>Errata ID: <a href="https://www.rfc-editor.org/errata/eid4270">4270</a>
+Status: Held for Document Update<br>
+Type: Editorial<br>
+Publication Format(s) : TEXT<br>
+Reported By: Jean-Philippe Paradis<br>
+Date Reported: 2015-02-12<br>
+Held for Document Update by: Ted Lemon<br>
+Date Held: 2015-02-12<br></p>
+</div>
+<div class="paragraph">
+<p>Section <a href="#sec_2.4">2.4</a> says:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>In the interests of performance, implementations may couple these
+functions.  For example, a resolver on the same machine as a name server
+might share a database consisting of <strong>the the</strong> zones managed by the name
+server and the cache managed by the resolver.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It should say:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>In the interests of performance, implementations may couple these
+functions.  For example, a resolver on the same machine as a name server
+might share a database consisting of <strong>the</strong> zones managed by the name
+server and the cache managed by the resolver.</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Just a duplicate "the".
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4269">4269</h4>
+<div class="paragraph">
+<p>Errata ID: <a href="https://www.rfc-editor.org/errata/eid4269">4269</a><br>
+Status: Held for Document Update<br>
+Type: Editorial<br>
+Publication Format(s) : TEXT<br>
+Reported By: Jean-Philippe Paradis<br>
+Date Reported: 2015-02-12<br>
+Held for Document Update by: Ted Lemon<br>
+Date Held: 2015-02-12<br></p>
+</div>
+<div class="paragraph">
+<p>Section <a href="#sec_2.3">2.3</a> says:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>The organization of the domain system derives from some assumptions
+about the needs and usage patterns of its user community and is designed
+to avoid many of <strong>the the</strong> complicated problems found in general purpose
+database systems.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It should say:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>The organization of the domain system derives from some assumptions
+about the needs and usage patterns of its user community and is designed
+to avoid many of <strong>the</strong> complicated problems found in general purpose
+database systems.</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Just a duplicate "the".
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4229">4229</h4>
+<div class="paragraph">
+<p>Errata ID: <a href="https://www.rfc-editor.org/errata/eid4229">4229</a><br>
+Status: Held for Document Update<br>
+Type: Editorial<br>
+Publication Format(s) : TEXT<br>
+Reported By: Sun Congyou<br>
+Date Reported: 2015-01-11<br>
+Held for Document Update by: Ted Lemon<br>
+Date Held: 2015-01-14<br></p>
+</div>
+<div class="paragraph">
+<p>Section <a href="#sec_4.2.2">4.2.2</a> says:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[RFC-1033] catalogs available DNS software <strong>an</strong> discusses administration
+procedures.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It should say:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[RFC-1033] catalogs available DNS software <strong>and</strong> discusses administration
+procedures.</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4230">4230</h4>
+<div class="paragraph">
+<p>Errata ID: <a href="https://www.rfc-editor.org/errata/eid4230">4230</a><br>
+Status: Held for Document Update<br>
+Type: Editorial<br>
+Publication Format(s) : TEXT<br>
+Reported By: Sun Congyou<br>
+Date Reported: 2015-01-11<br>
+Held for Document Update by: Ted Lemon<br>
+Date Held: 2015-01-14<br></p>
+</div>
+<div class="paragraph">
+<p>Section <a href="#sec_4.3.3">4.3.3</a> says:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>- When the query name or a name between the wildcard domain and
+  the query name is <strong>know</strong> to exist.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It should say:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>- When the query name or a name between the wildcard domain and
+  the query name is <strong>known</strong> to exist.</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4511">4511</h4>
+<div class="paragraph">
+<p>Errata ID: <a href="https://www.rfc-editor.org/errata/eid4511">4511</a><br>
+Status: Held for Document Update<br>
+Type: Editorial<br>
+Publication Format(s) : TEXT<br>
+Reported By: Han Ge Xin<br>
+Date Reported: 2015-10-23<br>
+Held for Document Update by: Terry Manderson<br>
+Date Held: 2015-11-01<br></p>
+</div>
+<div class="paragraph">
+<p>Section <a href="#sec_3.6">3.6</a> says:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>identifies a mail exchange for the domain. See <strong>[RFC-974</strong> for details.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It should say:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>identifies a mail exchange for the domain. See [RFC-974] for details.</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Just missing the "]"
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4893">4893</h4>
+<div class="paragraph">
+<p>Errata ID: <a href="https://www.rfc-editor.org/errata/eid4893">4893</a><br>
+Status: Held for Document Update<br>
+Type: Editorial<br>
+Publication Format(s) : TEXT<br>
+Reported By: anonymous<br>
+Date Reported: 2016-12-22<br>
+Held for Document Update by: Warren Kumari (Ops AD)<br>
+Date Held: 2018-04-01<br></p>
+</div>
+<div class="paragraph">
+<p>Section <a href="#sec_3.7.1">3.7.1</a> says:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>For example, a mailer tying to send mail to <a href="mailto:Mockapetris@ISI.EDU">Mockapetris@ISI.EDU</a> might
+ask the resolver for mail information about ISI.EDU, resulting in a
+query for QNAME=ISI.EDU, QTYPE=MX, QCLASS=IN.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It should say:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>For example, a mailer trying to send mail to <a href="mailto:Mockapetris@ISI.EDU">Mockapetris@ISI.EDU</a> might
+ask the resolver for mail information about ISI.EDU, resulting in a
+query for QNAME=ISI.EDU, QTYPE=MX, QCLASS=IN.</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Trying, not tying.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -4662,7 +5283,7 @@ Zones   19<br></p>
 <div id="footer">
     <div id="footer-text">
        <a href="https://gris8.github.io/betterfc" style="color:yellow">BetteRFC</a>
-       document v1.0 created with
+       document v1.1 created with
        <a href="https://www.asciidoctor.org" style="color:yellow">Asciidoctor</a>
        v2.0.11.dev
     </div>
