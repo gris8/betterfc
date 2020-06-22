@@ -2729,7 +2729,7 @@ Zones   19 +
 
 ==== 564
 
-====
+=====
 Errata ID: https://www.rfc-editor.org/errata/eid564[564] +
 Status: Verified +
 Type: Technical +
@@ -2761,9 +2761,11 @@ domain name using the usual text format for domain names (dots
 denote label breaks), and concatenating the two to form a single
 domain name.
 ....
-====
+=====
 
 ==== 4740
+
+=====
 Errata ID: https://www.rfc-editor.org/errata/eid4740[4740] +
 Status: Verified +
 Type: Technical +
@@ -2800,9 +2802,11 @@ or about adding resource records to the answer section of the response,
 but then step 6 says to add resource records to the additional section of the *query*.
 This doesn't make any sense, because the server is constructing a response to a query that
 it's already received. "Response" must have been intended instead.
+=====
 
 ==== 565
 
+=====
 Errata ID: https://www.rfc-editor.org/errata/eid565[565] +
 Status: Verified +
 Type: Editorial +
@@ -2825,10 +2829,12 @@ It should say:
 This bit pass:quotes[*specifies*] whether the requester wants recursive service for this
 query. Clients may.....
 ....
+=====
 
 
 ==== 1074
 
+=====
 Errata ID: https://www.rfc-editor.org/errata/eid1074[1074] +
 Status: Verified +
 Type: Editorial +
@@ -2881,10 +2887,12 @@ Notes:
 
 from pending
 ....
+=====
 
 
 ==== 4943
 
+=====
 Errata ID: https://www.rfc-editor.org/errata/eid4943[4943] +
 Status: Verified +
 Type: Editorial +
@@ -2909,11 +2917,13 @@ it must assume that its copy of the zone is obsolete pass:quotes[*and*] discard 
 ....
 
 NOTE: Fix typo; "an" should be "and".
+=====
 
 === Held for Document Update
 
 ==== 755
 
+=====
 Errata ID: https://www.rfc-editor.org/errata/eid755[755] +
 Status: Held for Document Update +
 Type: Technical +
@@ -2947,10 +2957,12 @@ but should be of type
 ....
 
 based on the context of the example.
+=====
 
 
 ==== 5316
 
+=====
 Errata ID: https://www.rfc-editor.org/errata/eid5316[5316] +
 Status: Held for Document Update +
 Type: Technical +
@@ -2987,9 +2999,12 @@ It is perfectly OK for an RR with a wildcard label '*' to be cached as long as i
 WK (OpsAD): Please see thread https://www.ietf.org/mail-archive/web/dnsop/current/msg22563.html for additional information.
 ====
 
+=====
+
 
 ==== 4270
 
+=====
 Errata ID: https://www.rfc-editor.org/errata/eid4270[4270]
 Status: Held for Document Update +
 Type: Editorial +
@@ -3020,10 +3035,12 @@ server and the cache managed by the resolver.
 ....
 
 NOTE: Just a duplicate "the".
+=====
 
 
 ==== 4269
 
+=====
 Errata ID: https://www.rfc-editor.org/errata/eid4269[4269] +
 Status: Held for Document Update +
 Type: Editorial +
@@ -3054,10 +3071,12 @@ database systems.
 ....
 
 NOTE: Just a duplicate "the".
+=====
 
 
 ==== 4229
 
+=====
 Errata ID: https://www.rfc-editor.org/errata/eid4229[4229] +
 Status: Held for Document Update +
 Type: Editorial +
@@ -3082,10 +3101,12 @@ It should say:
 [RFC-1033] catalogs available DNS software pass:quotes[*and*] discusses administration
 procedures.
 ....
+=====
 
 
 ==== 4230
 
+=====
 Errata ID: https://www.rfc-editor.org/errata/eid4230[4230] +
 Status: Held for Document Update +
 Type: Editorial +
@@ -3110,10 +3131,12 @@ It should say:
 - When the query name or a name between the wildcard domain and
   the query name is pass:quotes[*known*] to exist.
 ....
+=====
 
 
 ==== 4511
 
+=====
 Errata ID: https://www.rfc-editor.org/errata/eid4511[4511] +
 Status: Held for Document Update +
 Type: Editorial +
@@ -3140,9 +3163,12 @@ identifies a mail exchange for the domain. See [RFC-974] for details.
 
 NOTE:  Just missing the "]"
 
+=====
+
 
 ==== 4893
 
+=====
 Errata ID: https://www.rfc-editor.org/errata/eid4893[4893] +
 Status: Held for Document Update +
 Type: Editorial +
@@ -3171,4 +3197,5 @@ query for QNAME=ISI.EDU, QTYPE=MX, QCLASS=IN.
 ....
 
 NOTE: Trying, not tying.
+=====
 
