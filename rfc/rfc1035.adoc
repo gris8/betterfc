@@ -2745,10 +2745,6 @@ WKS   12
 
 == Errata
 
-ciao andrea
-bla bla
-xxx
-
 === Verified
 
 ==== 562
