@@ -49,6 +49,7 @@ I will slowly port other RFC, asymptotically one day ... all icon:smile-o[role="
 | {RFC_PATH}rfc792.html[792]   | INTERNET CONTROL MESSAGE PROTOCOL
 | {RFC_PATH}rfc814.html[814]   | NAME, ADDRESSES, PORTS, AND ROUTES
 | {RFC_PATH}rfc1034.html[1034] | DOMAIN NAMES - CONCEPTS AND FACILITIES
+| {RFC_PATH}rfc1034.html[1035] | DOMAIN NAMES - IMPLEMENTATION AND SPECIFICATION
 | {RFC_PATH}rfc1350.html[1350] | THE TFTP PROTOCOL (REVISION 2)
 | {RFC_PATH}rfc3549.html[3549] | Linux Netlink as an IP Services Protocol
 | {RFC_PATH}rfc6762.html[6762] | Multicast DNS
