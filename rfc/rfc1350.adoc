@@ -1,4 +1,4 @@
-:revnumber: 1.0
+:revnumber: 1.1
 
 include::header.adoc[]
 
@@ -15,7 +15,7 @@ include::header.adoc[]
 
 [frame=none, cols="^", width="99%"]
 |===
-|                     THE TFTP PROTOCOL (REVISION 2)
+|                     [big]#THE TFTP PROTOCOL (REVISION 2)#
 |===
 
 // it disables the section numbering

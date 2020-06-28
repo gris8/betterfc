@@ -1,4 +1,4 @@
-:revnumber: 1.0
+:revnumber: 1.1
 
 include::header.adoc[]
 
@@ -21,7 +21,7 @@ include::header.adoc[]
 
 [frame=none, cols="^", width="99%"]
 |===
-|               Linux Netlink as an IP Services Protocol
+|               [big]#Linux Netlink as an IP Services Protocol#
 |===
 
 // it disables the section numbering
