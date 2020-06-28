@@ -36,7 +36,7 @@ It isn't necessary to know anything about HTML and CSS. You can install https://
 
 == The future
 
-I will slowly port other RFC, asymptotically one day ... all icon:smile-o[role="blue"]
+I am currently working on other RFC. If the document you are looking for is not listed below you can contact me via https://github.com/gris8/betterfc[github] and I'll try to prioritize it.
 
 
 == List of the RFC
