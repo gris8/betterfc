@@ -828,12 +828,12 @@ pre.pygments.highlight { background-color: rgba(16, 195, 196, 0.05); }
 <ul class="sectlevel3">
 <li><a href="#_options_variable">3.1.1. Options:  variable</a>
 <ul class="sectlevel4">
-<li><a href="#_no_operation">No Operation</a></li>
-<li><a href="#_security">Security</a></li>
-<li><a href="#_security_s_field_16_bits">Security (S field):  16 bits</a></li>
-<li><a href="#_compartments_c_field_16_bits">Compartments (C field):  16 bits</a></li>
-<li><a href="#_handling_restrictions_h_field_16_bits">Handling Restrictions (H field):  16 bits</a></li>
-<li><a href="#_transmission_control_code_tcc_field_24_bits">Transmission Control Code (TCC field):  24 bits</a></li>
+<li><a href="#_no_operation">3.1.1.1. No Operation</a></li>
+<li><a href="#_security">3.1.1.2. Security</a></li>
+<li><a href="#_security_s_field_16_bits">3.1.1.3. Security (S field):  16 bits</a></li>
+<li><a href="#_compartments_c_field_16_bits">3.1.1.4. Compartments (C field):  16 bits</a></li>
+<li><a href="#_handling_restrictions_h_field_16_bits">3.1.1.5. Handling Restrictions (H field):  16 bits</a></li>
+<li><a href="#_transmission_control_code_tcc_field_24_bits">3.1.1.6. Transmission Control Code (TCC field):  24 bits</a></li>
 </ul>
 </li>
 <li><a href="#_loose_source_and_record_route">3.1.2. Loose Source and Record Route</a></li>
@@ -842,7 +842,7 @@ pre.pygments.highlight { background-color: rgba(16, 195, 196, 0.05); }
 <li><a href="#errata_716">3.1.5. Stream Identifier</a></li>
 <li><a href="#_internet_timestamp">3.1.6. Internet Timestamp</a>
 <ul class="sectlevel4">
-<li><a href="#_padding_variable">Padding:  variable</a></li>
+<li><a href="#_padding_variable">3.1.6.1. Padding:  variable</a></li>
 </ul>
 </li>
 </ul>
@@ -852,8 +852,8 @@ pre.pygments.highlight { background-color: rgba(16, 195, 196, 0.05); }
 <li><a href="#_addressing_2">3.2.1. Addressing</a></li>
 <li><a href="#_fragmentation_and_reassembly">3.2.2. Fragmentation and Reassembly.</a>
 <ul class="sectlevel4">
-<li><a href="#_an_example_fragmentation_procedure">An Example Fragmentation Procedure</a></li>
-<li><a href="#_an_example_reassembly_procedure">An Example Reassembly Procedure</a></li>
+<li><a href="#_an_example_fragmentation_procedure">3.2.2.1. An Example Fragmentation Procedure</a></li>
+<li><a href="#_an_example_reassembly_procedure">3.2.2.2. An Example Reassembly Procedure</a></li>
 </ul>
 </li>
 <li><a href="#_identification">3.2.3. Identification</a></li>
@@ -1940,7 +1940,7 @@ of the internet header.</p>
 any other reason.</p>
 </div>
 <div class="sect4">
-<h5 id="_no_operation">No Operation</h5>
+<h5 id="_no_operation">3.1.1.1. No Operation</h5>
 <div class="literalblock">
 <div class="content">
 <pre>+--------+
@@ -1959,7 +1959,7 @@ any other reason.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_security">Security</h5>
+<h5 id="_security">3.1.1.2. Security</h5>
 <div class="paragraph">
 <p>This option provides a way for hosts to send security,
 compartmentation, handling restrictions, and TCC (closed user
@@ -1975,7 +1975,7 @@ group) parameters.  The format for this option is as follows:</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_security_s_field_16_bits">Security (S field):  16 bits</h5>
+<h5 id="_security_s_field_16_bits">3.1.1.3. Security (S field):  16 bits</h5>
 <div class="paragraph">
 <p>Specifies one of 16 levels of security (eight of which are
 reserved for future use).</p>
@@ -2114,7 +2114,7 @@ reserved for future use).</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_compartments_c_field_16_bits">Compartments (C field):  16 bits</h5>
+<h5 id="_compartments_c_field_16_bits">3.1.1.4. Compartments (C field):  16 bits</h5>
 <div class="paragraph">
 <p>an all zero value is used when the information transmitted is
 not compartmented.  other values for the compartments field
@@ -2122,7 +2122,7 @@ may be obtained from the defense intelligence agency.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_handling_restrictions_h_field_16_bits">Handling Restrictions (H field):  16 bits</h5>
+<h5 id="_handling_restrictions_h_field_16_bits">3.1.1.5. Handling Restrictions (H field):  16 bits</h5>
 <div class="paragraph">
 <p>The values for the control and release markings are
 alphanumeric digraphs and are defined in the Defense
@@ -2131,7 +2131,7 @@ Markings".</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_transmission_control_code_tcc_field_24_bits">Transmission Control Code (TCC field):  24 bits</h5>
+<h5 id="_transmission_control_code_tcc_field_24_bits">3.1.1.6. Transmission Control Code (TCC field):  24 bits</h5>
 <div class="paragraph">
 <p>Provides a means to segregate traffic and define controlled
 communities of interest among subscribers. The TCC values are
@@ -2448,7 +2448,7 @@ carried in the first fragment.  Appears at most once in a
 datagram.</p>
 </div>
 <div class="sect4">
-<h5 id="_padding_variable">Padding:  variable</h5>
+<h5 id="_padding_variable">3.1.6.1. Padding:  variable</h5>
 <div class="paragraph">
 <p>The internet header padding is used to ensure that the internet
 header ends on a 32 bit boundary.  The padding is zero.</p>
@@ -2677,7 +2677,7 @@ than or equal", "#" means "not equal", "=" means "equal", "&#8592;" means
 "4 to 7" would include 4, 5, and 6 (but not 7).</p>
 </div>
 <div class="sect4">
-<h5 id="_an_example_fragmentation_procedure">An Example Fragmentation Procedure</h5>
+<h5 id="_an_example_fragmentation_procedure">3.2.2.1. An Example Fragmentation Procedure</h5>
 <div class="paragraph">
 <p>The maximum sized datagram that can be transmitted through the
 next network is called the maximum transmission unit (MTU).</p>
@@ -2825,7 +2825,7 @@ transmission unit size.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_an_example_reassembly_procedure">An Example Reassembly Procedure</h5>
+<h5 id="_an_example_reassembly_procedure">3.2.2.2. An Example Reassembly Procedure</h5>
 <div class="paragraph">
 <p>For each datagram the buffer identifier is computed as the
 concatenation of the source, destination, protocol, and
@@ -4402,12 +4402,16 @@ Date Held: 2014-10-21</p>
 </div>
 </div>
 <div id="footer">
-    <div id="footer-text">
-       <a href="https://gris8.github.io/betterfc" style="color:yellow">BetteRFC</a>
-       document v1.0 created with
-       <a href="https://www.asciidoctor.org" style="color:yellow">Asciidoctor</a>
-       v2.0.11.dev
-    </div>
+   <div id="footer-text">
+
+		<p style="text-align:left;">
+		<a href="https://betterfc.org"  align="right" style="color:yellow">BetteRFC</a> document v1.0
+		<span style="float:right;">
+			<a href="https://github.com/gris8/betterfc" align="left"  style="color:yellow">Source Project</a>
+		</span>
+		</p>
+
+   </div>
 </div>
 </body>
 </html>
