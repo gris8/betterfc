@@ -1,4 +1,5 @@
-:RFC_PATH: link:https://gris8.github.io/betterfc
+//:RFC_PATH: link:https://gris8.github.io/betterfc
+:RFC_PATH: link:https://betterfc.org
 
 = BetteRFC
 
