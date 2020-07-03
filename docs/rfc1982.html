@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.11.dev">
-<title>BetteRFC</title>
+<title>RFC 1982</title>
 <style>
 @import url(https://fonts.googleapis.com/css?family=Varela+Round|Open+Sans:400italic,600italic,400,600|Ubuntu+Mono:400);
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
@@ -757,125 +757,604 @@ pre.pygments.highlight { background-color: rgba(16, 195, 196, 0.05); }
 
   gtag('config', 'UA-158925429-1');
 </script>
-</head>
-<body class="article">
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@5/dist/gumshoe.polyfills.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.js"></script>
+<script>
+   jQuery(function () {
+      var scrollspy = new Gumshoe('#toc li > a', {
+         nested: false
+      });
+      document.addEventListener('gumshoeActivate', function (event) {
+         jQuery('#toc')
+            .stop()
+            .scrollTo(event.detail.link, 500, {
+               offset: {
+                  top:  0 - jQuery('#toc').height() / 2,
+                  left: 0,
+               }
+            });
+      }, false);
+   });
+</script>
+
+<style>
+   #toc li.active > a {
+      font-weight: bold;
+      text-decoration: underline;
+         <!-- font-style: italic; -->
+   }
+
+  #toc li a {
+     display: inline-block;
+  }
+</style>
+
 <div id="header">
-<h1>BetteRFC</h1>
+   <div style="text-align:center"> <b> This isn’t the official RFC, please refer to the IETF website for the official RFC. Errors & omissions excepted </b> </div>
+</div>
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1>RFC 1982</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_status_of_this_memo">Status of this Memo</a></li>
+<li><a href="#_abstract">Abstract</a></li>
+<li><a href="#_introduction">1. Introduction</a></li>
+<li><a href="#_serial_number_arithmetic">2. Serial Number Arithmetic</a></li>
+<li><a href="#_operations_upon_the_serial_number">3. Operations upon the serial number</a>
+<ul class="sectlevel2">
+<li><a href="#_addition">3.1. Addition</a></li>
+<li><a href="#_comparison">3.2. Comparison</a></li>
+</ul>
+</li>
+<li><a href="#_corollaries">4. Corollaries</a>
+<ul class="sectlevel2">
+<li><a href="#_corollary_1">4.1. Corollary 1</a></li>
+<li><a href="#_corollary_2">4.2. Corollary 2</a></li>
+<li><a href="#_corollary_3">4.3. Corollary 3</a></li>
+<li><a href="#_corollary_4">4.4. Corollary 4</a></li>
+</ul>
+</li>
+<li><a href="#_examples">5. Examples</a>
+<ul class="sectlevel2">
+<li><a href="#_a_trivial_example">5.1. A trivial example</a></li>
+<li><a href="#_a_slightly_larger_example">5.2. A slightly larger example</a></li>
+</ul>
+</li>
+<li><a href="#_citation">6. Citation</a></li>
+<li><a href="#_the_dns_soa_serial_number">7. The DNS SOA serial number</a></li>
+<li><a href="#_document_updates">8. Document Updates</a></li>
+<li><a href="#_security_considerations">9. Security Considerations</a></li>
+<li><a href="#_references">References</a></li>
+<li><a href="#_acknowledgements">Acknowledgements</a></li>
+<li><a href="#_authors_addresses">Authors' Addresses</a></li>
+</ul>
+</div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_introduction">Introduction</h2>
+<div id="preamble">
 <div class="sectionbody">
-<div class="paragraph">
-<p>BetteRFC is a project whose purpose is to make the RFC easier to read by creating HTML documents from the original plain ASCII format.
-The lack of any kind of tag or structure in the RFC documents makes it impossible to automate the process and it requires  manual intervention.
-Thankfully <a href="https://asciidoctor.org">Asciidoctor</a> now makes this process quite easy and fast.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_what_to_expect">What to expect</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>The documents take advantage of the CSS which enables them to be displayed clearly on screens of different sizes (tablet, phone, etc.)</p>
-</li>
-<li>
-<p>A table of contents is included which easily identifies parts of the document.</p>
-</li>
-<li>
-<p>RFC and <a href="https://en.wikipedia.org/wiki/Erratum">errata</a> are listed on the same page.</p>
-</li>
-<li>
-<p>The parts of the document that have an errata associated are highlighted with a different background color. E.g: the RFC791 section 3.1 has the <a href="https://www.rfc-editor.org/errata/eid716">errata 716</a> associated :</p>
-<div class="literalblock rfc-error">
-<div class="content">
-<pre>--------------------------------+
-|10001000|00000<strong>010</strong>|  Stream ID  |
---------------------------------+
-Type=136 Length=4</pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_how_to_contribute">How to contribute</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>It isn&#8217;t necessary to know anything about HTML and CSS. You can install <a href="https://asciidoctor.org">Asciidoctor</a> for Windows with <a href="https://chocolatey.org">chocolatey</a> or for Linux with the packet manager provided by your distribution or eventually from the <a href="https://github.com/asciidoctor/asciidoctor">source code</a>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_the_future">The future</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>I am currently working on other RFC. If the document you are looking for is not listed below you can contact me via <a href="https://github.com/gris8/betterfc">github</a> and I&#8217;ll try to prioritize it.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_list_of_the_rfc">List of the RFC</h2>
-<div class="sectionbody">
-<table class="tableblock frame-all grid-all stretch">
+<table class="tableblock frame-none grid-all stripes-none" style="width: 99%;">
 <colgroup>
-<col style="width: 1%;">
-<col>
+<col style="width: 50%;">
+<col style="width: 50%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">RFC</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc791.html">791</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">INTERNET PROTOCOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Network Working Group</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">R. Elz</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc792.html">792</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">INTERNET CONTROL MESSAGE PROTOCOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Request for Comments: 1982</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">University of Melbourne</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc814.html">814</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">NAME, ADDRESSES, PORTS, AND ROUTES</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Updates: 1034, 1035</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">R. Bush</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc1034.html">1034</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">DOMAIN NAMES - CONCEPTS AND FACILITIES</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Category: Standards Track</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">RGnet, Inc.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc1035.html">1035</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">DOMAIN NAMES - IMPLEMENTATION AND SPECIFICATION</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">August 1996</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-none grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><span class="big">Serial Number Arithmetic</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_status_of_this_memo">Status of this Memo</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document specifies an Internet standards track protocol for the
+Internet community, and requests discussion and suggestions for
+improvements.  Please refer to the current edition of the "Internet
+Official Protocol Standards" (STD 1) for the standardization state
+and status of this protocol.  Distribution of this memo is unlimited.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_abstract">Abstract</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This memo defines serial number arithmetic, as used in the Domain
+Name System.  The DNS has long relied upon serial number arithmetic,
+a concept which has never really been defined, certainly not in an
+IETF document, though which has been widely understood.  This memo
+supplies the missing definition.  It is intended to update <a href="#ref_RFC1034">RFC1034</a>
+and <a href="#ref_RFC1035">RFC1035</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_introduction">1. Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The serial number field of the SOA resource record is defined in
+<a href="#ref_RFC1035">RFC1035</a> as</p>
+</div>
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+SERIAL 
+</td>
+<td class="hdlist2">
+<p>The unsigned 32 bit version number of the original copy of
+the zone.  Zone transfers preserve this value.  This value
+wraps and should be compared using sequence space
+arithmetic.</p>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><a href="#ref_RFC1034">RFC1034</a> uses the same terminology when defining secondary server zone
+consistency procedures.</p>
+</div>
+<div class="paragraph">
+<p>Unfortunately the term "sequence space arithmetic" is not defined in
+either <a href="#ref_RFC1034">RFC1034</a> or <a href="#ref_RFC1035">RFC1035</a>, nor do any of their references provide
+further information.</p>
+</div>
+<div class="paragraph">
+<p>This phrase seems to have been intending to specify arithmetic as
+used in TCP sequence numbers [<a href="#ref_RFC793">RFC793</a>], and defined in [<a href="#ref_IEN-74">IEN-74</a>].</p>
+</div>
+<div class="paragraph">
+<p>Unfortunately, the arithmetic defined in [<a href="#ref_IEN-74">IEN-74</a>] is not adequate for
+the purposes of the DNS, as no general comparison operator is
+defined.</p>
+</div>
+<div class="paragraph">
+<p>To avoid further problems with this simple field, this document
+defines the field and the operations available upon it.  This
+definition is intended merely to clarify the intent of <a href="#ref_RFC1034">RFC1034</a> and
+<a href="#ref_RFC1035">RFC1035</a>, and is believed to generally agree with current
+implementations.  However, older, superseded, implementations are
+known to have treated the serial number as a simple unsigned integer,
+with no attempt to implement any kind of "sequence space arithmetic",
+however that may have been interpreted, and further, ignoring the
+requirement that the value wraps.  Nothing can be done with these
+implementations, beyond extermination.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_serial_number_arithmetic">2. Serial Number Arithmetic</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Serial numbers are formed from non-negative integers from a finite
+subset of the range of all integer values.  The lowest integer in
+every subset used for this purpose is zero, the maximum is always one
+less than a power of two.</p>
+</div>
+<div class="paragraph">
+<p>When considered as serial numbers however no value has any particular
+significance, there is no minimum or maximum serial number, every
+value has a successor and predecessor.</p>
+</div>
+<div class="paragraph">
+<p>To define a serial number to be used in this way, the size of the
+serial number space must be given.  This value, called "SERIAL_BITS",
+gives the power of two which results in one larger than the largest
+integer corresponding to a serial number value.  This also specifies
+the number of bits required to hold every possible value of a serial
+number of the defined type.  The operations permitted upon serial
+numbers are defined in the following section.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_operations_upon_the_serial_number">3. Operations upon the serial number</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Only two operations are defined upon serial numbers, addition of a
+positive integer of limited range, and comparison with another serial
+number.</p>
+</div>
+<div class="sect2">
+<h3 id="_addition">3.1. Addition</h3>
+<div class="paragraph">
+<p>Serial numbers may be incremented by the addition of a positive
+integer n, where n is taken from the range of integers
+[0 .. (2^(SERIAL_BITS - 1) - 1)].  For a sequence number s, the
+result of such an addition, s', is defined as</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>s' = (s + n) modulo (2 ^ SERIAL_BITS)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>where the addition and modulus operations here act upon values that
+are non-negative values of unbounded size in the usual ways of
+integer arithmetic.</p>
+</div>
+<div class="paragraph">
+<p>Addition of a value outside the range
+[0 .. (2^(SERIAL_BITS - 1) - 1)] is undefined.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_comparison">3.2. Comparison</h3>
+<div class="paragraph">
+<p>Any two serial numbers, s1 and s2, may be compared.  The definition
+of the result of this comparison is as follows.</p>
+</div>
+<div class="paragraph">
+<p>For the purposes of this definition, consider two integers, i1 and
+i2, from the unbounded set of non-negative integers, such that i1 and
+s1 have the same numeric value, as do i2 and s2.  Arithmetic and
+comparisons applied to i1 and i2 use ordinary unbounded integer
+arithmetic.</p>
+</div>
+<div class="paragraph">
+<p>Then, s1 is said to be equal to s2 if and only if i1 is equal to i2,
+in all other cases, s1 is not equal to s2.</p>
+</div>
+<div class="paragraph">
+<p>s1 is said to be less than s2 if, and only if, s1 is not equal to s2,
+and</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>(i1 &lt; i2 and i2 - i1 &lt; 2^(SERIAL_BITS - 1)) or
+(i1 &gt; i2 and i1 - i2 &gt; 2^(SERIAL_BITS - 1))</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>s1 is said to be greater than s2 if, and only if, s1 is not equal to
+s2, and</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>(i1 &lt; i2 and i2 - i1 &gt; 2^(SERIAL_BITS - 1)) or
+(i1 &gt; i2 and i1 - i2 &lt; 2^(SERIAL_BITS - 1))</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that there are some pairs of values s1 and s2 for which s1 is
+not equal to s2, but for which s1 is neither greater than, nor less
+than, s2.  An attempt to use these ordering operators on such pairs
+of values produces an undefined result.</p>
+</div>
+<div class="paragraph">
+<p>The reason for this is that those pairs of values are such that any
+simple definition that were to define s1 to be less than s2 where
+(s1, s2) is such a pair, would also usually cause s2 to be less than
+s1, when the pair is (s2, s1).  This would mean that the particular
+order selected for a test could cause the result to differ, leading
+to unpredictable implementations.</p>
+</div>
+<div class="paragraph">
+<p>While it would be possible to define the test in such a way that the
+inequality would not have this surprising property, while being
+defined for all pairs of values, such a definition would be
+unnecessarily burdensome to implement, and difficult to understand,
+and would still allow cases where</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>s1 &lt; s2 and (s1 + 1) &gt; (s2 + 1)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>which is just as non-intuitive.</p>
+</div>
+<div class="paragraph">
+<p>Thus the problem case is left undefined, implementations are free to
+return either result, or to flag an error, and users must take care
+not to depend on any particular outcome.  Usually this will mean
+avoiding allowing those particular pairs of numbers to co-exist.</p>
+</div>
+<div class="paragraph">
+<p>The relationships greater than or equal to, and less than or equal
+to, follow in the natural way from the above definitions.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_corollaries">4. Corollaries</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>These definitions give rise to some results of note.</p>
+</div>
+<div class="sect2">
+<h3 id="_corollary_1">4.1. Corollary 1</h3>
+<div class="paragraph">
+<p>For any sequence number s and any integer n such that addition of n
+to s is well defined, (s + n) &gt;= s.  Further (s + n) == s only when
+n == 0, in all other defined cases, (s + n) &gt; s.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_corollary_2">4.2. Corollary 2</h3>
+<div class="paragraph">
+<p>If s' is the result of adding the non-zero integer n to the sequence
+number s, and m is another integer from the range defined as able to
+be added to a sequence number, and s" is the result of adding m to
+s', then it is undefined whether s" is greater than, or less than s,
+though it is known that s" is not equal to s.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_corollary_3">4.3. Corollary 3</h3>
+<div class="paragraph">
+<p>If s" from the previous corollary is further incremented, then there
+is no longer any known relationship between the result and s.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_corollary_4">4.4. Corollary 4</h3>
+<div class="paragraph">
+<p>If in corollary 2 the value (n + m) is such that addition of the sum
+to sequence number s would produce a defined result, then corollary 1
+applies, and s" is known to be greater than s.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_examples">5. Examples</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_a_trivial_example">5.1. A trivial example</h3>
+<div class="paragraph">
+<p>The simplest meaningful serial number space has SERIAL_BITS == 2.  In
+this space, the integers that make up the serial number space are 0,
+1, 2, and 3.  That is, 3 == 2^SERIAL_BITS - 1.</p>
+</div>
+<div class="paragraph">
+<p>In this space, the largest integer that it is meaningful to add to a
+sequence number is 2^(SERIAL_BITS - 1) - 1, or 1.</p>
+</div>
+<div class="paragraph">
+<p>Then, as defined 0+1 == 1, 1+1 == 2, 2+1 == 3, and 3+1 == 0.
+Further, 1 &gt; 0, 2 &gt; 1, 3 &gt; 2, and 0 &gt; 3.  It is undefined whether
+2 &gt; 0 or 0 &gt; 2, and whether 1 &gt; 3 or 3 &gt; 1.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_a_slightly_larger_example">5.2. A slightly larger example</h3>
+<div class="paragraph">
+<p>Consider the case where SERIAL_BITS == 8.  In this space the integers
+that make up the serial number space are 0, 1, 2, &#8230;&#8203; 254, 255.
+255 == 2^SERIAL_BITS - 1.</p>
+</div>
+<div class="paragraph">
+<p>In this space, the largest integer that it is meaningful to add to a
+sequence number is 2^(SERIAL_BITS - 1) - 1, or 127.</p>
+</div>
+<div class="paragraph">
+<p>Addition is as expected in this space, for example: 255+1 == 0,
+100+100 == 200, and 200+100 == 44.</p>
+</div>
+<div class="paragraph">
+<p>Comparison is more interesting, 1 &gt; 0, 44 &gt; 0, 100 &gt; 0, 100 &gt; 44,
+200 &gt; 100, 255 &gt; 200, 0 &gt; 255, 100 &gt; 255, 0 &gt; 200, and 44 &gt; 200.</p>
+</div>
+<div class="paragraph">
+<p>Note that 100+100 &gt; 100, but that (100+100)+100 &lt; 100.  Incrementing
+a serial number can cause it to become "smaller".  Of course,
+incrementing by a smaller number will allow many more increments to
+be made before this occurs.  However this is always something to be
+aware of, it can cause surprising errors, or be useful as it is the
+only defined way to actually cause a serial number to decrease.</p>
+</div>
+<div class="paragraph">
+<p>The pairs of values 0 and 128, 1 and 129, 2 and 130, etc, to 127 and
+255 are not equal, but in each pair, neither number is defined as
+being greater than, or less than, the other.</p>
+</div>
+<div class="paragraph">
+<p>It could be defined (arbitrarily) that 128 &gt; 0, 129 &gt; 1,
+130 &gt; 2, &#8230;&#8203;, 255 &gt; 127, by changing the comparison operator
+definitions, as mentioned above.  However note that that would cause
+255 &gt; 127, while (255 + 1) &lt; (127 + 1), as 0 &lt; 128.  Such a
+definition, apart from being arbitrary, would also be more costly to
+implement.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_citation">6. Citation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As this defined arithmetic may be useful for purposes other than for
+the DNS serial number, it may be referenced as Serial Number
+Arithmetic from RFC1982.  Any such reference shall be taken as
+implying that the rules of sections 2 to 5 of this document apply to
+the stated values.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_dns_soa_serial_number">7. The DNS SOA serial number</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The serial number in the DNS SOA Resource Record is a Serial Number
+as defined above, with SERIAL_BITS being 32.  That is, the serial
+number is a non negative integer with values taken from the range
+[0 .. 4294967295].  That is, a 32 bit unsigned integer.</p>
+</div>
+<div class="paragraph">
+<p>The maximum defined increment is 2147483647 (2^31 - 1).</p>
+</div>
+<div class="paragraph">
+<p>Care should be taken that the serial number not be incremented, in
+one or more steps, by more than this maximum within the period given
+by the value of SOA.expire.  Doing so may leave some secondary
+servers with out of date copies of the zone, but with a serial number
+"greater" than that of the primary server.  Of course, special
+circumstances may require this rule be set aside, for example, when
+the serial number needs to be set lower for some reason.  If this
+must be done, then take special care to verify that ALL servers have
+correctly succeeded in following the primary server&#8217;s serial number
+changes, at each step.</p>
+</div>
+<div class="paragraph">
+<p>Note that each, and every, increment to the serial number must be
+treated as the start of a new sequence of increments for this
+purpose, as well as being the continuation of all previous sequences
+started within the period specified by SOA.expire.</p>
+</div>
+<div class="paragraph">
+<p>Caution should also be exercised before causing the serial number to
+be set to the value zero.  While this value is not in any way special
+in serial number arithmetic, or to the DNS SOA serial number, many
+DNS implementations have incorrectly treated zero as a special case,
+with special properties, and unusual behaviour may be expected if
+zero is used as a DNS SOA serial number.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_document_updates">8. Document Updates</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="#ref_RFC1034">RFC1034</a> and <a href="#ref_RFC1035">RFC1035</a> are to be treated as if the references to
+"sequence space arithmetic" therein are replaced by references to
+serial number arithmetic, as defined in this document.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_security_considerations">9. Security Considerations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document does not consider security.</p>
+</div>
+<div class="paragraph">
+<p>It is not believed that anything in this document adds to any
+security issues that may exist with the DNS, nor does it do anything
+to lessen them.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_references">References</h2>
+<div class="sectionbody">
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC1034"></a>  [RFC1034] 
+</td>
+<td class="hdlist2">
+<p>Domain Names - Concepts and Facilities, P. Mockapetris, STD 13, ISI, November 1987.</p>
+</td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc1350.html">1350</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">THE TFTP PROTOCOL (REVISION 2)</p></td>
+<td class="hdlist1">
+<a id="ref_RFC1035"></a>  [RFC1035] 
+</td>
+<td class="hdlist2">
+<p>Domain Names - Implementation and Specification P. Mockapetris, STD 13, ISI, November 1987</p>
+</td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc1982.html">1982</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Serial Number Arithmetic</p></td>
+<td class="hdlist1">
+<a id="ref_RFC793"></a>    [RFC793]  
+</td>
+<td class="hdlist2">
+<p>Transmission Control protocol Information Sciences Institute, STD 7, USC, September 1981</p>
+</td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc1995.html">1995</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Incremental Zone Transfer in DNS</p></td>
+<td class="hdlist1">
+<a id="ref_IEN-74"></a>    [IEN-74]  
+</td>
+<td class="hdlist2">
+<p>Sequence Number Arithmetic William W. Plummer, BB&amp;N Inc, September 1978</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_acknowledgements">Acknowledgements</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Thanks to Rob Austein for suggesting clarification of the undefined
+comparison operators, and to Michael Patton for attempting to locate
+another reference for this procedure.  Thanks also to members of the
+IETF DNSIND working group of 1995-6, in particular, Paul Mockapetris.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_authors_addresses">Authors' Addresses</h2>
+<div class="sectionbody">
+<table class="tableblock frame-topbot grid-none stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Robert Elz</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Randy Bush</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc3549.html">3549</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Linux Netlink as an IP Services Protocol</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Computer Science</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RGnet, Inc.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc6762.html">6762</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Multicast DNS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">University of Melbourne</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10361 NE Sasquatch Lane</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc6763.html">6763</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">DNS-Based Service Discovery</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parkville, Vic,  3052</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bainbridge Island, Washington,  98110</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Australia.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">United States.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EMail: <a href="mailto:kre@munnari.OZ.AU">kre@munnari.OZ.AU</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EMail: <a href="mailto:randy@psg.com">randy@psg.com</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -889,12 +1368,12 @@ Type=136 Length=4</pre>
 <div id="footer">
    <div id="footer-text">
 
-      <p style="text-align:left;">
-         <a href="https://github.com/gris8/betterfc" align="left"  style="color:yellow">Source Project</a>
-         <span style="float:right;">
-            <a href="https://betterfc.org"  align="right" style="color:yellow">BetteRFC</a>
-         </span>
-      </p>
+		<p style="text-align:left;">
+		<a href="https://betterfc.org"  align="right" style="color:yellow">BetteRFC</a> document v1.0
+		<span style="float:right;">
+			<a href="https://github.com/gris8/betterfc" align="left"  style="color:yellow">Source Project</a>
+		</span>
+		</p>
 
    </div>
 </div>
