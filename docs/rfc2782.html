@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.13.dev">
-<title>BetteRFC</title>
+<title>RFC 2782</title>
 <style>
 @import url(https://fonts.googleapis.com/css?family=Varela+Round|Open+Sans:400italic,600italic,400,600|Ubuntu+Mono:400);
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
@@ -749,141 +749,961 @@ pre.pygments.highlight { background-color: rgba(16, 195, 196, 0.05); }
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- -->
-</head>
-<body class="article">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/gumshoe@5/dist/gumshoe.polyfills.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.js"></script>
+<script>
+   jQuery(function () {
+      var scrollspy = new Gumshoe('#toc li > a', {
+         nested: false
+      });
+      document.addEventListener('gumshoeActivate', function (event) {
+         jQuery('#toc')
+            .stop()
+            .scrollTo(event.detail.link, 500, {
+               offset: {
+                  top:  0 - jQuery('#toc').height() / 2,
+                  left: 0,
+               }
+            });
+      }, false);
+   });
+</script>
+
+<style>
+   #toc li.active > a {
+      font-weight: bold;
+      text-decoration: underline;
+         <!-- font-style: italic; -->
+   }
+
+  #toc li a {
+     display: inline-block;
+  }
+</style>
+
 <div id="header">
-<h1>BetteRFC</h1>
+   <div style="text-align:center"> <b> This isn’t the official RFC, please refer to the IETF website for the official RFC. Errors & omissions excepted </b> </div>
+</div>
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1>RFC 2782</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_status_of_this_memo">Status of this Memo</a></li>
+<li><a href="#_copyright_notice">Copyright Notice</a></li>
+<li><a href="#_abstract">Abstract</a></li>
+<li><a href="#_overview_and_rationale">Overview and rationale</a></li>
+<li><a href="#_definitions">Definitions</a></li>
+<li><a href="#_applicability_statement">Applicability Statement</a></li>
+<li><a href="#_introductory_example">Introductory example</a></li>
+<li><a href="#_the_format_of_the_srv_rr">The format of the SRV RR</a></li>
+<li><a href="#_domain_administrator_advice">Domain administrator advice</a></li>
+<li><a href="#_the_weight_field">The "Weight" field</a></li>
+<li><a href="#_the_port_number">The Port number</a></li>
+<li><a href="#_usage_rules">Usage rules</a></li>
+<li><a href="#_notes">Notes:</a></li>
+<li><a href="#_fictional_example">Fictional example</a></li>
+<li><a href="#_iana_considerations">IANA Considerations</a></li>
+<li><a href="#_changes_from_rfc_2052">Changes from RFC 2052</a></li>
+<li><a href="#_security_considerations">Security Considerations</a></li>
+<li><a href="#_references">References</a></li>
+<li><a href="#_acknowledgements">Acknowledgements</a></li>
+<li><a href="#_authors_addresses">Authors' Addresses</a></li>
+<li><a href="#_full_copyright_statement">Full Copyright Statement</a></li>
+<li><a href="#_acknowledgement">Acknowledgement</a></li>
+</ul>
+</div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_introduction">Introduction</h2>
+<div id="preamble">
 <div class="sectionbody">
-<div class="paragraph">
-<p>BetteRFC is a project whose purpose is to make the RFC easier to read by creating HTML documents from the original plain ASCII format.
-The lack of any kind of tag or structure in the RFC documents makes it impossible to automate the process and it requires  manual intervention.
-Thankfully <a href="https://asciidoctor.org">Asciidoctor</a> now makes this process quite easy and fast.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_what_to_expect">What to expect</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>The documents take advantage of the CSS which enables them to be displayed clearly on screens of different sizes (tablet, phone, etc.)</p>
-</li>
-<li>
-<p>A table of contents is included which easily identifies parts of the document.</p>
-</li>
-<li>
-<p>RFC and <a href="https://en.wikipedia.org/wiki/Erratum">errata</a> are listed on the same page.</p>
-</li>
-<li>
-<p>The parts of the document that have an errata associated are highlighted with a different background color. E.g: the RFC791 section 3.1 has the <a href="https://www.rfc-editor.org/errata/eid716">errata 716</a> associated :</p>
-<div class="literalblock rfc-error">
-<div class="content">
-<pre>--------------------------------+
-|10001000|00000<strong>010</strong>|  Stream ID  |
---------------------------------+
-Type=136 Length=4</pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_how_to_contribute">How to contribute</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>It isn&#8217;t necessary to know anything about HTML and CSS. You can install <a href="https://asciidoctor.org">Asciidoctor</a> for Windows with <a href="https://chocolatey.org">chocolatey</a> or for Linux with the packet manager provided by your distribution or eventually from the <a href="https://github.com/asciidoctor/asciidoctor">source code</a>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_the_future">The future</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>I am currently working on other RFC. If the document you are looking for is not listed below you can contact me via <a href="https://github.com/gris8/betterfc">github</a> and I&#8217;ll try to prioritize it.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_list_of_the_rfc">List of the RFC</h2>
-<div class="sectionbody">
-<table class="tableblock frame-all grid-all stretch">
+<table class="tableblock frame-none grid-all stripes-none" style="width: 99%;">
 <colgroup>
-<col style="width: 1%;">
-<col>
+<col style="width: 50%;">
+<col style="width: 50%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">RFC</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc791.html">791</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">INTERNET PROTOCOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Network Working Group</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">A. Gulbrandsen</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc792.html">792</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">INTERNET CONTROL MESSAGE PROTOCOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Request for Comments: 2782</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">Troll Technologies</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc814.html">814</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">NAME, ADDRESSES, PORTS, AND ROUTES</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Obsoletes: 2052</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">P. Vixie</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc1034.html">1034</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">DOMAIN NAMES - CONCEPTS AND FACILITIES</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Category: Standards Track</p></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">Internet Software Consortium</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc1035.html">1035</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">DOMAIN NAMES - IMPLEMENTATION AND SPECIFICATION</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">L. Esibov</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc1350.html">1350</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">THE TFTP PROTOCOL (REVISION 2)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">Microsoft Corp.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc1912.html">1912</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Common DNS Operational and Configuration Errors</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc1982.html">1982</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Serial Number Arithmetic</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc1995.html">1995</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Incremental Zone Transfer in DNS</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc2182.html">2182</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Selection and Operation of Secondary DNS Servers</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc2782.html">2782</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A DNS RR for specifying the location of services (DNS SRV)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc3549.html">3549</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Linux Netlink as an IP Services Protocol</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc6762.html">6762</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Multicast DNS</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="rfc6763.html">6763</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">DNS-Based Service Discovery</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-right valign-top"><p class="tableblock">February 2000</p></td>
 </tr>
 </tbody>
 </table>
+<table class="tableblock frame-none grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><span class="big">A DNS RR for specifying the location of services (DNS SRV)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_status_of_this_memo">Status of this Memo</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document specifies an Internet standards track protocol for the
+Internet community, and requests discussion and suggestions for
+improvements.  Please refer to the current edition of the "Internet
+Official Protocol Standards" (STD 1) for the standardization state
+and status of this protocol.  Distribution of this memo is unlimited.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_copyright_notice">Copyright Notice</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Copyright &#169; The Internet Society (2000).  All Rights Reserved.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_abstract">Abstract</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document describes a DNS RR which specifies the location of the
+server(s) for a specific protocol and domain.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview_and_rationale">Overview and rationale</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Currently, one must either know the exact address of a server to
+contact it, or broadcast a question.</p>
+</div>
+<div class="paragraph">
+<p>The SRV RR allows administrators to use several servers for a single
+domain, to move services from host to host with little fuss, and to
+designate some hosts as primary servers for a service and others as
+backups.</p>
+</div>
+<div class="paragraph">
+<p>Clients ask for a specific service/protocol for a specific domain
+(the word domain is used here in the strict <a href="#ref_RFC1034">RFC 1034</a> sense), and get
+back the names of any available servers.</p>
+</div>
+<div class="paragraph">
+<p>Note that where this document refers to "address records", it means A
+RR&#8217;s, AAAA RR&#8217;s, or their most modern equivalent.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_definitions">Definitions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The key words "MUST", "MUST NOT", "SHOULD", "SHOULD NOT" and "MAY"
+used in this document are to be interpreted as specified in [<a href="#ref_BCP14">BCP 14</a>].
+Other terms used in this document are defined in the DNS
+specification, <a href="#ref_RFC1034">RFC 1034</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_applicability_statement">Applicability Statement</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In general, it is expected that SRV records will be used by clients
+for applications where the relevant protocol specification indicates
+that clients should use the SRV record. Such specification MUST
+define the symbolic name to be used in the Service field of the SRV
+record as described below. It also MUST include security
+considerations. Service SRV records SHOULD NOT be used in the absence
+of such specification.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_introductory_example">Introductory example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If a SRV-cognizant LDAP client wants to discover a LDAP server that
+supports TCP protocol and provides LDAP service for the domain
+example.com., it does a lookup of</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>_ldap._tcp.example.com</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>as described in [<a href="#ref_ARM">ARM</a>].  The example zone file near the end of this
+memo contains answering RRs for an SRV query.</p>
+</div>
+<div class="paragraph">
+<p>Note: LDAP is chosen as an example for illustrative purposes only,
+and the LDAP examples used in this document should not be considered
+a definitive statement on the recommended way for LDAP to use SRV
+records. As described in the earlier applicability section, consult
+the appropriate LDAP documents for the recommended procedures.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_format_of_the_srv_rr">The format of the SRV RR</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Here is the format of the SRV RR, whose DNS type code is 33:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>_Service._Proto.Name TTL Class SRV Priority Weight Port Target</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>(There is an example near the end of this document.)</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Service </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>The symbolic name of the desired service, as defined in Assigned
+Numbers [<a href="#ref_STD2">STD 2</a>] or locally.  An underscore (_) is prepended to
+the service identifier to avoid collisions with DNS labels that
+occur in nature.
+Some widely used services, notably POP, don&#8217;t have a single
+universal name.  If Assigned Numbers names the service
+indicated, that name is the only name which is legal for SRV
+lookups.  The Service is case insensitive.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">Proto </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>The symbolic name of the desired protocol, with an underscore
+(_) prepended to prevent collisions with DNS labels that occur
+in nature.  _TCP and _UDP are at present the most useful values
+for this field, though any name defined by Assigned Numbers or
+locally may be used (as for Service).  The Proto is case
+insensitive.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">Name </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>The domain this RR refers to.  The SRV RR is unique in that the
+name one searches for is not this name; the example near the end
+shows this clearly.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">TTL </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Standard DNS meaning [<a href="#ref_RFC1035">RFC 1035</a>].</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">Class </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Standard DNS meaning [<a href="#ref_RFC1035">RFC 1035</a>].   SRV records occur in the IN
+Class.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">Priority </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>The priority of this target host.  A client MUST attempt to
+contact the target host with the lowest-numbered priority it can
+reach; target hosts with the same priority SHOULD be tried in an
+order defined by the weight field.  The range is 0-65535.  This
+is a 16 bit unsigned integer in network byte order.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">Weight </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>A server selection mechanism.  The weight field specifies a
+relative weight for entries with the same priority. Larger
+weights SHOULD be given a proportionately higher probability of
+being selected. The range of this number is 0-65535.  This is a
+16 bit unsigned integer in network byte order.  Domain
+administrators SHOULD use Weight 0 when there isn&#8217;t any server
+selection to do, to make the RR easier to read for humans (less
+noisy).  In the presence of records containing weights greater
+than 0, records with weight 0 should have a very small chance of
+being selected.</p>
+</div>
+<div class="paragraph">
+<p>In the absence of a protocol whose specification calls for the
+use of other weighting information, a client arranges the SRV
+RRs of the same Priority in the order in which target hosts,
+specified by the SRV RRs, will be contacted. The following
+algorithm SHOULD be used to order the SRV RRs of the same
+priority:</p>
+</div>
+<div class="paragraph">
+<p>To select a target to be contacted next, arrange all SRV RRs
+(that have not been ordered yet) in any order, except that all
+those with weight 0 are placed at the beginning of the list.</p>
+</div>
+<div class="paragraph">
+<p>Compute the sum of the weights of those RRs, and with each RR
+associate the running sum in the selected order. Then choose a
+uniform random number between 0 and the sum computed
+(inclusive), and select the RR whose running sum value is the
+first in the selected order which is greater than or equal to
+the random number selected. The target host specified in the
+selected SRV RR is the next one to be contacted by the client.
+Remove this SRV RR from the set of the unordered SRV RRs and
+apply the described algorithm to the unordered SRV RRs to select
+the next target host.  Continue the ordering process until there
+are no unordered SRV RRs.  This process is repeated for each
+Priority.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">Port </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>The port on this target host of this service.  The range is 0-
+65535.  This is a 16 bit unsigned integer in network byte order.
+This is often as specified in Assigned Numbers but need not be.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1">Target </dt>
+<dd>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>The domain name of the target host.  There MUST be one or more
+address records for this name, the name MUST NOT be an alias (in
+the sense of <a href="#ref_RFC1034">RFC 1034</a> or <a href="#ref_RFC2181">RFC 2181</a>).  Implementors are urged, but
+not required, to return the address record(s) in the Additional
+Data section.  Unless and until permitted by future standards
+action, name compression is not to be used for this field.</p>
+</div>
+<div class="paragraph">
+<p>A Target of "." means that the service is decidedly not
+available at this domain.</p>
+</div>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_domain_administrator_advice">Domain administrator advice</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Expecting everyone to update their client applications when the first
+server publishes a SRV RR is futile (even if desirable).  Therefore
+SRV would have to coexist with address record lookups for existing
+protocols, and DNS administrators should try to provide address
+records to support old clients:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Where the services for a single domain are spread over several
+hosts, it seems advisable to have a list of address records at
+the same DNS node as the SRV RR, listing reasonable (if perhaps
+suboptimal) fallback hosts for Telnet, NNTP and other protocols
+likely to be used with this name.  Note that some programs only
+try the first address they get back from e.g. gethostbyname(),
+and we don&#8217;t know how widespread this behavior is.</p>
+</li>
+<li>
+<p>Where one service is provided by several hosts, one can either
+provide address records for all the hosts (in which case the
+round-robin mechanism, where available, will share the load
+equally) or just for one (presumably the fastest).</p>
+</li>
+<li>
+<p>If a host is intended to provide a service only when the main
+server(s) is/are down, it probably shouldn&#8217;t be listed in
+address records.</p>
+</li>
+<li>
+<p>Hosts that are referenced by backup address records must use the
+port number specified in Assigned Numbers for the service.</p>
+</li>
+<li>
+<p>Designers of future protocols for which "secondary servers" is
+not useful (or meaningful) may choose to not use SRV&#8217;s support
+for secondary servers.  Clients for such protocols may use or
+ignore SRV RRs with Priority higher than the RR with the lowest
+Priority for a domain.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Currently there&#8217;s a practical limit of 512 bytes for DNS replies.
+Until all resolvers can handle larger responses, domain
+administrators are strongly advised to keep their SRV replies below
+512 bytes.</p>
+</div>
+<div class="paragraph">
+<p>All round numbers, wrote Dr. Johnson, are false, and these numbers
+are very round: A reply packet has a 30-byte overhead plus the name
+of the service ("_ldap._tcp.example.com" for instance); each SRV RR
+adds 20 bytes plus the name of the target host; each NS RR in the NS
+section is 15 bytes plus the name of the name server host; and
+finally each A RR in the additional data section is 20 bytes or so,
+and there are A&#8217;s for each SRV and NS RR mentioned in the answer.
+This size estimate is extremely crude, but shouldn&#8217;t underestimate
+the actual answer size by much.  If an answer may be close to the
+limit, using a DNS query tool (e.g. "dig") to look at the actual
+answer is a good idea.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_weight_field">The "Weight" field</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Weight, the server selection field, is not quite satisfactory, but
+the actual load on typical servers changes much too quickly to be
+kept around in DNS caches.  It seems to the authors that offering
+administrators a way to say "this machine is three times as fast as
+that one" is the best that can practically be done.</p>
+</div>
+<div class="paragraph">
+<p>The only way the authors can see of getting a "better" load figure is
+asking a separate server when the client selects a server and
+contacts it.  For short-lived services an extra step in the
+connection establishment seems too expensive, and for long-lived
+services, the load figure may well be thrown off a minute after the
+connection is established when someone else starts or finishes a
+heavy job.</p>
+</div>
+<div class="paragraph">
+<p>Note: There are currently various experiments at providing relative
+network proximity estimation, available bandwidth estimation, and
+similar services.  Use of the SRV record with such facilities, and in
+particular the interpretation of the Weight field when these
+facilities are used, is for further study.  Weight is only intended
+for static, not dynamic, server selection.  Using SRV weight for
+dynamic server selection would require assigning unreasonably short
+TTLs to the SRV RRs, which would limit the usefulness of the DNS
+caching mechanism, thus increasing overall network load and
+decreasing overall reliability.  Server selection via SRV is only
+intended to express static information such as "this server has a
+faster CPU than that one" or "this server has a much better network
+connection than that one".</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_port_number">The Port number</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Currently, the translation from service name to port number happens
+at the client, often using a file such as /etc/services.</p>
+</div>
+<div class="paragraph">
+<p>Moving this information to the DNS makes it less necessary to update
+these files on every single computer of the net every time a new
+service is added, and makes it possible to move standard services out
+of the "root-only" port range on unix.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_usage_rules">Usage rules</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A SRV-cognizant client SHOULD use this procedure to locate a list of
+servers and connect to the preferred one:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="literalblock">
+<div class="content">
+<pre>Do a lookup for QNAME=_service._protocol.target, QCLASS=IN,
+QTYPE=SRV.</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>If the reply is NOERROR, ANCOUNT&gt;0 and there is at least one
+SRV RR which specifies the requested Service and Protocol in
+the reply:
+
+   If there is precisely one SRV RR, and its Target is "."
+   (the root domain), abort.
+
+   Else, for all such RR's, build a list of (Priority, Weight,
+   Target) tuples
+
+   Sort the list by priority (lowest number first)
+
+   Create a new empty list
+
+   For each distinct priority level
+       While there are still elements left at this priority
+       level
+
+           Select an element as specified above, in the
+           description of Weight in "The format of the SRV
+           RR" Section, and move it to the tail of the new
+           list
+
+   For each element in the new list
+
+       query the DNS for address records for the Target or
+       use any such records found in the Additional Data
+       section of the earlier SRV response.
+
+       for each address record found, try to connect to the
+      (protocol, address, service).
+
+else
+
+   Do a lookup for QNAME=target, QCLASS=IN, QTYPE=A
+
+   for each address record found, try to connect to the
+  (protocol, address, service)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_notes">Notes:</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Port numbers SHOULD NOT be used in place of the symbolic service
+or protocol names (for the same reason why variant names cannot
+be allowed: Applications would have to do two or more lookups).</p>
+</li>
+<li>
+<p>If a truncated response comes back from an SRV query, the rules
+described in [<a href="#ref_RFC2181">RFC 2181</a>] shall apply.</p>
+</li>
+<li>
+<p>A client MUST parse all of the RR&#8217;s in the reply.</p>
+</li>
+<li>
+<p>If the Additional Data section doesn&#8217;t contain address records
+for all the SRV RR&#8217;s and the client may want to connect to the
+target host(s) involved, the client MUST look up the address
+record(s).  (This happens quite often when the address record
+has shorter TTL than the SRV or NS RR&#8217;s.)</p>
+</li>
+<li>
+<p>Future protocols could be designed to use SRV RR lookups as the
+means by which clients locate their servers.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_fictional_example">Fictional example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This example uses fictional service "foobar" as an aid in
+understanding SRV records. If ever service "foobar" is implemented,
+it is not intended that it will necessarily use SRV records.  This is
+(part of) the zone file for example.com, a still-unused domain:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ORIGIN example.com.
+@               SOA server.example.com. root.example.com. (
+                    1995032001 3600 3600 604800 86400 )
+                NS  server.example.com.
+                NS  ns1.ip-provider.net.
+                NS  ns2.ip-provider.net.
+; foobar - use old-slow-box or new-fast-box if either is
+; available, make three quarters of the logins go to
+; new-fast-box.
+_foobar._tcp    SRV 0 1 9 old-slow-box.example.com.
+                 SRV 0 3 9 new-fast-box.example.com.
+; if neither old-slow-box or new-fast-box is up, switch to
+; using the sysdmin's box and the server
+                 SRV 1 0 9 sysadmins-box.example.com.
+                 SRV 1 0 9 server.example.com.
+server           A   172.30.79.10
+old-slow-box     A   172.30.79.11
+sysadmins-box    A   172.30.79.12
+new-fast-box     A   172.30.79.13
+; NO other services are supported
+*._tcp          SRV  0 0 0 .
+*._udp          SRV  0 0 0 .</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, a client of the "foobar" service in the
+"example.com." domain needs an SRV lookup of
+"_foobar._tcp.example.com." and possibly A lookups of "new-fast-
+box.example.com." and/or the other hosts named.  The size of the SRV
+reply is approximately 365 bytes:</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+30&#160;bytes  
+</td>
+<td class="hdlist2">
+<p>general overhead</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+20&#160;bytes  
+</td>
+<td class="hdlist2">
+<p>for the query string, "_foobar._tcp.example.com."</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+130&#160;bytes 
+</td>
+<td class="hdlist2">
+<p>for 4 SRV RR&#8217;s, 20 bytes each plus the lengths of "new-
+fast-box", "old-slow-box", "server" and "sysadmins-box" -
+"example.com" in the query section is quoted here and doesn&#8217;t
+need to be counted again.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+75&#160;bytes  
+</td>
+<td class="hdlist2">
+<p>for 3 NS RRs, 15 bytes each plus the lengths of "server",
+"ns1.ip-provider.net." and "ns2" - again, "ip-provider.net." is
+quoted and only needs to be counted once.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+120&#160;bytes 
+</td>
+<td class="hdlist2">
+<p>for the 6 address records (assuming IPv4 only) mentioned
+by the SRV and NS RR&#8217;s.</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_iana_considerations">IANA Considerations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The IANA has assigned RR type value 33 to the SRV RR.  No other IANA
+services are required by this document.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_changes_from_rfc_2052">Changes from RFC 2052</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document obsoletes RFC 2052.   The major change from that
+previous, experimental, version of this specification is that now the
+protocol and service labels are prepended with an underscore, to
+lower the probability of an accidental clash with a similar name used
+for unrelated purposes.  Aside from that, changes are only intended
+to increase the clarity and completeness of the document. This
+document especially clarifies the use of the Weight field of the SRV
+records.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_security_considerations">Security Considerations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The authors believe this RR to not cause any new security problems.
+Some problems become more visible, though.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The ability to specify ports on a fine-grained basis obviously
+changes how a router can filter packets.  It becomes impossible
+to block internal clients from accessing specific external
+services, slightly harder to block internal users from running
+unauthorized services, and more important for the router
+operations and DNS operations personnel to cooperate.</p>
+</li>
+<li>
+<p>There is no way a site can keep its hosts from being referenced
+as servers.  This could lead to denial of service.</p>
+</li>
+<li>
+<p>With SRV, DNS spoofers can supply false port numbers, as well as
+host names and addresses.   Because this vulnerability exists
+already, with names and addresses, this is not a new
+vulnerability, merely a slightly extended one, with little
+practical effect.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_references">References</h2>
+<div class="sectionbody">
+<div class="hdlist">
+<table>
+<tr>
+<td class="hdlist1">
+<a id="ref_STD2"></a> [STD 2] 
+</td>
+<td class="hdlist2">
+<p>Reynolds, J., and J. Postel, "Assigned Numbers", STD 2, RFC
+1700, October 1994.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC1034"></a> [RFC 1034] 
+</td>
+<td class="hdlist2">
+<p>Mockapetris, P., "Domain names - concepts and facilities",
+STD 13, RFC 1034, November 1987.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC1035"></a> [RFC 1035] 
+</td>
+<td class="hdlist2">
+<p>Mockapetris, P., "Domain names - Implementation and
+Specification", STD 13, RFC 1035, November 1987.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC974"></a> [RFC 974] 
+</td>
+<td class="hdlist2">
+<p>Partridge, C., "Mail routing and the domain system", STD
+14, RFC 974, January 1986.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_BCP14"></a> [BCP 14] 
+</td>
+<td class="hdlist2">
+<p>Bradner, S., "Key words for use in RFCs to Indicate
+Requirement Levels", BCP 14, RFC 2119, March 1997.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC2181"></a> [RFC 2181] 
+</td>
+<td class="hdlist2">
+<p>Elz, R. and R. Bush, "Clarifications to the DNS
+Specification", RFC 2181, July 1997.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_RFC2219"></a> [RFC2219] 
+</td>
+<td class="hdlist2">
+<p>Hamilton, M. and R. Wright, "Use of DNS Aliases for Network
+Services", BCP 17, RFC 2219, October 1997.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_BCP14_"></a> [BCP 14] 
+</td>
+<td class="hdlist2">
+<p>Bradner, S., "Key words for use in RFCs to Indicate
+Requirement Levels", BCP 14, RFC 2119, March 1997.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_ARM"></a> [ARM]  
+</td>
+<td class="hdlist2">
+<p>Armijo, M., Esibov, L. and P. Leach, "Discovering LDAP
+Services with DNS", Work in Progress.</p>
+</td>
+</tr>
+<tr>
+<td class="hdlist1">
+<a id="ref_KDC-DNS"></a> [KDC-DNS] 
+</td>
+<td class="hdlist2">
+<p>Hornstein, K. and J. Altman, "Distributing Kerberos KDC and
+Realm Information with DNS", Work in Progress.</p>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_acknowledgements">Acknowledgements</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The algorithm used to select from the weighted SRV RRs of equal
+priority is adapted from one supplied by Dan Bernstein.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_authors_addresses">Authors' Addresses</h2>
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Arnt Gulbrandsen          <br>
+Troll Tech                <br>
+Waldemar Thranes gate 98B <br>
+N-0175 Oslo, Norway</p>
+</div>
+<div class="paragraph">
+<p>Fax:   +47 22806380       <br>
+Phone: +47 22806390       <br>
+EMail: <a href="mailto:arnt@troll.no">arnt@troll.no</a></p>
+</div>
+<div class="paragraph">
+<p>Paul Vixie                   <br>
+Internet Software Consortium <br>
+950 Charter Street           <br>
+Redwood City, CA 94063</p>
+</div>
+<div class="paragraph">
+<p>Phone: +1 650 779 7001</p>
+</div>
+<div class="paragraph">
+<p>Levon Esibov           <br>
+Microsoft Corporation  <br>
+One Microsoft Way      <br>
+Redmond, WA 98052</p>
+</div>
+<div class="paragraph">
+<p>EMail: <a href="mailto:levone@microsoft.com">levone@microsoft.com</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_full_copyright_statement">Full Copyright Statement</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Copyright &#169; The Internet Society (2000).  All Rights Reserved.</p>
+</div>
+<div class="paragraph">
+<p>This document and translations of it may be copied and furnished to
+others, and derivative works that comment on or otherwise explain it
+or assist in its implementation may be prepared, copied, published
+and distributed, in whole or in part, without restriction of any
+kind, provided that the above copyright notice and this paragraph are
+included on all such copies and derivative works.  However, this
+document itself may not be modified in any way, such as by removing
+the copyright notice or references to the Internet Society or other
+Internet organizations, except as needed for the purpose of
+developing Internet standards in which case the procedures for
+copyrights defined in the Internet Standards process must be
+followed, or as required to translate it into languages other than
+English.</p>
+</div>
+<div class="paragraph">
+<p>The limited permissions granted above are perpetual and will not be
+revoked by the Internet Society or its successors or assigns.</p>
+</div>
+<div class="paragraph">
+<p>This document and the information contained herein is provided on an
+"AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_acknowledgement">Acknowledgement</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Funding for the RFC Editor function is currently provided by the
+Internet Society.</p>
+</div>
 </div>
 </div>
 </div>
@@ -894,12 +1714,12 @@ Type=136 Length=4</pre>
 <div id="footer">
    <div id="footer-text">
 
-      <p style="text-align:left;">
-         <a href="https://github.com/gris8/betterfc" align="left"  style="color:yellow">Source Project</a>
-         <span style="float:right;">
-            <a href="https://betterfc.org"  align="right" style="color:yellow">BetteRFC</a>
-         </span>
-      </p>
+		<p style="text-align:left;">
+		<a href="https://betterfc.org"  align="right" style="color:yellow">BetteRFC</a> document v1.0
+		<span style="float:right;">
+			<a href="https://github.com/gris8/betterfc" align="left"  style="color:yellow">Source Project</a>
+		</span>
+		</p>
 
    </div>
 </div>

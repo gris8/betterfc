@@ -55,6 +55,7 @@ I am currently working on other RFC. If the document you are looking for is not 
 | {RFC_PATH}rfc1982.html[1982] | Serial Number Arithmetic
 | {RFC_PATH}rfc1995.html[1995] | Incremental Zone Transfer in DNS
 | {RFC_PATH}rfc2182.html[2182] | Selection and Operation of Secondary DNS Servers
+| {RFC_PATH}rfc2782.html[2782] | A DNS RR for specifying the location of services (DNS SRV)
 | {RFC_PATH}rfc3549.html[3549] | Linux Netlink as an IP Services Protocol
 | {RFC_PATH}rfc6762.html[6762] | Multicast DNS
 | {RFC_PATH}rfc6763.html[6763] | DNS-Based Service Discovery
